@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Mail, Lock, User, ArrowRight, Eye, EyeOff, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 import uploadStyles from "../../styles/upload.module.scss";
-import { signIn, signUp } from "@/services/authService";
+import { signIn, signUp, signInWithGoogle } from "@/services/authService";
 import { toast } from "sonner";
 import { StarField } from "@/components/StarField";
 import landingStyles from "../landing/styles/LandingPage.module.scss";
@@ -657,7 +657,16 @@ const LoginPage = () => {
                 className={uploadStyles.googleButton}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-
+                onClick={async () => {
+                  try {
+                    const { error } = await signInWithGoogle();
+                    if (error) {
+                      toast.error(error.message);
+                    }
+                  } catch (error: any) {
+                    toast.error(error.message || "Failed to sign in with Google");
+                  }
+                }}
               >
                 <img
                   src="/google-white-icon.svg"
