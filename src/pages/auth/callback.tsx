@@ -8,16 +8,43 @@ const AuthCallback = () => {
 
   useEffect(() => {
     const handleAuthCallback = async () => {
-      const { error } = await supabase.auth.getSession()
-      
-      if (error) {
+      try {
+        // Get the URL hash
+        const hashParams = window.location.hash.substring(1)
+        const searchParams = new URLSearchParams(hashParams)
+        
+        // Check if we have an access token
+        const accessToken = searchParams.get('access_token')
+        const refreshToken = searchParams.get('refresh_token')
+        
+        if (!accessToken) {
+          throw new Error('No access token found')
+        }
+
+        // Set the session using the tokens
+        const { data: { session }, error } = await supabase.auth.setSession({
+          access_token: accessToken,
+          refresh_token: refreshToken || ''
+        })
+
+        if (error) {
+          console.error('Error setting session:', error)
+          navigate('/auth/signin?error=auth-callback-failed')
+          return
+        }
+
+        if (!session) {
+          console.error('No session found')
+          navigate('/auth/signin?error=no-session')
+          return
+        }
+
+        // Successful authentication, redirect to the app
+        navigate('/spider')
+      } catch (error) {
         console.error('Error during auth callback:', error)
         navigate('/auth/signin?error=auth-callback-failed')
-        return
       }
-
-      // Successful authentication, redirect to the app
-      navigate('/')
     }
 
     handleAuthCallback()
