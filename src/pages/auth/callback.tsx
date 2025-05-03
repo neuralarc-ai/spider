@@ -18,7 +18,9 @@ const AuthCallback = () => {
         const refreshToken = searchParams.get('refresh_token')
         
         if (!accessToken) {
-          throw new Error('No access token found')
+          console.error('No access token found in URL')
+          navigate('/auth/signin?error=no-access-token')
+          return
         }
 
         // Set the session using the tokens
@@ -34,12 +36,12 @@ const AuthCallback = () => {
         }
 
         if (!session) {
-          console.error('No session found')
+          console.error('No session established')
           navigate('/auth/signin?error=no-session')
           return
         }
 
-        // Successful authentication, redirect to the app
+        // Successful authentication, redirect to spider page
         navigate('/spider')
       } catch (error) {
         console.error('Error during auth callback:', error)
@@ -48,7 +50,7 @@ const AuthCallback = () => {
     }
 
     handleAuthCallback()
-  }, [navigate])
+  }, [navigate, supabase.auth])
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#1C1C1C]">

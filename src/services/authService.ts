@@ -102,15 +102,10 @@ export const updatePassword = async (password: string) => {
 export const signInWithGoogle = async () => {
     const supabase = getSupabaseClient()
     try {
-        // Determine if we're in development or production
-        const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: isDevelopment 
-                    ? 'http://localhost:5173/auth/callback'
-                    : 'https://spider.neuralarc.ai/auth/callback',
+                redirectTo: 'https://spider.neuralarc.ai/auth/callback',
                 queryParams: {
                     access_type: 'offline',
                     prompt: 'consent',
@@ -124,7 +119,6 @@ export const signInWithGoogle = async () => {
             throw error
         }
 
-        console.log('Google signin initiated:', data)
         return { data, error: null }
     } catch (error: any) {
         console.error('Google signin caught error:', error)
