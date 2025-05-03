@@ -105,12 +105,11 @@ export const signInWithGoogle = async () => {
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: 'https://spider.neuralarc.ai/auth/callback',
+                redirectTo: 'https://spider.neuralarc.ai/spider',
                 queryParams: {
                     access_type: 'offline',
                     prompt: 'consent',
-                },
-                skipBrowserRedirect: false
+                }
             }
         })
 

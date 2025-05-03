@@ -9,7 +9,6 @@ import NotFound from "./pages/NotFound";
 import History from "./pages/History";
 import Insight from "./pages/Insight";
 import LoginPage from "./pages/auth/login";
-import AuthCallback from "./pages/auth/callback";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfUse from './components/TermsOfUse';
@@ -26,7 +25,6 @@ const App = () => (
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/auth/signin" element={<LoginPage />} />
-          <Route path="/auth/callback" element={<AuthCallback />} />
           <Route
             path="/spider"
             element={
@@ -54,7 +52,6 @@ const App = () => (
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="/responsible-ai" element={<ResponsibleAI />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
