@@ -97,35 +97,4 @@ export const updatePassword = async (password: string) => {
         password: password
     })
     return { error }
-}
-
-export const signInWithGoogle = async () => {
-    const supabase = getSupabaseClient()
-    try {
-        const { data, error } = await supabase.auth.signInWithOAuth({
-            provider: 'google',
-            options: {
-                redirectTo: 'https://spider.neuralarc.ai/spider',
-                queryParams: {
-                    access_type: 'offline',
-                    prompt: 'consent',
-                }
-            }
-        })
-
-        if (error) {
-            console.error('Google signin error:', error)
-            throw error
-        }
-
-        return { data, error: null }
-    } catch (error: any) {
-        console.error('Google signin caught error:', error)
-        return {
-            data: null,
-            error: {
-                message: error.message || 'An unexpected error occurred during Google sign in'
-            }
-        }
-    }
 } 

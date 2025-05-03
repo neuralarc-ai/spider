@@ -11,8 +11,14 @@ export const getSupabaseClient = () => {
         auth: {
           persistSession: true,
           autoRefreshToken: true,
-          detectSessionInUrl: true
-        }
+          detectSessionInUrl: true,
+          flowType: 'pkce'
+        },
+        global: {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
       }
     );
   }
