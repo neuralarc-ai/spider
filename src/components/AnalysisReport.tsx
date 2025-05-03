@@ -50,9 +50,9 @@ const pdfStyles = StyleSheet.create({
     padding: 10,
   },
   sectionTitle: {
-    fontSize: 16,
+    fontSize: 18,
     marginBottom: 10,
-    color: "#333",
+    color: "#9b87f5", // Theme color for headings
     fontWeight: "bold",
   },
   text: {
@@ -60,10 +60,24 @@ const pdfStyles = StyleSheet.create({
     marginBottom: 5,
     color: "#666",
   },
+  bulletPoint: {
+    fontSize: 12,
+    marginBottom: 5,
+    color: "#666",
+    marginLeft: 10,
+  },
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 5,
+  },
+  twoColumn: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 10,
+  },
+  column: {
+    width: "48%",
   },
   label: {
     fontSize: 12,
@@ -119,9 +133,9 @@ const pdfStyles = StyleSheet.create({
 const PitchDeckPDF = ({ data }: AnalysisReportProps) => (
   <Document>
     <Page size="A4" style={pdfStyles.page}>
-      <Text style={pdfStyles.title}>Pitch Deck Analysis Report</Text>
+      <Text style={pdfStyles.title}>Spider Analysis</Text>
 
-      {/* Header Info */}
+      {/* Industry and Date */}
       <View style={pdfStyles.section}>
         <Text style={pdfStyles.text}>Industry: {data.industry_type}</Text>
         <Text style={pdfStyles.text}>
@@ -152,103 +166,99 @@ const PitchDeckPDF = ({ data }: AnalysisReportProps) => (
         <Text style={pdfStyles.sectionTitle}>Company Overview</Text>
         <View style={pdfStyles.row}>
           <Text style={pdfStyles.label}>Company Name:</Text>
-          <Text style={pdfStyles.value}>
-            {data.company_overview.company_name}
-          </Text>
+          <Text style={pdfStyles.value}>{data.company_overview.company_name}</Text>
         </View>
         <View style={pdfStyles.row}>
           <Text style={pdfStyles.label}>Business Model:</Text>
-          <Text style={pdfStyles.value}>
-            {data.company_overview.business_model}
-          </Text>
+          <Text style={pdfStyles.value}>{data.company_overview.business_model}</Text>
         </View>
         <View style={pdfStyles.row}>
           <Text style={pdfStyles.label}>Founded:</Text>
-          <Text style={pdfStyles.value}>
-            {data.company_overview.founded_on}
-          </Text>
+          <Text style={pdfStyles.value}>{data.company_overview.founded_on}</Text>
         </View>
+        <Text style={pdfStyles.sectionTitle}>Key Offerings</Text>
+        {data.company_overview.key_offerings?.map((offering, index) => (
+          <Text key={index} style={pdfStyles.bulletPoint}>• {offering}</Text>
+        ))}
       </View>
 
       {/* Funding History */}
       <View style={pdfStyles.section}>
         <Text style={pdfStyles.sectionTitle}>Funding History</Text>
-        <View style={pdfStyles.fundingTable}>
-          <View style={pdfStyles.tableHeader}>
-            <Text style={pdfStyles.headerCell}>Round</Text>
-            <Text style={pdfStyles.headerCell}>Amount</Text>
-            <Text style={pdfStyles.headerCell}>Key Investors</Text>
-          </View>
-          {data.funding_history.rounds.map((round, index) => (
-            <View
-              key={index}
-              style={[
-                pdfStyles.row,
-                { borderBottomWidth: 1, borderBottomColor: "#eee" },
-              ]}
-            >
-              <Text style={pdfStyles.tableCell}>{round.type}</Text>
-              <Text style={pdfStyles.tableCell}>{round.amount}</Text>
-              <Text style={pdfStyles.tableCell}>
-                {round.key_investors.join(", ")}
-              </Text>
+        {data.funding_history?.rounds?.length > 0 ? (
+          <View style={pdfStyles.fundingTable}>
+            <View style={pdfStyles.tableHeader}>
+              <Text style={pdfStyles.headerCell}>Round</Text>
+              <Text style={pdfStyles.headerCell}>Amount</Text>
+              <Text style={pdfStyles.headerCell}>Key Investors</Text>
             </View>
-          ))}
-        </View>
+            {data.funding_history.rounds.map((round, index) => (
+              <View
+                key={index}
+                style={[pdfStyles.row, { borderBottomWidth: 1, borderBottomColor: "#eee" }]}
+              >
+                <Text style={pdfStyles.tableCell}>{round.type}</Text>
+                <Text style={pdfStyles.tableCell}>{round.amount}</Text>
+                <Text style={pdfStyles.tableCell}>{round.key_investors.join(", ")}</Text>
+              </View>
+            ))}
+          </View>
+        ) : (
+          <Text style={pdfStyles.text}>N/A</Text>
+        )}
+      </View>
+
+      {/* Company Comparison */}
+      <View style={pdfStyles.section}>
+        <Text style={pdfStyles.sectionTitle}>Company Comparison</Text>
+        {data.competitor_analysis?.competitors?.map((competitor, index) => (
+          <View key={index} style={pdfStyles.row}>
+            <Text style={pdfStyles.label}>{competitor.name}:</Text>
+            <Text style={pdfStyles.value}>{competitor.comparison}</Text>
+          </View>
+        ))}
       </View>
 
       {/* Strengths and Weaknesses */}
       <View style={pdfStyles.section}>
-        <Text style={pdfStyles.sectionTitle}>Analysis</Text>
-        <View style={{ width: "80%", alignSelf: "center" }}>
-          <Text
-            style={[
-              pdfStyles.text,
-              { textAlign: "center", fontWeight: "bold", marginBottom: 10 },
-            ]}
-          >
-            Strengths:
-          </Text>
-          {data.strengths.map((strength, index) => (
-            <Text key={index} style={[pdfStyles.text, { textAlign: "center" }]}>
-              • {strength}
-            </Text>
-          ))}
-          <Text
-            style={[
-              pdfStyles.text,
-              {
-                textAlign: "center",
-                fontWeight: "bold",
-                marginTop: 15,
-                marginBottom: 10,
-              },
-            ]}
-          >
-            Weaknesses:
-          </Text>
-          {data.weaknesses.map((weakness, index) => (
-            <Text key={index} style={[pdfStyles.text, { textAlign: "center" }]}>
-              • {weakness}
-            </Text>
-          ))}
+        <Text style={pdfStyles.sectionTitle}>Strength and Weakness Analysis</Text>
+        <View style={pdfStyles.twoColumn}>
+          <View style={pdfStyles.column}>
+            <Text style={[pdfStyles.text, { fontWeight: "bold" }]}>Strengths:</Text>
+            {data.strengths.map((strength, index) => (
+              <Text key={index} style={pdfStyles.bulletPoint}>• {strength}</Text>
+            ))}
+          </View>
+          <View style={pdfStyles.column}>
+            <Text style={[pdfStyles.text, { fontWeight: "bold" }]}>Weaknesses:</Text>
+            {data.weaknesses.map((weakness, index) => (
+              <Text key={index} style={pdfStyles.bulletPoint}>• {weakness}</Text>
+            ))}
+          </View>
         </View>
       </View>
 
-      {/* Expert Opinions */}
+      {/* Proposed Deal Structure */}
       <View style={pdfStyles.section}>
-        <Text style={pdfStyles.sectionTitle}>Expert Opinions</Text>
-        {data.expert_opinions.map((opinion, index) => (
-          <View key={index} style={{ marginBottom: 10 }}>
-            <Text style={[pdfStyles.text, { fontWeight: "bold" }]}>
-              {opinion.name} - {opinion.affiliation}
-            </Text>
-            <Text style={pdfStyles.text}>{opinion.summary}</Text>
-            <Text style={[pdfStyles.text, { fontSize: 10, color: "#666" }]}>
-              Reference: {opinion.reference} | Date: {opinion.date}
-            </Text>
+        <Text style={pdfStyles.sectionTitle}>Proposed Deal Structure</Text>
+        {data.proposed_deal_structure ? (
+          <View style={[pdfStyles.verdictGrid, { backgroundColor: "#f0f7ff" }]}>
+            <View style={pdfStyles.row}>
+              <Text style={pdfStyles.label}>Investment Amount:</Text>
+              <Text style={pdfStyles.value}>{data.proposed_deal_structure.investment_amount}</Text>
+            </View>
+            <View style={pdfStyles.row}>
+              <Text style={pdfStyles.label}>Valuation Cap:</Text>
+              <Text style={pdfStyles.value}>{data.proposed_deal_structure.valuation_cap}</Text>
+            </View>
+            <View style={pdfStyles.row}>
+              <Text style={pdfStyles.label}>Equity Stake:</Text>
+              <Text style={pdfStyles.value}>{data.proposed_deal_structure.equity_stake}</Text>
+            </View>
           </View>
-        ))}
+        ) : (
+          <Text style={pdfStyles.text}>N/A</Text>
+        )}
       </View>
 
       {/* Final Verdict */}
@@ -257,72 +267,52 @@ const PitchDeckPDF = ({ data }: AnalysisReportProps) => (
         <View style={pdfStyles.verdictGrid}>
           <View style={pdfStyles.verdictItem}>
             <Text style={pdfStyles.label}>Product Viability</Text>
-            <Text style={pdfStyles.value}>
-              {data.final_verdict.product_viability}/10
-            </Text>
+            <Text style={pdfStyles.value}>{data.final_verdict.product_viability}/10</Text>
           </View>
           <View style={pdfStyles.verdictItem}>
             <Text style={pdfStyles.label}>Market Potential</Text>
-            <Text style={pdfStyles.value}>
-              {data.final_verdict.market_potential}/10
-            </Text>
+            <Text style={pdfStyles.value}>{data.final_verdict.market_potential}/10</Text>
           </View>
           <View style={pdfStyles.verdictItem}>
             <Text style={pdfStyles.label}>Sustainability</Text>
-            <Text style={pdfStyles.value}>
-              {data.final_verdict.sustainability}/10
-            </Text>
+            <Text style={pdfStyles.value}>{data.final_verdict.sustainability}/10</Text>
           </View>
           <View style={pdfStyles.verdictItem}>
             <Text style={pdfStyles.label}>Innovation</Text>
-            <Text style={pdfStyles.value}>
-              {data.final_verdict.innovation}/10
-            </Text>
+            <Text style={pdfStyles.value}>{data.final_verdict.innovation}/10</Text>
           </View>
           <View style={pdfStyles.verdictItem}>
             <Text style={pdfStyles.label}>Exit Potential</Text>
-            <Text style={pdfStyles.value}>
-              {data.final_verdict.exit_potential}/10
-            </Text>
+            <Text style={pdfStyles.value}>{data.final_verdict.exit_potential}/10</Text>
           </View>
           <View style={pdfStyles.verdictItem}>
             <Text style={pdfStyles.label}>Risk Factor</Text>
-            <Text style={pdfStyles.value}>
-              {data.final_verdict.risk_factor}/10
-            </Text>
+            <Text style={pdfStyles.value}>{data.final_verdict.risk_factor}/10</Text>
           </View>
           <View style={pdfStyles.verdictItem}>
             <Text style={pdfStyles.label}>Competitive Edge</Text>
-            <Text style={pdfStyles.value}>
-              {data.final_verdict.competitive_edge}/10
-            </Text>
+            <Text style={pdfStyles.value}>{data.final_verdict.competitive_edge}/10</Text>
           </View>
         </View>
       </View>
 
-      {/* Proposed Deal Structure */}
+      {/* Final Statement */}
       <View style={pdfStyles.section}>
-        <Text style={pdfStyles.sectionTitle}>Proposed Deal Structure</Text>
-        <View style={[pdfStyles.verdictGrid, { backgroundColor: "#f0f7ff" }]}>
-          <View style={pdfStyles.row}>
-            <Text style={pdfStyles.label}>Investment Amount:</Text>
-            <Text style={pdfStyles.value}>
-              {data.proposed_deal_structure.investment_amount}
-            </Text>
-          </View>
-          <View style={pdfStyles.row}>
-            <Text style={pdfStyles.label}>Valuation Cap:</Text>
-            <Text style={pdfStyles.value}>
-              {data.proposed_deal_structure.valuation_cap}
-            </Text>
-          </View>
-          <View style={pdfStyles.row}>
-            <Text style={pdfStyles.label}>Equity Stake:</Text>
-            <Text style={pdfStyles.value}>
-              {data.proposed_deal_structure.equity_stake}
-            </Text>
-          </View>
-        </View>
+        <Text style={pdfStyles.sectionTitle}>Final Statement</Text>
+        <Text style={pdfStyles.text}>
+          {(() => {
+            const score = data.investment_score;
+            if (score >= 8) {
+              return `${data.company_overview.company_name} presents an excellent investment opportunity with a strong position in the ${data.industry_type.toLowerCase()} sector. The company demonstrates exceptional market potential, innovative solutions, and a clear competitive advantage, making it a highly attractive investment prospect.`;
+            } else if (score >= 5 && score <= 7) {
+              return `${data.company_overview.company_name} shows promising investment potential in the ${data.industry_type.toLowerCase()} sector. While there are some areas for improvement, the company's market position and growth trajectory indicate good potential for returns.`;
+            } else if (score >= 1 && score <= 4) {
+              return `${data.company_overview.company_name} presents a moderate investment opportunity in the ${data.industry_type.toLowerCase()} sector. The company shows some potential but faces significant challenges that need to be addressed for better investment prospects.`;
+            } else {
+              return `${data.company_overview.company_name} currently presents a high-risk investment opportunity in the ${data.industry_type.toLowerCase()} sector. The company faces substantial challenges and requires significant improvements before being considered a viable investment option.`;
+            }
+          })()}
+        </Text>
       </View>
     </Page>
   </Document>

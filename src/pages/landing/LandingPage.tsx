@@ -630,11 +630,11 @@ const LandingPage = () => {
               </div>
 
               <div className={styles.footerLinks}>
-                <a href="/terms-of-use">Terms of use</a>
+                <Link to="/terms-of-use">Terms of use</Link>
                 <span>•</span>
-                <a href="/privacy-policy">Privacy Policy</a>
+                <Link to="/privacy-policy">Privacy Policy</Link>
                 <span>•</span>
-                <a href="/responsible-ai">Responsible AI</a>
+                <Link to="/responsible-ai">Responsible AI</Link>
               </div>
 
               <div className={styles.footerBottom}>
