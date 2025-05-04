@@ -197,21 +197,17 @@ const LoginPage = () => {
   const handleGoogleSignIn = async () => {
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: `${window.location.origin}/spider`,
-          queryParams: {
-            prompt: 'select_account'
-          }
-        }
+        provider: 'google'
       });
 
       if (error) {
+        console.error('Google Sign-in Error:', error);
         throw error;
       }
 
-      // The redirect will happen automatically
+      // The redirect will happen automatically based on Supabase configuration
     } catch (err: any) {
+      console.error('Google Sign-in Error:', err);
       setError(err.message || "An error occurred during Google sign in");
       toast.error(err.message || "An error occurred during Google sign in");
     }
