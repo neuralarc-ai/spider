@@ -196,7 +196,6 @@ const LoginPage = () => {
 
   const handleGoogleSignIn = async () => {
     try {
-      setLoading(true);
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
@@ -205,12 +204,13 @@ const LoginPage = () => {
       });
 
       if (error) {
-        toast.error(error.message);
+        throw error;
       }
-    } catch (error: any) {
-      toast.error(error.message || 'An error occurred during Google sign-in');
-    } finally {
-      setLoading(false);
+
+      // The redirect will happen automatically
+    } catch (err: any) {
+      setError(err.message || "An error occurred during Google sign in");
+      toast.error(err.message || "An error occurred during Google sign in");
     }
   };
 
@@ -678,7 +678,6 @@ const LoginPage = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleGoogleSignIn}
-                disabled={loading}
               >
                 <img
                   src="/google-white-icon.svg"
@@ -686,7 +685,6 @@ const LoginPage = () => {
                   className="w-5 h-5"
                 />
                 Sign {activeTab === "login" ? "in" : "up"} with Google
-                {loading && <span className="ml-2">...</span>}
               </motion.button>
             </div>
           </div>
