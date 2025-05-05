@@ -21,7 +21,7 @@ const Logo: React.FC<LogoProps> = ({
                 src="/images/navlogo.svg"
                 width={Math.round(width)}
                 height={Math.round(height)}
-                alt="Spider"
+                alt="LawBit"
                 style={{
                     display: 'block',
                     imageRendering: 'crisp-edges',
