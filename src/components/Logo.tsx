@@ -19,10 +19,14 @@ const Logo: React.FC<LogoProps> = ({
         <div className={`${styles.logoWrapper} ${className}`}>
             <img
                 src="/images/navlogo.svg"
-                width={width}
-                height={height}
-                alt="LawBit"
-
+                width={Math.round(width)}
+                height={Math.round(height)}
+                alt="Spider"
+                style={{
+                    display: 'block',
+                    imageRendering: 'crisp-edges',
+                    transform: 'translateZ(0)'
+                }}
             />
             <span className={styles.betaLabel}>BETA</span>
         </div>
