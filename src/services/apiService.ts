@@ -41,7 +41,17 @@ export const analyzePitchDeck = async (text: string) => {
   IMPORTANT: Provide detailed competitor analysis, market comparison, and expert opinions. 
   For competitors, identify at least 3-4 major players in the market.
   For market comparison, include specific metrics and data points.Such as Key Investors, Amount Raised, Market Share, Revenue Model, Growth Rate, Differentiator, etc.
-  For expert opinions, provide 1 detailed genuine opinions for the company and return proper reference and name of the person.
+  
+  For expert opinions:
+  - Provide ONLY real, verified industry experts with their actual names and current positions
+  - Include their current company/organization affiliation
+  - Use real quotes or paraphrased insights from their actual interviews, articles, or public statements
+  - Include proper references (news articles, interviews, or public statements)
+  - Ensure the expert's background and expertise matches the industry being analyzed
+  - Do not use fictional names or generic titles
+  - Focus on experts who have publicly commented on similar companies or market trends
+  - Include the date of their statement or analysis
+  - Ensure the expert's opinion is relevant to the company's specific industry and business model
 
   For reputation analysis, provide:
   - News/Media rating (1-10)

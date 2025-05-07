@@ -849,16 +849,16 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                 <h3 className="text-xl text-white mb-4 text-left border-b border-[#ffffff1a] pb-4">Expert Opinion</h3>
                 {data.expert_opinions && data.expert_opinions.length > 0 ? (
                   <div className="mb-6">
-                    <h4 className="text-white text-lg font-medium">
+                    <h4 className="text-white text-lg font-medium text-left">
                       {data.expert_opinions[0].name}
                     </h4>
-                    <p className="text-gray-400 mb-2">
+                    <p className="text-gray-400 mb-2 text-left">
                       {data.expert_opinions[0].affiliation}
                     </p>
-                    <p className="text-gray-300 leading-relaxed mb-2">
+                    <p className="text-gray-300 leading-relaxed mb-2 text-left">
                       {data.expert_opinions[0].summary}
                     </p>
-                    <p className="text-gray-500 text-sm">
+                    <p className="text-gray-500 text-sm text-left">
                       Reference: {data.expert_opinions[0].reference} | Date:{" "}
                       {data.expert_opinions[0].date}
                     </p>
