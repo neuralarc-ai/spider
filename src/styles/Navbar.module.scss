@@ -226,11 +226,13 @@
 }
 
 .profileImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
-    object-fit: cover;
-    margin-right: 1rem;
     width: 40px;
     height: 40px;
+    margin-right: 1rem;
 }
 
 .profilePlaceholder {

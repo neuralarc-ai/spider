@@ -3,6 +3,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import styles from "./PrivacyPolicy.module.sass";
 import Navbar from "./Navbar";
+import Footer from './Footer';
 
 interface Section {
   title: string;
@@ -22,7 +23,7 @@ const TermsOfUse: React.FC = () => {
       title: "1. Acceptance of Terms",
       content: (
         <p>
-          By accessing and using PitchWise, you agree to be bound by these Terms
+          By accessing and using Spider AI, you agree to be bound by these Terms
           of Use. If you do not agree to these terms, please do not use our
           services.
         </p>
@@ -32,7 +33,7 @@ const TermsOfUse: React.FC = () => {
       title: "2. Service Description",
       content: (
         <>
-          <p>PitchWise provides:</p>
+          <p>Spider provides:</p>
           <ul>
             <li>• AI-powered pitch deck analysis</li>
             <li>• Investment insights and recommendations</li>
@@ -61,7 +62,7 @@ const TermsOfUse: React.FC = () => {
       content: (
         <>
           <p>
-            All content and materials available through PitchWise are protected
+            All content and materials available through Spider are protected
             by:
           </p>
           <ul>
@@ -94,7 +95,7 @@ const TermsOfUse: React.FC = () => {
       title: "6. Limitation of Liability",
       content: (
         <p>
-          PitchWise provides analysis and insights as informational resources
+          Spider AI provides analysis and insights as informational resources
           only. We are not responsible for investment decisions made based on
           our analysis. Users should conduct their own due diligence before
           making investment decisions.
@@ -128,7 +129,7 @@ const TermsOfUse: React.FC = () => {
 
             <div className={styles.welcomeSection}>
               <p>
-                Welcome to PitchWise. By using our services, you agree to these
+                Welcome to Spider AI. By using our services, you agree to these
                 terms. Please read them carefully before using our platform.
               </p>
             </div>
@@ -160,6 +161,7 @@ const TermsOfUse: React.FC = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

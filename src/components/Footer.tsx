@@ -23,7 +23,7 @@ const Footer = () => {
             </p>
           </div>
           <img 
-            src="/neuralpath.svg" 
+            src="/images/Nafooter.svg" 
             alt="Neural Paths" 
             width={140} 
             height={60} 

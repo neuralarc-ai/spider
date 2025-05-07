@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import styles from './PrivacyPolicy.module.sass';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 interface Section {
   title: string;
@@ -110,6 +111,7 @@ const ResponsibleAI: React.FC = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

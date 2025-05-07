@@ -239,7 +239,7 @@ const RadarChart: React.FC<RadarChartProps> = ({ data }) => {
   };
 
   return (
-    <ResponsiveContainer width="100%" height={380}>
+    <ResponsiveContainer width="100%" height={500}>
       <RechartsRadarChart
         data={chartData}
         outerRadius="65%"
@@ -254,9 +254,9 @@ const RadarChart: React.FC<RadarChartProps> = ({ data }) => {
             fx="50%"
             fy="50%"
           >
-            <stop offset="28%" stopColor="#29272C" />
-            <stop offset="65%" stopColor="#B0B0B0" />
-            <stop offset="100%" stopColor="#FFFFFF" />
+            <stop offset="28%" stopColor="#29272C" stopOpacity="0.6" />
+            <stop offset="65%" stopColor="#B0B0B0" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.5" />
           </radialGradient>
         </defs>
         <PolarGrid 
@@ -281,33 +281,46 @@ const RadarChart: React.FC<RadarChartProps> = ({ data }) => {
           dataKey="value"
           stroke="#B0B0B0"
           fill="url(#radarGradient)"
-          fillOpacity={0.8}
+          fillOpacity={0.4}
           dot={(props) => {
-            const { cx, cy, value, payload } = props;
+            const { cx, cy, value, payload, index } = props;
+            // Ensure we have valid values for the key
+            const dotKey = `dot-${index}-${payload?.subject || 'unknown'}-${value || 0}`;
+            
             return (
               <circle
-                key={`dot-${payload.subject}`}
+                key={dotKey}
                 cx={cx}
                 cy={cy}
-                r={5}
+                r={3}
                 fill={value >= 8 ? "#4CAF50" : value <= 4 ? "#F44336" : "#B0B0B0"}
                 stroke="#fff"
-                strokeWidth={2}
+                strokeWidth={1}
                 style={{
-                  filter: 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.3))'
+                  filter: 'drop-shadow(0 0 1px rgba(255, 255, 255, 0.2))'
                 }}
               />
             );
           }}
-          activeDot={{
-            r: 8,
-            fill: "#FFFFFF",
-            stroke: "#B0B0B0",
-            strokeWidth: 2,
-            style: {
-              cursor: 'pointer',
-              filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.5))'
-            }
+          activeDot={(props) => {
+            const { cx, cy, value, payload, index } = props;
+            const dotKey = `active-dot-${index}-${payload?.subject || 'unknown'}-${value || 0}`;
+            
+            return (
+              <circle
+                key={dotKey}
+                cx={cx}
+                cy={cy}
+                r={4}
+                fill="#FFFFFF"
+                stroke="#B0B0B0"
+                strokeWidth={1}
+                style={{
+                  cursor: 'pointer',
+                  filter: 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.3))'
+                }}
+              />
+            );
           }}
           animationDuration={1500}
           animationEasing="ease-in-out"

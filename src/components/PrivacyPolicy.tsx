@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import styles from "./PrivacyPolicy.module.sass";
 import Navbar from "./Navbar";
+import Footer from './Footer';
 
 interface Section {
   title: string;
@@ -112,7 +113,7 @@ const PrivacyPolicy: React.FC = () => {
             
             <div className={styles.welcomeSection}>
               <p>
-                PitchWise values your privacy and is committed to protecting your personal information. 
+                Spider values your privacy and is committed to protecting your personal information. 
                 This Privacy Policy outlines how we collect, use, share, and safeguard your data 
                 when you visit our website and use our services.
               </p>
@@ -143,6 +144,7 @@ const PrivacyPolicy: React.FC = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

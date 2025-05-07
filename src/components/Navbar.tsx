@@ -5,6 +5,7 @@ import { getSupabaseClient } from '@/lib/supabase';
 import { User } from '@supabase/supabase-js';
 import TokenUsage from '@/components/TokenUsage';
 import SubscriptionModal from '@/components/SubscriptionModal';
+import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar';
 import styles from '../styles/Navbar.module.scss';
 
 const Navbar = () => {
@@ -127,17 +128,15 @@ const Navbar = () => {
                         >
                             <div className={styles.menuItems}>
                                 <div className={styles.profileSection}>
-                                    {user?.user_metadata?.avatar_url ? (
-                                        <img
-                                            src={user.user_metadata.avatar_url}
-                                            alt="Profile"
-                                            className={styles.profileImage}
+                                    <Avatar className={styles.profileImage} style={{ borderRadius: '50%' }}>
+                                        <AvatarImage
+                                            src={user?.user_metadata?.avatar_url}
+                                            alt={user?.user_metadata?.full_name || user?.email || 'Profile'}
                                         />
-                                    ) : (
-                                        <div className={styles.profilePlaceholder}>
+                                        <AvatarFallback className={styles.profilePlaceholder}>
                                             {user?.email?.[0]?.toUpperCase() || 'N/A'}
-                                        </div>
-                                    )}
+                                        </AvatarFallback>
+                                    </Avatar>
                                     <div className={styles.profileInfo}>
                                         <div className={styles.profileName}>
                                             {user?.user_metadata?.full_name || user?.email || 'Please Sign In'}

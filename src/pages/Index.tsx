@@ -52,18 +52,28 @@ const Index = () => {
     setProgress(0);
 
     try {
-      // Process the pitch deck (upload PDF and analyze)
+      // Document Processing (0-30%)
       setProgress(5);
       const { pdfUrl, analysis } = await processPitchDeck(file);
+      setProgress(30);
+
+      // Startup Profile Analysis (30-50%)
       setProgress(40);
+      await new Promise(resolve => setTimeout(resolve, 500)); // Simulate processing time
+      setProgress(50);
 
-      // Save to history
+      // Market Analysis (50-70%)
       setProgress(60);
-      await saveToHistory(analysis, pdfUrl);
-      setProgress(80);
+      await new Promise(resolve => setTimeout(resolve, 500)); // Simulate processing time
+      setProgress(70);
 
-      // Update UI
-      setProgress(85);
+      // Save to history (70-90%)
+      setProgress(80);
+      await saveToHistory(analysis, pdfUrl);
+      setProgress(90);
+
+      // Final Report Generation (90-100%)
+      setProgress(95);
       setInsights(analysis);
       setProgress(100);
 
@@ -207,7 +217,7 @@ const Index = () => {
                     />
                     <div className={styles.disclaimerText}>
                       <p className="text-muted-foreground text-justify leading-relaxed font-fustat">
-                        This website is a platform developed and maintained by Neural Paths(Spider). All information, content, tools, and services provided through this platform are intended solely for use by authorized personnel for official and approved purposes.
+                        This website is a platform developed and maintained by NeuralArc. All information, content, tools, and services provided through this platform are intended solely for use by authorized personnel for official and approved purposes.
                         The materials and data provided are offered on an "as is" and "as available" basis. No warranties, either express or implied, are made regarding the accuracy, completeness, reliability, or availability of the content on this platform. Use of the site is at your own risk.
                         Unauthorized access, distribution, modification, or misuse of this website or its data is strictly prohibited and may result in disciplinary action and/or legal proceedings under applicable laws and organizational policies.
                       </p>

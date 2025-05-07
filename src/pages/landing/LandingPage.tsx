@@ -549,7 +549,7 @@ const LandingPage = () => {
                 {
                   question: "How accurate is the AI analysis?",
                   answer:
-                    "Our AI analysis powered by Gemini 2.0 achieves over 95% accuracy in extracting key information from pitch decks. The system is continuously trained on thousands of successful pitch decks and investment reports to provide reliable insights.",
+                    "Our AI analysis  achieves over 95% accuracy in extracting key information from pitch decks. The system is continuously trained on thousands of successful pitch decks and investment reports to provide reliable insights.",
                 },
                 {
                   question: "What types of pitch decks can be analyzed?",
@@ -564,7 +564,7 @@ const LandingPage = () => {
                 {
                   question: "Can I customize the analysis reports?",
                   answer:
-                    "Yes, you can customize analysis reports to focus on specific aspects of the pitch deck, add custom metrics, and generate reports in various formats including PDF, Excel, and interactive dashboards.",
+                    "No, you cannot customize analysis reports to focus on specific aspects of the pitch deck, add custom metrics, and generate reports in various formats including PDF, Excel, and interactive dashboards.",
                 },
                 {
                   question: "How long does the analysis take?",
@@ -579,7 +579,7 @@ const LandingPage = () => {
                 {
                   question: "Can I integrate Spider with my existing tools?",
                   answer:
-                    "Yes, Spider offers API integration capabilities and can be integrated with popular investment management platforms, CRM systems, and data analytics tools.",
+                    "No, Spider does not offer API integration capabilities and cannot be integrated with popular investment management platforms, CRM systems, and data analytics tools.",
                 },
               ].map((faq, index) => (
                 <motion.div
@@ -642,7 +642,7 @@ const LandingPage = () => {
                   Copyright 2025. All rights reserved. &nbsp;&nbsp; Spider AI, A
                   thing by&nbsp;
                   <img
-                    src="/neuralpath.svg"
+                    src="/images/Nafooter.svg"
                     alt="Neural Paths"
                     width={115}
                     height={30}
