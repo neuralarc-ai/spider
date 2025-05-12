@@ -90,7 +90,7 @@ const Navbar = () => {
                 )}
                 <div className={styles.logoLink} onClick={() => navigate('/spider')}>
                     <img
-                        src="/images/slogo.svg"
+                        src="/images/navlogo.svg"
                         alt="spider"
                         className={styles.logo}
                     />

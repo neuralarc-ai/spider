@@ -4,6 +4,14 @@
     position: relative;
     display: inline-flex;
     align-items: center;
+    filter: none;
+    img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+        shape-rendering: geometricPrecision;
+        filter: none;
+        box-shadow: none;
+    }
 }
 
 .logoLink{
@@ -11,8 +19,10 @@
     align-items: center;
     text-decoration: none;
     transition: opacity 0.2s ease;
+    filter: none;
     &:hover{
         opacity: 0.8;
+        filter: none;
     }
 }
 

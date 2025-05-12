@@ -260,10 +260,11 @@ const LoginPage = () => {
       <div className="flex-grow">
         <div className="flex justify-center pt-20">
           <img
-            src="/images/slogo.svg"
+            src="/images/navlogo.svg"
             alt="logo"
-            className="w-[68px] h-[72px] mb-10"
+            className="w-[40px] h-[42px] mb-10"
           />
+          
         </div>
 
         <div className="flex justify-center mb-6">

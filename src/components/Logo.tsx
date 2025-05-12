@@ -21,9 +21,10 @@ const Logo: React.FC<LogoProps> = ({
                 src="/images/navlogo.svg"
                 width={width}
                 height={height}
-                alt="LawBit"
-
+                alt="Spider"
+                className='w-10 h-10'
             />
+            <p className='text-white text-[40px] ml-4 '>Spider</p>
             <span className={styles.betaLabel}>BETA</span>
         </div>
     );
