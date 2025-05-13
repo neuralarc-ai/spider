@@ -1,4 +1,6 @@
 import { API_CONFIG } from '../config/api';
+import { calculateTokens, updateTokenUsage, hasEnoughTokens } from './tokenService';
+import { getSupabaseClient } from '@/lib/supabase';
 
 const getApiConfig = () => {
   const useOpenAI = import.meta.env.VITE_USE_OPENAI === 'true';
@@ -28,6 +30,24 @@ export const analyzePitchDeck = async (text: string) => {
   console.log('\n=== Starting Analysis ===');
   console.log('Text length:', text.length, 'characters');
   console.log('========================\n');
+
+  const supabase = getSupabaseClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    throw new Error('User not authenticated');
+  }
+
+  // Calculate estimated tokens needed for the analysis
+  const estimatedInputTokens = calculateTokens(text);
+  const estimatedOutputTokens = 2000; // Conservative estimate for response
+  const totalEstimatedTokens = estimatedInputTokens + estimatedOutputTokens;
+
+  // Check if user has enough tokens
+  const hasTokens = await hasEnoughTokens(user.id, totalEstimatedTokens);
+  if (!hasTokens) {
+    throw new Error('Insufficient tokens. Please upgrade your plan.');
+  }
 
   const systemPrompt = `You are an expert AI system for analyzing pitch decks and providing investment analysis. 
   Analyze the following pitch deck content and provide a detailed, structured analysis.
@@ -220,6 +240,13 @@ export const analyzePitchDeck = async (text: string) => {
     }
 
     const result = await openaiResponse.json();
+    
+    // Get actual token usage from the API response
+    const actualTokenUsage = result.usage?.total_tokens || totalEstimatedTokens;
+    
+    // Update token usage in the database
+    await updateTokenUsage(user.id, actualTokenUsage);
+
     const finalAnalysis = JSON.parse(result.choices[0].message.content.replace(/```json\n?|\n?```/g, '').trim());
 
     if (!finalAnalysis) {
