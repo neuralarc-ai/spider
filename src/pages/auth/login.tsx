@@ -386,7 +386,10 @@ const LoginPage = () => {
                         <label className="block text-sm font-medium text-white text-left">
                           Password
                         </label>
-                        <span className="text-sm text-primary hover:text-primary/80 cursor-pointer">
+                        <span 
+                          className="text-sm text-primary hover:text-primary/80 cursor-pointer"
+                          onClick={() => navigate("/auth/forgot-password")}
+                        >
                           Forgot password?
                         </span>
                       </div>
