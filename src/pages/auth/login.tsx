@@ -5,10 +5,9 @@ import { motion } from "framer-motion";
 import uploadStyles from "../../styles/upload.module.scss";
 import { signIn, signUp } from "@/services/authService";
 import { toast } from "sonner";
-import { StarField } from "@/components/StarField";
-import landingStyles from "../landing/styles/LandingPage.module.scss";
 import { getSupabaseClient } from '@/lib/supabase';
 import Footer from "@/components/Footer";
+import { Card } from "@/components/ui/card";
 
 // Initialize Supabase client
 const supabase = getSupabaseClient();
@@ -213,123 +212,76 @@ const LoginPage = () => {
     }
   };
 
-  const starfieldVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 1,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const ellipseVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 1.5,
-        ease: "easeOut",
-      },
-    },
-  };
+  const starfieldVariants = undefined;
+  const ellipseVariants = undefined;
 
   return (
-    <div className="flex flex-col min-h-screen overflow-hidden">
-      <div className={landingStyles.backgroundElements} style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1 }}>
-        <motion.div
-          className={landingStyles.starfieldWrapperlog}
-          variants={starfieldVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <StarField />
-        </motion.div>
-        <div className={landingStyles.ellipselog}>
-          <img
-            src="/images/white-radial.svg"
-            alt="Radial gradient"
-            width={1000}
-            height={1000}
-          />
-        </div>
-      </div>
-
-      <div className="flex-grow">
-        <div className="flex justify-center pt-20">
-          <img
-            src="/images/navlogo.svg"
-            alt="logo"
-            className="w-[40px] h-[42px] mb-10"
-          />
-          
-        </div>
-
-        <div className="flex justify-center mb-6">
-          <motion.div
-            className="bg-[#2A2A2A] rounded-full p-1 inline-flex"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <motion.button
-              className={`px-8 py-2 rounded-full text-sm font-medium transition-all duration-200 ${activeTab === "login"
-                  ? "bg-gradient-to-r from-[#2B8CFF] to-[#7B5AFF] text-white"
-                  : "text-muted-foreground hover:text-white"
-                }`}
-              onClick={() => {
-                setActiveTab("login");
-                setFormData({
-                  fullName: "",
-                  email: "",
-                  password: "",
-                  confirmPassword: "",
-                  mobile: "",
-                });
-                setErrors({});
-              }}
-              whileHover={{ scale: activeTab === "login" ? 1 : 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Log In
-            </motion.button>
-            <motion.button
-              className={`px-8 py-2 rounded-full text-sm font-medium transition-all duration-200 ${activeTab === "signup"
-                  ? "bg-gradient-to-r from-[#2B8CFF] to-[#7B5AFF] text-white"
-                  : "text-muted-foreground hover:text-white"
-                }`}
-              onClick={() => {
-                setActiveTab("signup");
-                setFormData({
-                  fullName: "",
-                  email: "",
-                  password: "",
-                  confirmPassword: "",
-                  mobile: "",
-                });
-                setErrors({});
-              }}
-              whileHover={{ scale: activeTab === "signup" ? 1 : 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Sign Up
-            </motion.button>
-          </motion.div>
-        </div>
-        <div className="flex items-center justify-center  px-4">
-          <div
-            className={`${uploadStyles.gradientWrapper} w-[676px] min-h-[580px] max-w-[90vw]`}
-          >
-            <img
-              src="/images/backgroundgradiant.png"
-              alt="Gradient Background"
-              className={uploadStyles.gradientBackground}
-            />
-            <div
-              className={`${uploadStyles.innerBox} w-full h-full p-8 flex flex-col`}
-            >
+    <div className="flex flex-col min-h-screen bg-[#E8E8E8] grain-texture">
+      <div className="flex-grow flex flex-row items-center justify-center gap-12">
+        {/* Left blank card */}
+        <Card className="w-[35vw] h-[90vh] bg-[#362716] rounded-[16px] border-none flex flex-col">
+          <div className="pt-8 pl-8 text-white text-[32px] font-normal" style={{ fontFamily: 'Fustat, sans-serif' }}>
+            Spider
+          </div>
+          <div className="flex-1 flex items-center justify-center">
+            {activeTab === "login" ? (
+              <img src="/images/loginspark.svg" alt="Login Spark" className="w-[90%] max-w-[600px] h-auto" />
+            ) : (
+              <img src="/images/signup.svg" alt="Signup Spark" className="w-[90%] max-w-[600px] h-auto" />
+            )}
+          </div>
+        </Card>
+        {/* Right login/signup section */}
+        <div>
+          <div className="flex justify-left mb-6">
+            <div className="bg-[#D4D4D4] rounded-xl p-2 flex">
+              <button
+                className={`px-6 py-2 text-base font-normal rounded-md transition-all duration-200 focus:outline-none
+                  ${activeTab === "login"
+                    ? "bg-[#362716] text-white shadow"
+                    : "bg-transparent text-[#404040]"
+                  }
+                `}
+                style={{ marginRight: '4px' }}
+                onClick={() => {
+                  setActiveTab("login");
+                  setFormData({
+                    fullName: "",
+                    email: "",
+                    password: "",
+                    confirmPassword: "",
+                    mobile: "",
+                  });
+                  setErrors({});
+                }}
+              >
+                Log In
+              </button>
+              <button
+                className={`px-6 py-2 text-base font-normal rounded-md transition-all duration-200 focus:outline-none
+                  ${activeTab === "signup"
+                    ? "bg-[#362716] text-white shadow"
+                    : "bg-transparent text-[#404040]"
+                  }
+                `}
+                onClick={() => {
+                  setActiveTab("signup");
+                  setFormData({
+                    fullName: "",
+                    email: "",
+                    password: "",
+                    confirmPassword: "",
+                    mobile: "",
+                  });
+                  setErrors({});
+                }}
+              >
+                Sign Up
+              </button>
+            </div>
+          </div>
+          <div className="flex items-center justify-center ">
+            <Card className="w-[676px] max-w-[90vw] bg-[#F9F6F3] border border-[#E0E0E0] rounded-[16px] p-8 shadow-none">
               {error && (
                 <motion.div
                   className="mb-4 text-destructive text-sm text-center"
@@ -357,7 +309,7 @@ const LoginPage = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <div className="space-y-2">
-                      <label className="block text-sm font-medium text-white text-left">
+                      <label className="block text-sm font-medium text-black text-left">
                         Username
                       </label>
                       <div className="relative">
@@ -366,10 +318,7 @@ const LoginPage = () => {
                           name="email"
                           value={formData.email}
                           onChange={handleInputChange}
-                          className={`w-full h-16 bg-[#2A2A2A] border ${errors.email
-                              ? "border-destructive"
-                              : "border-[#3A3A3A]"
-                            } rounded-lg py-2 pl-4 pr-4 text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary`}
+                          className={`w-full h-16 bg-transparent border ${errors.email ? "border-destructive" : "border-[#BDBDBD]"} rounded-lg py-2 pl-4 pr-4 text-[#202020] placeholder:text-[#888] focus:outline-none`}
                           placeholder="Enter your email"
                           required
                         />
@@ -383,11 +332,11 @@ const LoginPage = () => {
 
                     <div className="space-y-2">
                       <div className="flex justify-between items-center">
-                        <label className="block text-sm font-medium text-white text-left">
+                        <label className="block text-sm font-medium text-black text-left">
                           Password
                         </label>
-                        <span 
-                          className="text-sm text-primary hover:text-primary/80 cursor-pointer"
+                        <span
+                          className="text-sm text-[#949494] hover:text-[#949494]/80 cursor-pointer"
                           onClick={() => navigate("/auth/forgot-password")}
                         >
                           Forgot password?
@@ -399,10 +348,7 @@ const LoginPage = () => {
                           name="password"
                           value={formData.password}
                           onChange={handleInputChange}
-                          className={`w-full h-16 bg-[#2A2A2A] border ${errors.password
-                              ? "border-destructive"
-                              : "border-[#3A3A3A]"
-                            } rounded-lg py-2 pl-4 pr-10 text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary`}
+                          className={`w-full h-16 bg-transparent border ${errors.password ? "border-destructive" : "border-[#BDBDBD]"} rounded-lg py-2 pl-4 pr-10 text-[#202020] placeholder:text-[#888] focus:outline-none`}
                           placeholder="Enter your password"
                           required
                         />
@@ -425,17 +371,34 @@ const LoginPage = () => {
                       )}
                     </div>
 
-                    <motion.button
-                      type="submit"
-                      className={`${uploadStyles.analyzeButton} ${loading ? "opacity-70 cursor-not-allowed" : ""
-                        }`}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      disabled={loading}
-                    >
-                      {loading ? "Signing in..." : "Sign In"}
-                      <ArrowRight className="w-5 h-5" />
-                    </motion.button>
+
+                    <div className="flex gap-4 mt-6">
+                      <motion.button
+                        type="button"
+                        className="w-full border border-[#BDBDBD] bg-transparent text-[#000000] rounded-lg py-4 flex items-center justify-center gap-2 font-medium transition-colors duration-200 hover:bg-[#f5f5f5]"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={handleGoogleSignIn}
+                      >
+                        <img
+                          src="/google-white-icon.svg"
+                          alt="Google"
+                          className="w-5 h-5"
+                        />
+                        Sign in with Google
+                      </motion.button>
+                      <motion.button
+                        type="submit"
+                        className="w-full bg-[#362716] text-white rounded-lg py-4 flex items-center justify-center gap-2 font-medium transition-colors duration-200 hover:bg-[#111]"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        disabled={loading}
+                      >
+                        {loading ? "Signing in..." : "Sign In"}
+                        <ArrowRight className="w-5 h-5" />
+                      </motion.button>
+                    </div>
+
                   </motion.form>
                 ) : (
                   <motion.form
@@ -446,7 +409,7 @@ const LoginPage = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <div className="space-y-2">
-                      <label className="block text-sm font-medium text-white text-left">
+                      <label className="block text-sm font-medium text-black text-left">
                         Full Name
                       </label>
                       <div className="relative">
@@ -455,10 +418,7 @@ const LoginPage = () => {
                           name="fullName"
                           value={formData.fullName}
                           onChange={handleInputChange}
-                          className={`w-full h-16 bg-[#2A2A2A] border ${errors.fullName
-                              ? "border-destructive"
-                              : "border-[#3A3A3A]"
-                            } rounded-lg py-2 pl-4 pr-4 text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary`}
+                          className={`w-full h-16 bg-transparent border ${errors.fullName ? "border-destructive" : "border-[#BDBDBD]"} rounded-lg py-2 pl-4 pr-4 text-[#202020] placeholder:text-[#888] focus:outline-none `}
                           placeholder="Enter your full name"
                           required
                         />
@@ -471,7 +431,7 @@ const LoginPage = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="block text-sm font-medium text-white text-left">
+                      <label className="block text-sm font-medium text-black text-left">
                         Email
                       </label>
                       <div className="relative">
@@ -480,10 +440,7 @@ const LoginPage = () => {
                           name="email"
                           value={formData.email}
                           onChange={handleInputChange}
-                          className={`w-full h-16 bg-[#2A2A2A] border ${errors.email
-                              ? "border-destructive"
-                              : "border-[#3A3A3A]"
-                            } rounded-lg py-2 pl-4 pr-4 text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary`}
+                          className={`w-full h-16 bg-transparent border ${errors.email ? "border-destructive" : "border-[#BDBDBD]"} rounded-lg py-2 pl-4 pr-4 text-[#202020] placeholder:text-[#888] focus:outline-none `}
                           placeholder="Enter your email"
                           required
                         />
@@ -496,7 +453,7 @@ const LoginPage = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="block text-sm font-medium text-white text-left">
+                      <label className="block text-sm font-medium text-black text-left">
                         Password
                       </label>
                       <div className="relative">
@@ -505,10 +462,7 @@ const LoginPage = () => {
                           name="password"
                           value={formData.password}
                           onChange={handleInputChange}
-                          className={`w-full h-16 bg-[#2A2A2A] border ${errors.password
-                              ? "border-destructive"
-                              : "border-[#3A3A3A]"
-                            } rounded-lg py-2 pl-4 pr-10 text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary`}
+                          className={`w-full h-16 bg-transparent border ${errors.password ? "border-destructive" : "border-[#BDBDBD]"} rounded-lg py-2 pl-4 pr-10 text-[#202020] placeholder:text-[#888] focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white/10 transition-colors duration-200`}
                           placeholder="Create a password"
                           required
                         />
@@ -535,10 +489,10 @@ const LoginPage = () => {
 
                       {activeTab === "signup" && (
                         <div className="mt-2 text-xs text-muted-foreground text-left">
-                          <p className="mb-1 font-medium">
+                          <p className="mb-1 font-medium text-[#414141]">
                             Password requirements:
                           </p>
-                          <ul className="list-disc pl-4 space-y-0.5">
+                          <ul className="list-disc pl-4 text-[#414141] space-y-0.5">
                             <li
                               className={
                                 formData.password.length >= 8
@@ -590,7 +544,7 @@ const LoginPage = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="block text-sm font-medium text-white text-left">
+                      <label className="block text-sm font-medium text-black text-left">
                         Confirm Password
                       </label>
                       <div className="relative">
@@ -599,10 +553,7 @@ const LoginPage = () => {
                           name="confirmPassword"
                           value={formData.confirmPassword}
                           onChange={handleInputChange}
-                          className={`w-full h-16 bg-[#2A2A2A] border ${errors.confirmPassword
-                              ? "border-destructive"
-                              : "border-[#3A3A3A]"
-                            } rounded-lg py-2 pl-4 pr-10 text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary`}
+                          className={`w-full h-16 bg-transparent border ${errors.confirmPassword ? "border-destructive" : "border-[#BDBDBD]"} rounded-lg py-2 pl-4 pr-10 text-[#202020] placeholder:text-[#888] focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white/10 transition-colors duration-200`}
                           placeholder="Confirm your password"
                           required
                         />
@@ -626,7 +577,7 @@ const LoginPage = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="block text-sm font-medium text-white text-left">
+                      <label className="block text-sm font-medium text-black text-left">
                         Mobile No.
                       </label>
                       <div className="relative">
@@ -635,10 +586,7 @@ const LoginPage = () => {
                           name="mobile"
                           value={formData.mobile}
                           onChange={handleInputChange}
-                          className={`w-full h-16 bg-[#2A2A2A] border ${errors.mobile
-                              ? "border-destructive"
-                              : "border-[#3A3A3A]"
-                            } rounded-lg py-2 pl-4 pr-4 text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary`}
+                          className={`w-full h-16 bg-transparent border ${errors.mobile ? "border-destructive" : "border-[#BDBDBD]"} rounded-lg py-2 pl-4 pr-4 text-[#202020] placeholder:text-[#888] focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white/10 transition-colors duration-200`}
                           placeholder="Enter your mobile number"
                         />
                       </div>
@@ -649,47 +597,36 @@ const LoginPage = () => {
                       )}
                     </div>
 
-                    <motion.button
-                      type="submit"
-                      className={`${uploadStyles.analyzeButton} ${loading ? "opacity-70 cursor-not-allowed" : ""
-                        }`}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      disabled={loading}
-                    >
-                      {loading ? "Creating account..." : "Sign Up"}
-                      <ArrowRight className="w-5 h-5" />
-                    </motion.button>
+                    <div className="flex gap-4 mt-6">
+                      <motion.button
+                        type="button"
+                        className="w-full border border-[#BDBDBD] bg-transparent text-[#000000] rounded-lg py-4 flex items-center justify-center gap-2 font-medium transition-colors duration-200 hover:bg-[#f5f5f5]"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={handleGoogleSignIn}
+                      >
+                        <img
+                          src="/google-white-icon.svg"
+                          alt="Google"
+                          className="w-5 h-5"
+                        />
+                        Sign up with Google
+                      </motion.button>
+                      <motion.button
+                        type="submit"
+                        className="w-full bg-[#232323] text-white rounded-lg py-4 flex items-center justify-center gap-2 font-medium transition-colors duration-200 hover:bg-[#111]"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        disabled={loading}
+                      >
+                        {loading ? "Creating account..." : "Sign Up"}
+                        <ArrowRight className="w-5 h-5" />
+                      </motion.button>
+                    </div>
                   </motion.form>
                 )}
               </motion.div>
-
-              <div className="relative flex items-center justify-center my-6">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-[#3A3A3A]"></div>
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-[#1C1C1C] text-muted-foreground">
-                    OR
-                  </span>
-                </div>
-              </div>
-
-              <motion.button
-                type="button"
-                className={uploadStyles.googleButton}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={handleGoogleSignIn}
-              >
-                <img
-                  src="/google-white-icon.svg"
-                  alt="Google"
-                  className="w-5 h-5"
-                />
-                Sign {activeTab === "login" ? "in" : "up"} with Google
-              </motion.button>
-            </div>
+            </Card>
           </div>
         </div>
       </div>
