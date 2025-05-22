@@ -59,7 +59,7 @@ const PasswordStrength = ({ password }: { password: string }) => {
             }}
           />
         </div>
-        <span className="text-xs text-muted-foreground">{strengthText}</span>
+        <span className="text-xs text-[#696969]">{strengthText}</span>
       </div>
     </div>
   );
@@ -369,7 +369,7 @@ const LoginPage = () => {
                           {errors.password}
                         </span>
                       )}
-                      <div className="mt-6 rounded-b-[16px] w-full overflow-hidden p-8" style={{
+                      <div className="mt-6 rounded-b-[16px] pt-2 w-full overflow-hidden p-8" style={{
                         background: 'radial-gradient(circle at bottom, #E7CDC1 0%, #6FC3D4 100%)',
                       }}>
                         <div className="flex gap-4">
