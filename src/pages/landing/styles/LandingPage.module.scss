@@ -157,7 +157,6 @@ html, body {
         background: #FFFFFF;
         border-radius: 24px;
         padding: 3rem;
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
     }
 
     .title {
@@ -262,7 +261,6 @@ html, body {
     .benefitCard {
         background: #D0C3B5;
         border-radius: 18px;
-        box-shadow: 0 4px 24px rgba(0,0,0,0.08);
         width: 100%;
         min-width: 0;
         min-height: 135px;
@@ -275,11 +273,7 @@ html, body {
         text-align: left;
         border: 1px solid #ececec;
         margin: 0 auto;
-        transition: box-shadow 0.2s;
         color: #151414;
-        &:hover {
-            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
-        }
         h3 {
             font-size: 32px;
             font-weight: 700;
@@ -866,7 +860,6 @@ html, body {
     .stepCard {
         background: #fff;
         border-radius: 20px;
-        box-shadow: 0 4px 24px rgba(0,0,0,0.08);
         width: 100%;
         min-width: 0;
         min-height: 300px;
@@ -877,13 +870,8 @@ html, body {
         justify-content: flex-start;
         padding: 2.5rem 1.5rem;
         text-align: left;
-        transition: box-shadow 0.2s;
         border: 1px solid #ececec;
         margin: 0 auto;
-        
-        &:hover {
-            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
-        }
         
         .stepIcon {
             width: 72px;
@@ -937,10 +925,15 @@ html, body {
 
 .faq {
     padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 
     .faqGrid {
-        max-width: 800px;
+        width: 1226px;
+        max-width: 100%;
         margin: 0 auto;
+        padding: 0 20px;
     }
 
     .faqAccordion {
@@ -956,6 +949,7 @@ html, body {
         overflow: hidden;
         transition: all 0.3s ease;
         color: #000;
+        width: 100%;
     }
 
     .faqQuestion {
@@ -1076,7 +1070,7 @@ html, body {
     font-weight: 400;
     color: #000000;
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 4rem;
     line-height: 1.5;
 }
 

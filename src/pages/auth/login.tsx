@@ -219,7 +219,7 @@ const LoginPage = () => {
     <div className="flex flex-col min-h-screen bg-[#E8E8E8] grain-texture">
       <div className="flex-grow flex flex-row items-center justify-center gap-12">
         {/* Left blank card */}
-        <Card className="w-[35vw] h-[90vh] rounded-[16px] border-none flex flex-col" style={{ background: 'linear-gradient(180deg, #765E54 0%, #312119 100%)' }}>
+        <Card className="w-[35vw] h-[80vh] rounded-[16px] border-none flex flex-col" style={{ background: 'linear-gradient(180deg, #765E54 0%, #312119 100%)' }}>
           <div className="pt-8 pl-8 text-white text-[32px] font-normal" style={{ fontFamily: 'Fustat, sans-serif' }}>
             Spider
           </div>
@@ -281,7 +281,7 @@ const LoginPage = () => {
             </div>
           </div>
           <div className="flex items-center justify-center ">
-            <Card className="w-[676px] max-w-[90vw] bg-[#F9F6F3] border border-[#E0E0E0] rounded-[16px] p-8 shadow-none">
+            <Card className="min-w-[676px] bg-[#F9F6F3] border border-[#E0E0E0] rounded-[16px] shadow-none">
               {error && (
                 <motion.div
                   className="mb-4 text-destructive text-sm text-center"
@@ -298,17 +298,17 @@ const LoginPage = () => {
                 initial={{ opacity: 0, x: activeTab === "login" ? -20 : 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3 }}
-                className="flex-1 flex flex-col"
+                className="flex flex-col"
               >
                 {activeTab === "login" ? (
                   <motion.form
                     onSubmit={handleSubmit}
-                    className="space-y-6 w-full max-w-[548px] mx-auto"
+                    className="space-y-6 w-full min-w-[548px]"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="space-y-2">
+                    <div className="space-y-2 pt-8 px-8">
                       <label className="block text-sm font-medium text-black text-left">
                         Username
                       </label>
@@ -331,7 +331,7 @@ const LoginPage = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <div className="flex justify-between items-center">
+                      <div className="flex justify-between pb-8 px-8 items-center">
                         <label className="block text-sm font-medium text-black text-left">
                           Password
                         </label>
@@ -342,7 +342,7 @@ const LoginPage = () => {
                           Forgot password?
                         </span>
                       </div>
-                      <div className="relative">
+                      <div className="relative pb-8 px-8">
                         <input
                           type={showPassword ? "text" : "password"}
                           name="password"
@@ -354,7 +354,7 @@ const LoginPage = () => {
                         />
                         <button
                           type="button"
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-white"
+                          className="absolute right-12 top-1/4 text-[#696969] hover:text-black"
                           onClick={() => setShowPassword(!showPassword)}
                         >
                           {showPassword ? (
@@ -369,46 +369,50 @@ const LoginPage = () => {
                           {errors.password}
                         </span>
                       )}
+                      <div className="mt-6 rounded-b-[16px] w-full overflow-hidden p-8" style={{
+                        background: 'radial-gradient(circle at bottom, #E7CDC1 0%, #6FC3D4 100%)',
+                      }}>
+                        <div className="flex gap-4">
+                          <motion.button
+                            type="button"
+                            className="w-full border border-[#BDBDBD] bg-white/80 text-[#000000] rounded-lg py-4 flex items-center justify-center gap-2 font-medium transition-colors duration-200 hover:bg-white/100"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={handleGoogleSignIn}
+                          >
+                            <img
+                              src="/google-white-icon.svg"
+                              alt="Google"
+                              className="w-5 h-5"
+                            />
+                            Sign in with Google
+                          </motion.button>
+                          <motion.button
+                            type="submit"
+                            className="w-full bg-[#232323] text-white rounded-lg py-4 flex items-center justify-center gap-2 font-medium transition-colors duration-200 hover:bg-[#111]"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            disabled={loading}
+                          >
+                            {loading ? "Signing in..." : "Sign In"}
+                            <ArrowRight className="w-5 h-5" />
+                          </motion.button>
+                        </div>
+                      </div>
                     </div>
 
 
-                    <div className="flex gap-4 mt-6">
-                      <motion.button
-                        type="button"
-                        className="w-full border border-[#BDBDBD] bg-transparent text-[#000000] rounded-lg py-4 flex items-center justify-center gap-2 font-medium transition-colors duration-200 hover:bg-[#f5f5f5]"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={handleGoogleSignIn}
-                      >
-                        <img
-                          src="/google-white-icon.svg"
-                          alt="Google"
-                          className="w-5 h-5"
-                        />
-                        Sign in with Google
-                      </motion.button>
-                      <motion.button
-                        type="submit"
-                        className="w-full bg-[#362716] text-white rounded-lg py-4 flex items-center justify-center gap-2 font-medium transition-colors duration-200 hover:bg-[#111]"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        disabled={loading}
-                      >
-                        {loading ? "Signing in..." : "Sign In"}
-                        <ArrowRight className="w-5 h-5" />
-                      </motion.button>
-                    </div>
 
                   </motion.form>
                 ) : (
                   <motion.form
                     onSubmit={handleSubmit}
-                    className="space-y-6 w-full max-w-[548px] mx-auto"
+                    className="space-y-6 w-full min-w-[548px] mx-auto"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="space-y-2">
+                    <div className="space-y-2 px-8 pt-8">
                       <label className="block text-sm font-medium text-black text-left">
                         Full Name
                       </label>
@@ -430,7 +434,7 @@ const LoginPage = () => {
                       )}
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2 px-8">
                       <label className="block text-sm font-medium text-black text-left">
                         Email
                       </label>
@@ -452,7 +456,7 @@ const LoginPage = () => {
                       )}
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2 px-8">
                       <label className="block text-sm font-medium text-black text-left">
                         Password
                       </label>
@@ -468,7 +472,7 @@ const LoginPage = () => {
                         />
                         <button
                           type="button"
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-white"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-[#696969] hover:text-black"
                           onClick={() => setShowPassword(!showPassword)}
                         >
                           {showPassword ? (
@@ -543,7 +547,7 @@ const LoginPage = () => {
                       )}
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2 px-8">
                       <label className="block text-sm font-medium text-black text-left">
                         Confirm Password
                       </label>
@@ -559,7 +563,7 @@ const LoginPage = () => {
                         />
                         <button
                           type="button"
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-white"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-[#696969] hover:text-black"
                           onClick={() => setShowPassword(!showPassword)}
                         >
                           {showPassword ? (
@@ -576,7 +580,7 @@ const LoginPage = () => {
                       )}
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2 px-8 ">
                       <label className="block text-sm font-medium text-black text-left">
                         Mobile No.
                       </label>
@@ -597,34 +601,42 @@ const LoginPage = () => {
                       )}
                     </div>
 
-                    <div className="flex gap-4 mt-6">
-                      <motion.button
-                        type="button"
-                        className="w-full border border-[#BDBDBD] bg-transparent text-[#000000] rounded-lg py-4 flex items-center justify-center gap-2 font-medium transition-colors duration-200 hover:bg-[#f5f5f5]"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={handleGoogleSignIn}
-                      >
-                        <img
-                          src="/google-white-icon.svg"
-                          alt="Google"
-                          className="w-5 h-5"
-                        />
-                        Sign up with Google
-                      </motion.button>
-                      <motion.button
-                        type="submit"
-                        className="w-full bg-[#232323] text-white rounded-lg py-4 flex items-center justify-center gap-2 font-medium transition-colors duration-200 hover:bg-[#111]"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        disabled={loading}
-                      >
-                        {loading ? "Creating account..." : "Sign Up"}
-                        <ArrowRight className="w-5 h-5" />
-                      </motion.button>
+                    <div className="mt-6 rounded-b-[16px] overflow-hidden" style={{
+                      background: 'radial-gradient(circle at bottom, #E7CDC1 0%, #6FC3D4 100%)',
+                     
+                      padding: '24px 32px 32px'
+                    }}>
+                      <div className="flex gap-4">
+                        <motion.button
+                          type="button"
+                          className="w-full border border-[#BDBDBD] bg-white/80 text-[#000000] rounded-lg py-4 flex items-center justify-center gap-2 font-medium transition-colors duration-200 hover:bg-white/100"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={handleGoogleSignIn}
+                        >
+                          <img
+                            src="/google-white-icon.svg"
+                            alt="Google"
+                            className="w-5 h-5"
+                          />
+                          Sign up with Google
+                        </motion.button>
+                        <motion.button
+                          type="submit"
+                          className="w-full bg-[#232323] text-white rounded-lg py-4 flex items-center justify-center gap-2 font-medium transition-colors duration-200 hover:bg-[#111]"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          disabled={loading}
+                        >
+                          {loading ? "Creating account..." : "Sign Up"}
+                          <ArrowRight className="w-5 h-5" />
+                        </motion.button>
+                      </div>
                     </div>
                   </motion.form>
+
                 )}
+
               </motion.div>
             </Card>
           </div>

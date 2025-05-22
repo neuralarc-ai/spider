@@ -51,7 +51,7 @@ const LandingNavbar = () => {
       }}
     >
       <div className={styles.container}>
-        <Logo width={160} height={60} />
+        <div className={styles.logoText}>Spider</div>
 
         {/* Hamburger Icon for Mobile */}
         <div className={styles.mobileMenuToggle} onClick={toggleMobileMenu}>
