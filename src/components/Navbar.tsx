@@ -7,7 +7,12 @@ import TokenUsage from '@/components/TokenUsage';
 import SubscriptionModal from '@/components/SubscriptionModal';
 import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar';
 import styles from '../styles/Navbar.module.scss';
-
+import menuIcon from "../../public/List item.svg"
+import dropdown from  "../../public/List item (1).svg"
+import profile from "../../public/userprofile.svg"
+import logout from "../../public/LogoutOutline.svg"
+import historyIcon from "../../public/SortAscending.svg"
+import upgrade from "../../public/upgrade.svg"
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
@@ -86,24 +91,27 @@ const Navbar = () => {
                         </div>
                     </button>
                 ) : (
-                    <div className={styles.placeholder} />
+                    <div className={styles.placeholder} > 
+                      Spider
+                     </div>
+                    
                 )}
                 <div className={styles.logoLink} onClick={() => navigate('/spider')}>
-                    <img
-                        src="/images/navlogo.svg"
-                        alt="spider"
-                        className={styles.logo}
-                    />
+                    
                 </div>
                 <button
                     className={styles.menuButton}
                     onClick={toggleMenu}
                     aria-label="Toggle menu"
                 >
+                     <img 
+                                src={dropdown} 
+                                alt="Menu" 
+                                
+                            />
                     <div className={styles.menuSquare}>
                         <div className={styles.menuCircle}>
-                            <div className={`${styles.menuLine} ${isOpen ? styles.open : ''}`} />
-                            <div className={`${styles.menuLine} ${isOpen ? styles.open : ''}`} />
+                           
                         </div>
                     </div>
                 </button>
@@ -128,15 +136,27 @@ const Navbar = () => {
                         >
                             <div className={styles.menuItems}>
                                 <div className={styles.profileSection}>
-                                    <Avatar className={styles.profileImage} style={{ borderRadius: '50%' }}>
-                                        <AvatarImage
-                                            src={user?.user_metadata?.avatar_url}
-                                            alt={user?.user_metadata?.full_name || user?.email || 'Profile'}
-                                        />
-                                        <AvatarFallback className={styles.profilePlaceholder}>
-                                            {user?.email?.[0]?.toUpperCase() || 'N/A'}
-                                        </AvatarFallback>
-                                    </Avatar>
+                                    <div className={styles.profileImageWrapper}>
+                                        <div className={styles.profileOuterCircle}>
+                                            <div className={styles.profileInnerCircle}>
+                                                {/* <Avatar className={styles.profileImage} style={{ borderRadius: '50%' }}>
+                                                    <AvatarImage
+                                                        src={user?.user_metadata?.avatar_url}
+                                                        alt={user?.user_metadata?.full_name || user?.email || 'Profile'}
+                                                    />
+                                                    <AvatarFallback className={styles.profileFallbackIcon}>
+                                                        {user?.email?.[0]?.toUpperCase() || (
+                                                            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                                <circle cx="12" cy="12" r="10" stroke="#222" />
+                                                                <path d="M12 16c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z" stroke="#222" />
+                                                            </svg>
+                                                        )}
+                                                    </AvatarFallback>
+                                                </Avatar> */}
+                                                <img src={profile} className={styles.profileImage}/>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div className={styles.profileInfo}>
                                         <div className={styles.profileName}>
                                             {user?.user_metadata?.full_name || user?.email || 'Please Sign In'}
@@ -157,12 +177,19 @@ const Navbar = () => {
                                     <>
                                         <button onClick={() => navigate('/history')} className={styles.menuItem}>
                                             History
+                                            <img src ={historyIcon} />
                                         </button>
                                         <button onClick={openSubscriptionModal} className={styles.menuItem}>
                                             <span>Upgrade Plan</span>
+                                             <img src ={upgrade} />
                                         </button>
+                                    
                                         <button onClick={handleLogout} className={styles.menuItem}>
-                                            Logout
+                                        
+                                                Logout
+                                                <img src ={logout} />
+                                         
+                                           
                                         </button>
                                     </>
                                 ) : (

@@ -62,7 +62,7 @@ const LoadingScreen = ({ progress = 0, text = 'Generating' }: LoadingScreenProps
 
   return (
     <div className={styles.gradientWrapper}>
-      <img src="/images/backgroundgradiant.png" alt="Gradient Background" className={styles.gradientBackground} />
+      {/* <img src="/images/backgroundgradiant.png" alt="Gradient Background" className={styles.gradientBackground} /> */}
 
       <div className={styles.innerBox}>
         <h2 className="text-[20px] font-medium text-white mb-1 font-fustat">

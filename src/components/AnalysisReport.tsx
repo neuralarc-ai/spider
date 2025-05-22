@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MistralResponse } from "../services/pdfService";
 import { format } from "date-fns";
 import styles from "@/styles/upload.module.scss";
+import sharelogo from "../../public/Avatar.svg"
 import {
   FileText,
   Globe,
@@ -365,41 +366,48 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
 
   return (
     <div className={`${styles.gradientWrapper} font-fustat`}>
-      <img
-        src="/images/backgroundgradiant.png"
-        alt="Gradient Background"
-        className={styles.gradientBackground}
-      />
+      
       <div className={styles.innerBox}>
-        <div className="flex flex-col items-start mb-4">
-          <h4 className="text-xl font-medium text-white">
-            Analysis For: {data.company_overview.company_name}
-          </h4>
-          <p className="text-gray-400 text-sm mt-1">
+        <div className="flex  items-start justify-between">
+          <div className="flex flex-col items-start justify-center">
+            <h4 className="font-[Fustat] font-bold text-[32px] leading-[28px] tracking-[-0.02em] text-black">
+
+            Analysis For - {data.company_overview.company_name}
+            </h4>
+            <p className="text-gray-400 text-sm mt-3">
             Industry: {data.industry_type} | Date:{" "}
             {format(data.analyzedAt, "MMMM dd yyyy")}
-          </p>
+            </p>
+          </div>
+         <div className="w-16 h-16 rounded-full bg-black bg-opacity-5 flex justify-center items-center">
+          <img
+            src={sharelogo}
+            className="w-8 h-8 object-contain"
+          />
+         </div>
+           
         </div>
-        <div className="bg-[#212228] bg-opacity-50 backdrop-blur-md rounded-xl p-6">
+        
+        <div className="bg-[#FFFFFF] bg-opacity-50 backdrop-blur-md rounded-xl p-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {/* Pitch Analysis Card */}
-            <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6">
+            <div className="bg-[#DED5C9] border border-[#ffffff1a] rounded-lg p-2  gap-6">
               <div className="flex items-center mb-4 border border-[#ffffff1a] rounded-[48px] p-2 pl-6">
                 <img src="/panalysis.svg" alt="Pitch Analysis" className="w-5 h-5 mr-3" />
-                <h3 className="text-white text-lg font-medium">
+                <h3 className="text-lg font-medium text-black">
                   Pitch Analysis
                 </h3>
               </div>
               <div className="space-y-4">
                 <div className="flex items-center justify-between pl-2 pr-2 gap-20 text-left">
                   <div>
-                    <p className="text-gray-400 text-sm mb-1">Clarity Score:</p>
-                    <p className="text-white text-2xl font-bold">
+                    <p className="text-black text-sm mb-1">Clarity Score:</p>
+                    <p className="text-black text-2xl font-bold">
                       {data.pitch_clarity}/10
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm mb-1">Sentiment:</p>
+                    <p className="text-black text-sm mb-1">Sentiment:</p>
                     <p
                       className={`text-${data.reputation_analysis?.overall?.sentiment?.toLowerCase() ===
                         "positive"
@@ -414,8 +422,8 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                     </p>
                   </div>
                 </div>
-                <div className="pt-4 border-t border-[#ffffff1a]">
-                  <p className="text-sm text-gray-300 text-left">
+                <div className="pt-4 border-t border-[#ffffff1a] ">
+                  <p className="text-sm text-black text-left">
                     AI detected{" "}
                     <span className="font-medium">
                       {data.strengths?.length || 0} strengths
@@ -430,31 +438,31 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
             </div>
 
             {/* Investment Potential Card */}
-            <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6">
+            <div className=" bg-[#DED5C9] border border-[#ffffff1a] rounded-lg p-2">
               <div className="flex items-center mb-4 border border-[#ffffff1a] rounded-[48px] p-2 pl-6">
                 <img src="/ipotential.svg" alt="Investment Potential" className="w-5 h-5 mr-3" />
-                <h3 className="text-white text-lg font-medium">
+                <h3 className="text-black text-lg font-medium">
                   Investment Potential
                 </h3>
               </div>
               <div className="space-y-4">
                 <div className="flex items-center justify-between pl-2 pr-2 gap-20 text-left">
                   <div>
-                    <p className="text-gray-400 text-sm mb-1">Score:</p>
-                    <p className="text-white text-2xl font-bold">
+                    <p className="text-black text-sm mb-1">Score:</p>
+                    <p className="text-black text-2xl font-bold">
                       {data.investment_score}/10
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm mb-1">Exit Potential:</p>
-                    <p className="text-white font-medium">
+                    <p className="text-black text-sm mb-1">Exit Potential:</p>
+                    <p className="text-black font-medium">
                       {data.proposed_deal_structure?.valuation_cap ||
                         "Not specified"}
                     </p>
                   </div>
                 </div>
                 <div className="pt-4 border-t border-[#ffffff1a]">
-                  <p className="text-sm text-gray-300 text-left">
+                  <p className="text-sm text-black text-left">
                     {data.market_analysis?.growth_rate ? (
                       <>
                         Growth rate:{" "}
@@ -480,30 +488,30 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
             </div>
 
             {/* Market Position Card */}
-            <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6">
+            <div className=" bg-[#DED5C9] border border-[#ffffff1a] rounded-lg p-2">
               <div className="flex items-center mb-4 border border-[#ffffff1a] rounded-[48px] p-2 pl-6">
                 <img src="/mposition.svg" alt="Market Position" className="w-5 h-5 mr-3" />
-                <h3 className="text-white text-lg font-medium">
+                <h3 className="text-black text-lg font-medium">
                   Market Position
                 </h3>
               </div>
               <div className="space-y-4">
                 <div className="flex items-center justify-between pl-2 pr-2 gap-20 text-left">
                   <div>
-                    <p className="text-gray-400 text-sm mb-1">Classification:</p>
-                    <p className="text-white text-2xl font-bold">
+                    <p className="text-black text-sm mb-1">Classification:</p>
+                    <p className="text-black text-2xl font-bold">
                       {data.market_position}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm mb-1">Industry:</p>
-                    <p className="text-gray-300 font-medium">
+                    <p className="text-black text-sm mb-1">Industry:</p>
+                    <p className="text-black font-medium">
                       {data.industry_type}
                     </p>
                   </div>
                 </div>
                 <div className="pt-4 border-t border-[#ffffff1a]">
-                  <p className="text-sm text-gray-300 text-left">
+                  <p className="text-sm text-black text-left">
                     {data.competitor_analysis?.competitors ? (
                       <>
                         Competing with{" "}
@@ -521,8 +529,8 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
             </div>
           </div>
           <div>
-            <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6 mt-8">
-              <h2 className="text-2xl font-medium text-white mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+            <div className="">
+              <h2 className="text-2xl font-medium text-black mb-8 border-b border-[#ffffff1a] pb-4 text-left">
                 Company Overview
               </h2>
               <div className="grid grid-cols-2 gap-6">
@@ -534,9 +542,9 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                   ["Business Model:", data.company_overview.business_model],
                   ["Key Offerings:", data.company_overview.key_offerings],
                 ].map(([label, value], i) => (
-                  <div key={i} className="border-b border-[#ffffff1a] pb-4 grid grid-cols-[150px_1fr]">
+                  <div key={i} className="border-b border-[#202020] pb-4 grid grid-cols-[150px_1fr]">
                     <p className="text-gray-400 text-sm text-left">{label}</p>
-                    <p className="text-white text-base text-left">{value}</p>
+                    <p className="text-black text-base text-left">{value}</p>
                   </div>
                 ))}
               </div>
@@ -547,7 +555,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
             {/* Strengths & Weaknesses Section */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 mt-8">
               <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6">
-                <h2 className="text-2xl font-medium text-white mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+                <h2 className="text-2xl font-medium text-black mb-8 border-b border-[#ffffff1a] pb-4 text-left">
                   Strengths & Weaknesses
                 </h2>
                 <div className="grid grid-cols-2 gap-8">
@@ -555,7 +563,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                     <h3 className="text-green-500 text-lg pl-5 mb-4 text-left">
                       Strengths (Pros)
                     </h3>
-                    <ul className="list-disc list-outside pl-5 text-left text-gray-300 text-sm space-y-3">
+                    <ul className="list-disc list-outside pl-5 text-left text-black text-sm space-y-3">
                       {data.strengths.map((strength, index) => (
                         <li key={index} className="leading-relaxed">
                           {strength}
@@ -567,7 +575,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                     <h3 className="text-red-500 pl-5 text-lg mb-4 text-left">
                       Weaknesses (Cons)
                     </h3>
-                    <ul className="list-disc list-outside pl-5 text-left text-gray-300 text-sm space-y-3">
+                    <ul className="list-disc list-outside pl-5 text-left text-black text-sm space-y-3">
                       {data.weaknesses.map((weakness, index) => (
                         <li key={index} className="leading-relaxed">
                           {weakness}
@@ -580,7 +588,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
 
               {/* Funding History Section */}
               <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6">
-                <h2 className="text-2xl font-medium text-white mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+                <h2 className="text-2xl font-medium text-black mb-8 border-b border-[#ffffff1a] pb-4 text-left">
                   Funding History
                 </h2>
                 {data.funding_history?.rounds?.length > 0 ? (
@@ -588,16 +596,16 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                     <table className="w-full">
                       <thead>
                         <tr className="border-b border-[#ffffff1a]">
-                          <th className="text-left py-3 px-4 text-gray-400 font-normal">
+                          <th className="text-left py-3 px-4 text-black font-normal">
                             Round
                           </th>
-                          <th className="text-left py-3 px-4 text-gray-400 font-normal">
+                          <th className="text-left py-3 px-4 text-black font-normal">
                             Amount
                           </th>
-                          <th className="text-left py-3 px-4 text-gray-400 font-normal">
+                          <th className="text-left py-3 px-4 text-black font-normal">
                             Key Investors
                           </th>
-                          <th className="text-left py-3 px-4 text-gray-400 font-normal">
+                          <th className="text-left py-3 px-4 text-black font-normal">
                             Date
                           </th>
                         </tr>
@@ -608,18 +616,18 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                             key={index}
                             className="border-b border-[#ffffff1a] hover:bg-[#ffffff05] transition-colors"
                           >
-                            <td className="py-3 px-4 text-white text-left">
+                            <td className="py-3 px-4 text-black text-left">
                               {round.type || "Unknown Round"}
                             </td>
-                            <td className="py-3 px-4 text-white text-left">
+                            <td className="py-3 px-4 text-black text-left">
                               {round.amount || "Not disclosed"}
                             </td>
-                            <td className="py-3 px-4 text-white text-left">
+                            <td className="py-3 px-4 text-black text-left">
                               {round.key_investors?.length > 0
                                 ? round.key_investors.join(", ")
                                 : "Not disclosed"}
                             </td>
-                            <td className="py-3 px-4 text-white text-left">
+                            <td className="py-3 px-4 text-black text-left">
                               {round.date || "Not specified"}
                             </td>
                           </tr>
@@ -648,26 +656,26 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
           <div>
             {/* Competitor Comparison Section */}
             <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6 mb-8">
-              <h2 className="text-2xl font-medium text-white mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+              <h2 className="text-2xl font-medium text-black mb-8 border-b border-[#ffffff1a] pb-4 text-left">
                 Competitor Comparison
               </h2>
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-[#ffffff1a]">
-                      <th className="text-left py-3 px-4 text-gray-400 font-normal border-r border-[#ffffff1a]">
+                      <th className="text-left py-3 px-4 text-black font-normal border-r border-[#ffffff1a]">
                         Competitor
                       </th>
-                      <th className="text-left py-3 px-4 text-gray-400 font-normal border-r border-[#ffffff1a]">
+                      <th className="text-left py-3 px-4 text-black font-normal border-r border-[#ffffff1a]">
                         Key Investors
                       </th>
-                      <th className="text-left py-3 px-4 text-gray-400 font-normal border-r border-[#ffffff1a]">
+                      <th className="text-left py-3 px-4 text-black font-normal border-r border-[#ffffff1a]">
                         Amount Raised
                       </th>
-                      <th className="text-left py-3 px-4 text-gray-400 font-normal border-r border-[#ffffff1a]">
+                      <th className="text-left py-3 px-4 text-black font-normal border-r border-[#ffffff1a]">
                         Market Position
                       </th>
-                      <th className="text-left py-3 px-4 text-gray-400 font-normal">
+                      <th className="text-left py-3 px-4 text-black font-normal">
                         Strengths
                       </th>
                     </tr>
@@ -679,19 +687,19 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                           key={index}
                           className={index === data.competitor_analysis.competitors.length - 1 ? '' : 'border-b border-[#ffffff1a]'}
                         >
-                          <td className="py-4 px-4 text-white text-left border-r border-[#ffffff1a]">
+                          <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
                             {competitor.name}
                           </td>
-                          <td className="py-4 px-4 text-white text-left border-r border-[#ffffff1a]">
+                          <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
                             {competitor.key_investors}
                           </td>
-                          <td className="py-4 px-4 text-white text-left border-r border-[#ffffff1a]">
+                          <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
                             {competitor.amount_raised}
                           </td>
-                          <td className="py-4 px-4 text-white text-left border-r border-[#ffffff1a]">
+                          <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
                             {competitor.market_position}
                           </td>
-                          <td className="py-4 px-4 text-white text-left">
+                          <td className="py-4 px-4 text-[#4F4F4F] text-left">
                             {competitor.strengths}
                           </td>
                         </tr>
@@ -704,7 +712,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
 
             {/* Market Comparison Section */}
             <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6 mb-8">
-              <h2 className="text-2xl font-medium text-white mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+              <h2 className="text-2xl font-medium text-black mb-8 border-b border-[#ffffff1a] pb-4 text-left">
                 Market Comparison
               </h2>
               <div className="overflow-x-auto">
@@ -731,10 +739,10 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                   </thead>
                   <tbody>
                     <tr className="border-b border-[#ffffff1a]">
-                      <td className="py-4 px-4 text-white text-left border-r border-[#ffffff1a]">
+                      <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
                         Market Share
                       </td>
-                      <td className="py-4 px-4 text-white text-left border-r border-[#ffffff1a]">
+                      <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
                         {data.market_position}
                       </td>
                       {data.competitor_analysis.competitors
@@ -742,17 +750,17 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                         .map((competitor, index) => (
                           <td
                             key={index}
-                            className="py-4 px-4 text-white text-left border-r border-[#ffffff1a]"
+                            className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]"
                           >
                             {competitor.market_position}
                           </td>
                         ))}
                     </tr>
                     <tr className="border-b border-[#ffffff1a]">
-                      <td className="py-4 px-4 text-white text-left border-r border-[#ffffff1a]">
+                      <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
                         Growth Rate
                       </td>
-                      <td className="py-4 px-4 text-white text-left border-r border-[#ffffff1a]">
+                      <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
                         {data.market_analysis.growth_rate}
                       </td>
                       {data.competitor_analysis.competitors
@@ -760,17 +768,17 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                         .map((competitor, index) => (
                           <td
                             key={index}
-                            className="py-4 px-4 text-white text-left border-r border-[#ffffff1a]"
+                            className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]"
                           >
                             {competitor.growth_rate || "N/A"}
                           </td>
                         ))}
                     </tr>
                     <tr className="border-b border-[#ffffff1a]">
-                      <td className="py-4 px-4 text-white text-left border-r border-[#ffffff1a]">
+                      <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
                         Revenue Model
                       </td>
-                      <td className="py-4 px-4 text-white text-left border-r border-[#ffffff1a]">
+                      <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
                         {data.company_overview.business_model}
                       </td>
                       {data.competitor_analysis.competitors
@@ -778,17 +786,17 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                         .map((competitor, index) => (
                           <td
                             key={index}
-                            className="py-4 px-4 text-white text-left border-r border-[#ffffff1a]"
+                            className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]"
                           >
                             {competitor.business_model || "N/A"}
                           </td>
                         ))}
                     </tr>
                     <tr>
-                      <td className="py-4 px-4 text-white text-left border-r border-[#ffffff1a]">
+                      <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
                         Key Differentiator
                       </td>
-                      <td className="py-4 px-4 text-white text-left border-r border-[#ffffff1a]">
+                      <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
                         {data.strengths[0] || "N/A"}
                       </td>
                       {data.competitor_analysis.competitors
@@ -796,7 +804,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                         .map((competitor, index) => (
                           <td
                             key={index}
-                            className="py-4 px-4 text-white text-left border-r border-[#ffffff1a]"
+                            className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]"
                           >
                             {competitor.key_differentiator || "N/A"}
                           </td>
@@ -808,26 +816,29 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
             </div>
 
             {/* Exit Potential Section */}
-            <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6">
-              <h2 className="text-2xl font-medium text-white mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+            <div className=" border border-[#ffffff1a] rounded-xl p-6">
+              <h2 className="text-2xl font-medium text-black  mb-8 border-b border-[#ffffff1a] pb-4 text-left">
                 Exit Potential
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-[#1a1b1f] rounded-xl p-6">
+                <div className="bg-[#202020] rounded-xl p-6">
                   <h3 className="text-gray-400 mb-4 text-left">Exit Likelihood</h3>
                   <div className="relative pt-2">
                     <div className="w-full bg-gray-700 rounded-full h-2 relative">
                       <div
-                        className="h-full bg-white rounded-full shadow-[0_0_20px_rgba(255,255,255,0.7)] transition-all duration-1000 ease-out"
-                        style={{ width: `${(data.final_verdict.exit_potential / 10) * 100}%` }}
+                        className="h-full rounded-full shadow-[0_0_20px_rgba(255,255,255,0.7)] transition-all duration-1000 ease-out"
+                        style={{ 
+                          width: `${(data.final_verdict.exit_potential / 10) * 100}%`,
+                          background: 'linear-gradient(90deg, #FFFF1E 0%, #45FAC2 75.98%, #FF287A 168.85%)'
+                        }}
                       ></div>
-                      <div className="absolute -top-12 right-0 bg-[#F38416]/10 border border-[#F38416] text-[#FFC491] px-5 py-2 rounded-[48px] text-sm">
+                      <div className="absolute -top-12 right-0 bg-[#FFFF1E] text-[#202020]  px-5 py-2 rounded-[48px] text-sm">
                         {data.final_verdict.exit_potential}/10
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="bg-[#1a1b1f] rounded-xl p-6">
+                <div className=" bg-[#202020] rounded-xl p-6">
                   <h3 className="text-gray-400 mb-4 text-left">Potential Exit Value</h3>
                   <p className="text-3xl font-semibold text-white text-left">
                     {data.proposed_deal_structure?.valuation_cap ||
@@ -840,12 +851,12 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
 
           {/* Expert Insights Section */}
           <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6 mt-8">
-            <h2 className="text-2xl font-medium text-white mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+            <h2 className="text-2xl font-medium text-black mb-8 border-b border-[#ffffff1a] pb-4 text-left">
               Expert Insights
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Expert Opinions Card */}
-              <div className="bg-[#1a1b1f] rounded-xl p-6">
+              <div className="bg-[#202020] rounded-xl p-6">
                 <h3 className="text-xl text-white mb-4 text-left border-b border-[#ffffff1a] pb-4">Expert Opinion</h3>
                 {data.expert_opinions && data.expert_opinions.length > 0 ? (
                   <div className="mb-6">
@@ -892,7 +903,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
               </div>
 
               {/* Reputation Analysis Card */}
-              <div className="bg-[#1a1b1f] rounded-xl p-6">
+              <div className="bg-[#202020] rounded-xl p-6">
                 <h3 className="text-xl text-white mb-6 text-left border-b border-[#ffffff1a] pb-4">Reputation Analysis</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full">
@@ -922,14 +933,14 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-yellow-400 fill-yellow-400"
+                                        className="w-4 h-4 text-white-400 fill-white"
                                       />
                                     );
                                   } else if (i === fullStars && halfStar) {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-yellow-400"
+                                        className="w-4 h-4 text-white-400"
                                         style={{
                                           fill: "url(#halfStarGradient)",
                                         }}
@@ -974,14 +985,14 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-yellow-400 fill-yellow-400"
+                                        className="w-4 h-4 text-white-400 fill-white"
                                       />
                                     );
                                   } else if (i === fullStars && halfStar) {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-yellow-400"
+                                        className="w-4 h-4 text-white-400"
                                         style={{
                                           fill: "url(#halfStarGradient)",
                                         }}
@@ -1026,14 +1037,14 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-yellow-400 fill-yellow-400"
+                                        className="w-4 h-4 text-white-400 fill-white"
                                       />
                                     );
                                   } else if (i === fullStars && halfStar) {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-yellow-400"
+                                        className="w-4 h-4 text-white-400"
                                         style={{
                                           fill: "url(#halfStarGradient)",
                                         }}
@@ -1078,14 +1089,14 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-yellow-400 fill-yellow-400"
+                                        className="w-4 h-4 text-white-400 fill-white"
                                       />
                                     );
                                   } else if (i === fullStars && halfStar) {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-yellow-400"
+                                        className="w-4 h-4 text-white-400"
                                         style={{
                                           fill: "url(#halfStarGradient)",
                                         }}
@@ -1130,14 +1141,14 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-yellow-400 fill-yellow-400"
+                                        className="w-4 h-4 text-white-400 fill-white"
                                       />
                                     );
                                   } else if (i === fullStars && halfStar) {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-yellow-400"
+                                        className="w-4 h-4 text-white-400"
                                         style={{
                                           fill: "url(#halfStarGradient)",
                                         }}
@@ -1166,7 +1177,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
 
           {/* Proposed Deal Structure */}
           <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6 mt-8">
-            <h2 className="text-2xl font-medium text-white mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+            <h2 className="text-2xl font-medium text-black mb-8 border-b border-[#ffffff1a] pb-4 text-left">
               Proposed Deal Structure
             </h2>
             {(!data.proposed_deal_structure ||
@@ -1190,10 +1201,10 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {data.proposed_deal_structure.investment_amount && data.proposed_deal_structure.investment_amount !== "Not specified" ? (
                   <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-white text-base mb-2 text-left">
+                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">
                       Investment Amount
                     </h3>
-                    <p className="text-white text-2xl text-left">
+                    <p className="text-[#202020] text-2xl text-left">
                       {data.proposed_deal_structure.investment_amount}
                     </p>
                   </div>
@@ -1208,44 +1219,44 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
 
                 {data.proposed_deal_structure.equity_stake && data.proposed_deal_structure.equity_stake !== "Not specified" ? (
                   <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-white text-base mb-2 text-left">Equity Stake</h3>
-                    <p className="text-white text-2xl text-left">
+                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">Equity Stake</h3>
+                    <p className="text-[#202020] text-2xl text-left">
                       {data.proposed_deal_structure.equity_stake}
                     </p>
                   </div>
                 ) : (
                   <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-gray-400 text-base mb-2 text-left">Equity Stake</h3>
+                    <h3 className=" text-[#B3B3B3] text-base mb-2 text-left">Equity Stake</h3>
                     <p className="text-gray-400 text-sm text-left">The company has not specified the equity stake they are offering</p>
                   </div>
                 )}
 
                 {data.proposed_deal_structure.valuation_cap && data.proposed_deal_structure.valuation_cap !== "Not specified" ? (
                   <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-white text-base mb-2 text-left">Valuation Cap</h3>
-                    <p className="text-white text-2xl text-left">
+                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">Valuation Cap</h3>
+                    <p className="text-[#202020] text-2xl text-left">
                       {data.proposed_deal_structure.valuation_cap}
                     </p>
                   </div>
                 ) : (
                   <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-gray-400 text-base mb-2 text-left">Valuation Cap</h3>
+                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">Valuation Cap</h3>
                     <p className="text-gray-400 text-sm text-left">The company has not provided their valuation expectations</p>
                   </div>
                 )}
 
                 {data.proposed_deal_structure.liquidation_preference && data.proposed_deal_structure.liquidation_preference !== "Not specified" ? (
                   <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-white text-base mb-2 text-left">
+                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">
                       Liquidation Preference
                     </h3>
-                    <p className="text-white text-2xl text-left">
+                    <p className="text-[#202020] text-2xl text-left">
                       {data.proposed_deal_structure.liquidation_preference}
                     </p>
                   </div>
                 ) : (
                   <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-gray-400 text-base mb-2 text-left">
+                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">
                       Liquidation Preference
                     </h3>
                     <p className="text-gray-400 text-sm text-left">Liquidation preference terms have not been specified in the deck</p>
@@ -1254,16 +1265,16 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
 
                 {data.proposed_deal_structure.anti_dilution_protection && data.proposed_deal_structure.anti_dilution_protection !== "Not specified" ? (
                   <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-white text-base mb-2 text-left">
+                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">
                       Anti-Dilution Protection
                     </h3>
-                    <p className="text-white text-2xl text-left">
+                    <p className="text-[#202020] text-2xl text-left">
                       {data.proposed_deal_structure.anti_dilution_protection}
                     </p>
                   </div>
                 ) : (
                   <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-gray-400 text-base mb-2 text-left">
+                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">
                       Anti-Dilution Protection
                     </h3>
                     <p className="text-gray-400 text-sm text-left">Anti-dilution protection terms have not been disclosed</p>
@@ -1272,30 +1283,30 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
 
                 {data.proposed_deal_structure.board_seat && data.proposed_deal_structure.board_seat !== "Not specified" ? (
                   <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-white text-base mb-2 text-left">Board Seat</h3>
-                    <p className="text-white text-2xl text-left">
+                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">Board Seat</h3>
+                    <p className="text-[#202020] text-2xl text-left">
                       {data.proposed_deal_structure.board_seat}
                     </p>
                   </div>
                 ) : (
                   <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-gray-400 text-base mb-2 text-left">Board Seat</h3>
+                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">Board Seat</h3>
                     <p className="text-gray-400 text-sm text-left">Board seat arrangements have not been mentioned in the deck</p>
                   </div>
                 )}
 
                 {data.proposed_deal_structure.vesting_schedule && data.proposed_deal_structure.vesting_schedule !== "Not specified" ? (
                   <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-white text-base mb-2 text-left">
+                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">
                       Vesting Schedule
                     </h3>
-                    <p className="text-white text-2xl text-left">
+                    <p className="text-[#202020] text-2xl text-left">
                       {data.proposed_deal_structure.vesting_schedule}
                     </p>
                   </div>
                 ) : (
                   <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-gray-400 text-base mb-2 text-left">
+                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">
                       Vesting Schedule
                     </h3>
                     <p className="text-gray-400 text-sm text-left">The company has not outlined their vesting schedule in the pitch deck</p>
@@ -1306,51 +1317,65 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
           </div>
           {/* Key Questions Section */}
           <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6 mt-8">
-          <h2 className="text-2xl font-medium text-white mb-8 border-b border-[#ffffff1a] pb-4 text-left">
-              Key Questions
+          <h2 className="text-2xl font-medium text-black mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+              Key Questions for the Startup
             </h2>
             <div className="grid grid-cols-3 gap-4 mt-8">
-              <div className="bg-[#1a1b1f] p-4 rounded-lg ">
-                <h3 className="text-sm font-medium text-white mb-2 text-left">
+              <div className="bg-[#F2F2F2] p-4 rounded-lg ">
+                <h3 className="text-sm font-medium text-[#8C8C8C] mb-2 text-left">
                   {data.key_questions?.market_strategy?.question ||
                     "What is the market strategy?"}
                 </h3>
-                <p className="text-sm text-gray-400 text-left">
+                <p className="text-sm text-black text-left">
                   {data.key_questions?.market_strategy?.answer || "N/A"}
                 </p>
               </div>
-              <div className="bg-[#1a1b1f] p-4 rounded-lg ">
-                <h3 className="text-sm font-medium text-white mb-2 text-left">
+              <div className="bg-[#F2F2F2] p-4 rounded-lg ">
+                <h3 className="text-sm font-medium text-[#8C8C8C] mb-2 text-left">
                   {data.key_questions?.user_retention?.question ||
                     "How is user retention handled?"}
                 </h3>
-                <p className="text-sm text-gray-400 text-left">
+                <p className="text-sm text-black text-left">
                   {data.key_questions?.user_retention?.answer || "N/A"}
                 </p>
               </div>
-              <div className="bg-[#1a1b1f] p-4 rounded-lg ">
-                <h3 className="text-sm font-medium text-white mb-2 text-left">
+              <div className="bg-[#F2F2F2] p-4 rounded-lg ">
+                <h3 className="text-sm font-medium text-[#8C8C8C] mb-2 text-left">
                   {data.key_questions?.regulatory_risks?.question ||
                     "What are the regulatory risks?"}
                 </h3>
-                <p className="text-sm text-gray-400 text-left">
+                <p className="text-sm text-black text-left">
                   {data.key_questions?.regulatory_risks?.answer || "N/A"}
                 </p>
               </div>
             </div>
           </div>
           {/* Final Verdict Section */}
-          <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6 mt-8">
-            <h2 className="text-2xl font-medium text-white mb-8 border-b border-[#ffffff1a] pb-4 text-left">
-              Final Verdict
-            </h2>
+          <div className=" bg-[#202020] border border-[#ffffff1a] rounded-xl p-6 mt-8">
+            <div className="flex justify-between items-center">
+                <h2 className="text-2xl font-medium text-white mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+                  Final Verdict
+                </h2>
+                <div className="relative flex items-center justify-center">
+                  <div className="absolute inset-0 rounded-[50px] bg-gradient-to-r from-[#FFFF1E]/30 to-[#45FAC2]/30 blur-xl"></div>
+                  <div className="w-[133px] rounded-[50px] border-none p-[20px] flex justify-center items-center relative" style={{
+                        background: 'linear-gradient(90deg, #FFFF1E 0%, #45FAC2 95.42%)',
+                        boxShadow: '0px 0px 20px rgba(69, 250, 194, 0.3)'
+                      }}>
+                      <p className="font-[Fustat] font-bold text-[32px] leading-[100%] text-center text-[#202020]"> 
+                      {data.investment_score * 10}%
+                      </p>
+                  </div>
+                </div>
+            </div>
+           
 
             {/* Company Analysis Card */}
             <div className="bg-[#1a1b1f] rounded-xl p-6 mb-6">
-              <h3 className="text-xl text-white mb-2 text-left">
+              <h3 className="text-xl text-[#FFFFFF] mb-2 text-left">
                 {data.company_overview.company_name}
               </h3>
-              <p className="text-gray-300 text-base leading-relaxed mb-8 text-left">
+              <p className="text-[#A9A9A9] text-base leading-relaxed mb-8 text-left">
                 {(() => {
                   const score = data.investment_score;
                   if (score >= 8) {
@@ -1374,9 +1399,10 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2 relative">
                   <div
-                    className="bg-white h-2 rounded-full shadow-[0_0_15px_rgba(255,255,255,0.5)]"
-                    style={{
-                      width: `${data.investment_score * 10}%`,
+                    className="h-full rounded-full shadow-[0_0_20px_rgba(255,255,255,0.7)] transition-all duration-1000 ease-out"
+                    style={{ 
+                      width: `${(data.investment_score / 10) * 100}%`,
+                      background: 'linear-gradient(90deg, #FFFF1E 0%, #45FAC2 75.98%, #FF287A 168.85%)'
                     }}
                   ></div>
                 </div>

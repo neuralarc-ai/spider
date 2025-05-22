@@ -1,32 +1,56 @@
 .tokenUsage {
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 12px;
-    padding: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    
+    background: "linear-gradient(90deg, #262626 -45.63%, #3987BE 23.66%, #D48EA3 86.59%)";
+
+    background: #2D2623;
+    width: 314px;
+    height: 133px;
+    border-radius: 8px;
+    padding: 24px;
+    gap: 19px;
+
     transition: all 0.3s ease;
 
-    &:hover {
-        border-color: rgba(255, 255, 255, 0.1);
-        background: rgba(0, 0, 0, 0.2);
-    }
+    // &:hover {
+    //     border-color: rgba(255, 255, 255, 0.1);
+    //     background: rgba(0, 0, 0, 0.2);
+    // }
 }
 
 .tokenHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    margin:auto;
+    width: 266px;
+    height: 36px;
+    gap: 8px;
+
+
+
 }
 
 .tokenLabel {
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 1);
 }
 
 .tokenCount {
     font-size: 14px;
     font-weight: 500;
-    color: white;
+    color: black;
+  
+    background: linear-gradient(90deg, #C6AEA3 0%, #8EE3F0 95.42%);
+
+    width: 132;
+    height: 36;
+    border-radius: 48px;
+    gap: 8px;
+    padding-top: 8px;
+    padding-right: 20px;
+    padding-bottom: 8px;
+    padding-left: 20px;
+
 }
 
 .errorText {
@@ -36,10 +60,17 @@
 }
 
 .progressBar {
-    height: 4px;
+    
     background: rgba(255, 255, 255, 0.1);
     border-radius: 2px;
     overflow: hidden;
+    width: 266px;
+    height: 6px;
+    border-radius: 111px;
+    margin-left: 16px;
+    margin-top: 25px;
+    
+
 }
 
 .progressFill {

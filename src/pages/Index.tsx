@@ -12,6 +12,7 @@ import LoadingScreen from "@/components/LoadingScreen";
 import { StarField } from "@/components/StarField";
 import Footer from "@/components/Footer";
 import styles from "@/styles/upload.module.scss";
+import spidergo from "../../public/la_spider.svg"
 
 const starfieldVariants = {
   initial: { opacity: 0 },
@@ -154,14 +155,14 @@ const Index = () => {
         </motion.div>
       </div>
 
-      <div className="flex-grow">
+      <div className="flex-grow bg-[#FBFBF8]">
         <h1
           className="text-center text-5xl font-bold mb-8"
           style={{
-            background:
-              "linear-gradient(to right, #FFFFFF 0%, #959595 50%, #FFFFFF 100%)",
+            color: "#1E1E1E",
+           
             WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
+            // WebkitTextFillColor: "transparent",
             backgroundClip: "text",
             fontWeight: 700,
             fontFamily: "Fustat, sans-serif",
@@ -173,19 +174,19 @@ const Index = () => {
             ? "Analyzing"
             : insights && !isLoading
             ? "Analysis Report"
-            : "Start Analysis"}
+            : "AI-Powered Pitch Deck & Investment Analysis"}
         </h1>
 
         <div className={styles.uploadContainer}>
           {!insights && !isLoading && (
             <div className={styles.gradientWrapper}>
-              <img
+              {/* <img
                 src="/images/backgroundgradiant.png"
                 alt="Gradient Background"
                 className={styles.gradientBackground}
-              />
+              /> */}
               <div className={styles.innerBox}>
-                <h2 className="text-xl font-medium text-white mb-2">
+                <h2 className="font-fustat text-[#232323] font-semibold text-[20px] leading-[24px] tracking-[-0.01em] text-center mb-2 ">
                   Upload Your Pitch Deck
                 </h2>
 
@@ -204,7 +205,7 @@ const Index = () => {
 
                 <div className={styles.disclaimerContainer}>
                   <div className={styles.requiredIndicator}>
-                    <h2 className="text-[18px] font-bold">Disclaimer</h2>
+                    <h2 className="text-[18px] font-bold text-black font-[Fustat]">Disclaimer</h2>
                     <span className={styles.asterisk}>*</span>
                   </div>
                   <div className={styles.disclaimerCheckbox}>
@@ -216,7 +217,7 @@ const Index = () => {
                       className={styles.checkbox}
                     />
                     <div className={styles.disclaimerText}>
-                      <p className="text-muted-foreground text-justify leading-relaxed font-fustat">
+                      <p className="font-[Fustat] font-normal text-[16px] leading-[24px] tracking-[-0.4%] text-[#676767]">
                         This website is a platform developed and maintained by NeuralArc. All information, content, tools, and services provided through this platform are intended solely for use by authorized personnel for official and approved purposes.
                         The materials and data provided are offered on an "as is" and "as available" basis. No warranties, either express or implied, are made regarding the accuracy, completeness, reliability, or availability of the content on this platform. Use of the site is at your own risk.
                         Unauthorized access, distribution, modification, or misuse of this website or its data is strictly prohibited and may result in disciplinary action and/or legal proceedings under applicable laws and organizational policies.
@@ -224,15 +225,19 @@ const Index = () => {
                     </div>
                   </div>
                 </div>
-
-                <button
-                  onClick={handleAnalyze}
-                  className={styles.analyzeButton}
-                  disabled={!file || isLoading || !isDisclaimerAccepted}
-                >
-                  Analyze your document now
-                  <ArrowRight className="w-5 h-5" />
-                </button>
+                <div>
+                 
+                    <button
+                      onClick={handleAnalyze}
+                      className={styles.analyzeButton}
+                      disabled={!file || isLoading || !isDisclaimerAccepted}
+                    >
+                    <img src={spidergo} alt="spidergo" />
+                      Go Spider - Analysis Now 
+                      <ArrowRight className="w-5 h-5" />
+                    </button>
+                </div>
+               
               </div>
             </div>
           )}

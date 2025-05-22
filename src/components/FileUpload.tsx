@@ -2,6 +2,7 @@ import { useState, useRef, DragEvent, ChangeEvent, forwardRef } from "react";
 import { Upload, FilePlus, AlertCircle, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/sonner";
+import uploadfile from "../../public/fluent_document-arrow-up-20-regular (1).svg"
 
 interface FileUploadProps {
   onFileSelected: (file: File) => void;
@@ -96,18 +97,27 @@ const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(({ onFileSelect
       />
 
       <div className="flex flex-col items-center justify-center space-y-4">
-        <img src="/images/upload.svg" alt="Upload" className="h-16 w-16" />
+        <img src= {uploadfile} alt="Upload" className="h-16 w-16" />
 
         <div className="space-y-2">
           {file ? (
-            <div className="text-white flex items-center gap-2">
+            <div className="text-[#7C7C7C] flex items-center gap-2">
               <FileText className="w-5 h-5" />
               <span>{file.name}</span>
             </div>
           ) : (
             <>
-              Drag & drop your file here, or{" "}
-              <span className="text-primary cursor-pointer">Choose File..</span>
+              <span
+                className="font-[Fustat] font-normal text-[18px] leading-[24px] "
+                style={{
+                  color: "#7C7C7C",
+                  letterSpacing: "0%",
+                  
+                }}
+              >
+                Drag & drop your file here, or{" "}
+              </span>
+              <span className="text-[#000000] cursor-pointer">Choose File..</span>
             </>
           )}
         </div>

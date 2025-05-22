@@ -8,27 +8,34 @@ const Footer = () => {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.links}>
-            <Link to="/terms-of-use">Terms of use</Link>
+            <Link to="/terms-of-use">
+              <p className='font-[Fustat] font-light text-[12px] [leading-trim:cap-height] leading-[14px] tracking-normal text-center underline decoration-solid decoration-[0%] underline-offset-[0%] text-[#798682]'> Terms of use</p> 
+            </Link>
             <span>•</span>
-            <Link to="/privacy-policy" className="text-gray-400 hover:text-white">
-              Privacy Policy
+            <Link to="/privacy-policy" >
+            <p className='font-[Fustat] font-light text-[12px] [leading-trim:cap-height] leading-[14px] tracking-normal text-center underline decoration-solid decoration-[0%] underline-offset-[0%] text-[#798682]' > Privacy Policy</p>
+             
             </Link>
             
             <span>•</span>
-            <Link to="/responsible-ai">Responsible AI</Link>
+            <Link to="/responsible-ai">
+            <p className='font-[Fustat] font-light text-[12px] [leading-trim:cap-height] leading-[14px] tracking-normal text-center underline decoration-solid decoration-[0%] underline-offset-[0%] text-[#798682] '> Responsible AI</p>
+            </Link>
+
+            <span >•</span>
+            <Link to="/responsible-ai">
+            <p className='font-[Fustat] font-light text-[12px] [leading-trim:cap-height] leading-[14px] tracking-normal text-center underline decoration-solid decoration-[0%] underline-offset-[0%] text-[#798682]'> Ethcial  AI</p>
+            </Link>
+
           </div>
           <div className={styles.copyright}>
-            <p>
-              Copyright 2025. All rights reserved. &nbsp;&nbsp; Spider AI, A thing by&nbsp;
+            <p className='font-[Fustat] font-light text-[12px] [leading-trim:cap-height] leading-[14px] tracking-normal text-center decoration-solid decoration-[0%] underline-offset-[0%] text-[#798682] ' >
+              Copyright 2025. All rights reserved. &nbsp;&nbsp; Spider AI, a Product by&nbsp;
+              <span className="font-[Fustat] font-[700] text-[12px] [leading-trim:cap-height] leading-[14px] tracking-normal text-center">NeuralArc</span>
             </p>
           </div>
-          <img 
-            src="/images/Nafooter.svg" 
-            alt="Neural Paths" 
-            width={140} 
-            height={60} 
-            style={{ display: 'inline-block', verticalAlign: 'middle', marginLeft: '0px' }}
-          />
+          <span className='text-[#798682]'>•</span>
+         <p className={styles.spiderText}>Spider</p>
         </div>
       </div>
     </footer>

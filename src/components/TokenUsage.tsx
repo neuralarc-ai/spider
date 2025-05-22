@@ -74,8 +74,8 @@ const TokenUsage: React.FC<TokenUsageProps> = ({ className }) => {
                 )}
             </div>
             {!error && (
-                <div className={styles.progressBar}>
-                    <Progress value={usagePercentage} className="h-2" />
+                <div className={styles.progressBar} >
+                    <Progress value={usagePercentage} className="h-2 " />
                 </div>
             )}
         </div>

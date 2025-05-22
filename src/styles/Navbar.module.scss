@@ -2,13 +2,15 @@
     position: relative;
     width: 100%;
     z-index: 100;
-    background: transparent;
-    padding-top: 55px;
+    background-color: rgba(251, 251, 248, 1);
+    padding-top: 30px;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
     max-width: 1440px;
-    margin: 0 auto;
+    justify-content: center;
     padding: 0 48px;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -22,8 +24,19 @@
 }
 
 .placeholder {
-    width: 72px;
-    height: 72px;
+    width: 105;
+   height: 80;
+
+    color: #1E1E1E;
+    font-family: Fustat;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 80px;
+    letter-spacing: 3%;
+    
+    vertical-align: middle;
+
+
 }
 
 .backButton {
@@ -84,49 +97,54 @@
     border: none;
     position: relative;
     backdrop-filter: blur(30px);
-    box-shadow: 0 15px 16px rgba(0, 0, 0, 0.1);
+    // box-shadow: 0 15px 16px rgba(0, 0, 0, 0.1);
 
     &:hover {
         opacity: 0.8;
     }
 }
 
-.menuSquare {
-    width: 72px;
-    height: 72px;
-    background: rgba(248, 248, 248, 0.02);
-    backdrop-filter: blur(30px);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    position: relative;
-    filter: drop-shadow(0 15px 16px rgba(0, 0, 0, 0.1));
+// .menuSquare {
+//     width: 72px;
+//     height: 72px;
+//     background: rgba(248, 248, 248, 0.02);
+//     backdrop-filter: blur(30px);
+//     border-radius: 16px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     transition: all 0.3s ease;
+//     position: relative;
+//     filter: drop-shadow(0 15px 16px rgba(0, 0, 0, 0.1));
 
-    &:before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border-radius: 16px;
-        padding: 1.5px;
-        background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1));
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: destination-out;
-        mask-composite: exclude;
-    }
-}
+//     // &:before {
+//     //     content: '';
+//     //     position: absolute;
+//     //     inset: 0;
+//     //     border-radius: 16px;
+//     //     padding: 1.5px;
+//     //     background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1));
+//     //     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+//     //     -webkit-mask-composite: destination-out;
+//     //     mask-composite: exclude;
+//     // }
+// }
 
-.menuCircle {
-    width: 48px;
-    height: 48px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
+// .menuCircle {
+//     width: 48px;
+//     height: 48px;
+//     background: rgba(255, 255, 255, 0.05);
+//     border-radius: 50%;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     transition: all 0.3s ease;
+// }
+
+.menuIcon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
     transition: all 0.3s ease;
 }
 
@@ -154,11 +172,12 @@
 .dialog {
     position: absolute;
     right: 48px;
-    background: rgba(248, 248, 248, 0.02);
+    background: #38312C;
     backdrop-filter: blur(50px);
     border-radius: 12px;
     padding: 12px;
-    width: 400px;
+
+    height: 407px;
     box-shadow: 0 15px 50px 0 rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
@@ -207,6 +226,7 @@
     background: none;
     border: none;
     text-align: left;
+    justify-content: space-between;
 
     &:hover {
         background: rgba(0, 0, 0, 0.11);
@@ -223,6 +243,13 @@
     padding: 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     margin-bottom: 0.5rem;
+    width: 314px;
+    height: 80px;
+
+        border-radius: 10px;
+        padding: 16px;
+        gap: 15px;
+
 }
 
 .profileImage {
@@ -255,15 +282,32 @@
 }
 
 .profileName {
-    font-weight: 500;
-    font-size: 1rem;
-    color: white;
-    margin-bottom: 0.25rem;
+
+  
+    color : rgba(255, 255, 255, 1);
+    margin-bottom: 0px;
+    font-family: Fustat;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0%; 
+
+ 
+
+    
+
 }
 
 .profileEmail {
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.7);
+    font-family: Fustat;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: rgba(255, 255, 255, 1); 
+ 
+
 }
 
 .menuSection {
@@ -274,16 +318,14 @@
 }
 
 .tokenUsage {
-    width: 100%;
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 12px;
+  
+   
     padding: 16px 8px;
     margin-bottom: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    min-width: 280px;
+   
 
-    &:hover {
-        border-color: rgba(255, 255, 255, 0.1);
-        background: rgba(0, 0, 0, 0.2);
-    }
+    // &:hover {
+    //     border-color: rgba(255, 255, 255, 0.1);
+    //     background: rgba(0, 0, 0, 0.2);
+    // }
 } 
