@@ -219,7 +219,7 @@ const LoginPage = () => {
     <div className="flex flex-col min-h-screen bg-[#E8E8E8] grain-texture">
       <div className="flex-grow flex flex-row items-center justify-center gap-12">
         {/* Left blank card */}
-        <Card className="w-[35vw] h-[90vh] bg-[#362716] rounded-[16px] border-none flex flex-col">
+        <Card className="w-[35vw] h-[90vh] rounded-[16px] border-none flex flex-col" style={{ background: 'linear-gradient(180deg, #765E54 0%, #312119 100%)' }}>
           <div className="pt-8 pl-8 text-white text-[32px] font-normal" style={{ fontFamily: 'Fustat, sans-serif' }}>
             Spider
           </div>
