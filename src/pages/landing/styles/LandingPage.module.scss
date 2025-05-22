@@ -4,13 +4,15 @@ html, body {
     width: 100%;
     margin: 0;
     padding: 0;
+    font-family: Fustat, sans-serif;
 }
 
 .main {
     min-height: 100vh;
-    background: #202020;
-    color: white;
+    background: #F8F7F3;
+    color: #202020;
     position: relative;
+    font-family: Fustat, sans-serif;
 }
 
 // Global container style
@@ -49,40 +51,14 @@ html, body {
     }
 }
 
-.backgroundElements {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-}
-
-.starfieldWrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 10%;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.ellipse {
-    position: absolute;
-    top: -50%;
-    width: 100%;
-    height: 70%;
-    z-index: 1;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 30%, rgba(255, 255, 255, 0) 70%);
-    filter: blur(100px);
-}
-
-.radialImage {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+// Remove background elements styles
+.backgroundElements,
+.starfieldWrapper,
+.ellipse,
+.radialImage,
+.starfieldWrapperlog,
+.ellipselog {
+    display: none;
 }
 
 .hero {
@@ -99,6 +75,7 @@ html, body {
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
+        color: #202020;
         
         @media (max-width: 768px) {
             font-size: 3rem;
@@ -109,34 +86,29 @@ html, body {
         margin: 4rem 0;
         position: relative;
         z-index: 1;
-        
         &::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 30%;
-            background: linear-gradient(to bottom, rgba(32, 32, 32, 0) 0%, rgba(32, 32, 32, 1) 100%);
-            pointer-events: none;
-            z-index: 2;
+            display: none !important;
         }
+        box-shadow: none !important;
+        background: none !important;
+        border: none !important;
     }
 
     .heroImg {
         max-width: 100%;
         height: auto;
-       
-        // box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         display: block;
         position: relative;
         z-index: 1;
+        box-shadow: none !important;
+        background: none !important;
+        border: none !important;
     }
 
     .description {
         font-size: 24px;
         line-height: 1.6;
-        color: $text-secondary;
+        color: #4A4A4A;
         width: fit-content;
         margin: 0 auto;
         white-space: nowrap;
@@ -155,15 +127,13 @@ html, body {
     }
 }
 
-// Add consistent title styling for all sections
+// Update title color since background is now light
 .title, .sectionTitle {
     font-size: 2.75rem;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 1.5rem;
-    background: linear-gradient(90deg, #FFFFFF 0%, #959595 50%, rgba(255, 255, 255, 0.15) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #202020;
     font-family: Fustat, sans-serif;
     text-align: center;
 
@@ -174,176 +144,166 @@ html, body {
 
 // Features Section
 .features {
-    // padding: 60px 0;
+    padding: 4rem 0;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+    
     .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 0 auto;
         padding: 0 24px;
     }
 
+    .featuresCard {
+        background: #FFFFFF;
+        border-radius: 24px;
+        padding: 3rem;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .title {
+        text-align: center;
+        margin-bottom: 3rem;
+        color: #202020;
+    }
+
     .featureGrid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 32px;
-        position: relative;
-
-        @media (max-width: 1024px) {
-            grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(580px, 600px));
+        gap: 2rem;
+        justify-content: center;
+        
+        @media (max-width: 1240px) {
+            grid-template-columns: minmax(580px, 600px);
         }
-
-        @media (max-width: 768px) {
+        
+        @media (max-width: 640px) {
             grid-template-columns: 1fr;
         }
     }
 
     .featureCard {
-        position: relative;
+        background: #D0C3B5;
+        border-radius: 16px;
+        padding: 2.5rem;
+        color: #202020;
+        transition: transform 0.3s ease;
+        min-height: 360px;
         height: 100%;
-        background: rgba(31, 31, 31, 0.8);
-        border-radius: 32px;
-        padding: 32px;
-        transition: all 0.3s ease;
-        backdrop-filter: blur(50px);
-        box-shadow: 0 5px 1.5px -4px rgba(5, 5, 5, 0.25), 0 6px 4px -4px rgba(5, 5, 5, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
         text-align: left;
 
-        &:before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 32px;
-            border: 1.5px solid transparent;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1)) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: destination-out;
-            mask-composite: exclude;
+        &:hover {
+            transform: translateY(-4px);
         }
 
-        &:hover {
-            transform: translateY(-2px);
+        .iconOuterCircle {
+            margin: 0 0 1.5rem 0;
         }
 
         h3 {
-            font-size: 24px;
-            margin: 24px 0 16px;
+            font-size: 40px;
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+            color: #202020;
             text-align: left;
+            word-break: break-word;
+            line-height: 1.1;
         }
 
         p {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
+            color: #333;
+            font-size: 20px;
+            line-height: 1.5;
+            margin: 0;
+            text-align: left;
+            word-break: break-word;
         }
     }
 
     .iconWrapper {
-        display: flex;
-        // justify-content: center;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        
+        img {
+            width: 4rem;
+            height: 4rem;
+        }
     }
+}
 
-    .iconSquare {
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, rgba(0, 245, 160, 0.1) 0%, rgba(0, 217, 245, 0.1) 100%);
-        border-radius: 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .iconCircle {
-        width: 40px;
-        height: 40px;
-        background: linear-gradient(135deg, #00F5A0 0%, #00D9F5 100%);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .icon {
-        width: 40px;
-        height: 40px;
-    }
+// Remove old feature styles
+.featureCardWrapper,
+.iconSquare,
+.iconCircle,
+.icon {
+    display: none;
 }
 
 // Benefits Section
 .benefits {
     padding: 4rem 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
+    background: none;
 
     .benefitsGrid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 630px);
         gap: 2rem;
-        max-width: 1200px;
+        max-width: 1320px;
         margin: 0 auto;
         padding: 0 2rem;
-    }
-
-    .gradientWrapper {
-        position: relative;
-        width: 100%;
-        border-radius: 24px;
-        overflow: hidden;
-        height: 250px;
-    }
-
-    .gradientBackground {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .innerBox {
-        position: relative;
-        z-index: 2;
-        height: 100%;
-        padding: 1rem;
-        display: flex;
         justify-content: center;
-        align-items: center;
-        
-        & > div {
-            width: 420px;
-            height: 200px;
-            background: rgba(20, 20, 20, 0.75);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            
-            h3 {
-                font-size: 1.5rem;
-                font-weight: 600;
-                margin-bottom: 0.75rem;
-                color: #FFFFFF;
-                background: linear-gradient(90deg, #FFFFFF 0%, #959595 100%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-            }
-            
-            p {
-                color: #959595;
-                line-height: 1.5;
-                font-size: 0.95rem;
-            }
+        @media (max-width: 1400px) {
+            grid-template-columns: 1fr;
         }
+    }
+
+    .benefitCard {
+        background: #D0C3B5;
+        border-radius: 18px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        width: 100%;
+        min-width: 0;
+        min-height: 135px;
+        max-width: 630px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 1.5rem 2rem;
+        text-align: left;
+        border: 1px solid #ececec;
+        margin: 0 auto;
+        transition: box-shadow 0.2s;
+        color: #151414;
+        &:hover {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+        }
+        h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #151414;
+            text-align: left;
+            line-height: 1.2;
+            word-break: break-word;
+        }
+        p {
+            color: #151414;
+            font-size: 18px;
+            line-height: 1.5;
+            margin: 0;
+            text-align: left;
+            word-break: break-word;
+        }
+    }
+
+    // Remove old styles
+    .gradientWrapper,
+    .gradientBackground,
+    .innerBox {
+        display: none !important;
     }
 }
 
@@ -440,7 +400,7 @@ html, body {
             content: "";
             position: absolute;
             inset: -12px;
-            background: linear-gradient(90deg, #36EEFC, #5091C9, #693597);
+            background: linear-gradient(#D0C3B5, #AEBF98);
             border-radius: 36px;
             z-index: -1;
             padding: 12px;
@@ -450,7 +410,7 @@ html, body {
         margin-top: -16px;
         margin-bottom: -16px;
         
-        box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
+        // box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
         transform: scale(1.05);
         z-index: 5;
     }
@@ -459,7 +419,7 @@ html, body {
         font-size: 1.75rem;
         font-weight: 600;
         margin-bottom: 1rem;
-        color: #ffffff;
+        color: #202020;
         text-align: left;
     }
 }
@@ -469,7 +429,7 @@ html, body {
     top: -5%;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(40, 40, 40, 1);
+    background: #A7B891;
     border: 1px solid rgba(248, 248, 248, 0.1);
     backdrop-filter: blur(100px);
     padding: 16px 24px;
@@ -483,7 +443,7 @@ html, body {
 
 .price {
     margin: 10px 0;
-    color: rgba(255, 255, 255, 0.6);
+    color: #202020AD;
     text-align: left;
     
     .amount {
@@ -493,13 +453,13 @@ html, body {
     
     .period {
         font-size: 20px;
-        color: rgba(255, 255, 255, 0.6);
+        color: #202020AD;
     }
 }
 
 .planDescription {
     font-size: 18px;
-    color: #f8f8f8;
+    color: #202020;
     margin-bottom: 16px;
     text-align: left;
 }
@@ -518,7 +478,7 @@ html, body {
     li {
         position: relative;
         padding-left: 14px;
-        color: rgba(255, 255, 255, 0.8);
+        color: #20202085;
         text-align: left;
         line-height: 1.5;
         width: 100%;
@@ -527,7 +487,7 @@ html, body {
             content: "•";
             position: absolute;
             left: 0;
-            color: rgba(255, 255, 255, 0.6);
+            color: #20202085;
             font-size: 20px;
             line-height: 1.5;
         }
@@ -539,37 +499,17 @@ html, body {
     padding: 16px 24px;
     font-size: 18px;
     font-weight: 600;
-    border-radius: 24px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    transform: translateY(0);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-    position: relative;
-    overflow: hidden;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    
-    &:before{
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
-        z-index: 1;
-        opacity: 0;
-        transition: all 0.6s ease;
-    }
-    
-    &:hover{
-        transform: translateY(-5px) scale(1.03);
-        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
-        
-        &:before{
-            opacity: 1;
-            left: 100%;
-            animation: shimmer 1.5s infinite;
-        }
+    border-radius: 8px;
+    background: #232323;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    transition: background 0.2s;
+    cursor: pointer;
+    &:hover {
+        background: #111;
     }
 }
 
@@ -634,14 +574,11 @@ html, body {
 .footer {
     position: relative;
     padding: 80px 0 0 0;
-    background: rgba(31, 31, 31, 0.8);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: #232323;
+    border-top: 1px solid #232323;
     overflow: visible;
-    border-radius: 24px 24px 0 0;
-    box-shadow: inset 2px 4px 16px 0 rgba(248, 248, 248, 0.06);
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .footerContainer {
@@ -661,8 +598,9 @@ html, body {
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
-    gap: 40px;
+    gap: 74px;
     position: relative;
+    height: 100%;
 
     @media (max-width: 1024px) {
         flex-direction: column;
@@ -684,12 +622,12 @@ html, body {
     }
 
     .footerRight {
+        flex: 1 1 0;
+        height: 100%;
         display: flex;
         align-items: flex-end;
         justify-content: flex-end;
         position: relative;
-        min-width: 340px;
-        align-self: flex-end;
         margin-bottom: 0;
         padding-bottom: 0;
 
@@ -700,12 +638,22 @@ html, body {
             margin-top: 0;
             margin-bottom: 0;
         }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: right bottom;
+            display: block;
+            margin-bottom: 0;
+            max-width: none;
+        }
     }
 
     .footerLogo {
         display: flex;
         align-items: center;
-        gap: 24px;
+        gap: 74px;
 
         @media (max-width: 768px) {
             flex-direction: column;
@@ -730,6 +678,7 @@ html, body {
         flex-wrap: wrap;
         gap: 16px;
         padding-bottom: 24px;
+        padding-top: 64px;
         border-bottom: 1px solid rgba(49, 53, 52, 1);
         width: 100%;
 
@@ -895,142 +844,94 @@ html, body {
 
 // Steps Section
 .steps {
-    padding: 0rem 0;
+    // padding: 0rem 0;
     
     .stepsGrid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 410px);
         gap: 2rem;
-        max-width: 1200px;
-        margin-bottom: 5rem;
+        max-width: 1300px;
+        margin: 0 auto 5rem auto;
         padding: 0 2rem;
+        justify-content: center;
         
-        @media (max-width: 1024px) {
+        @media (max-width: 1300px) {
             grid-template-columns: repeat(2, 1fr);
         }
-        
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             grid-template-columns: 1fr;
         }
     }
-    
-    .gradientWrapper {
-        position: relative;
-        width: 100%;
-        border-radius: 24px;
-        overflow: hidden;
-        height: 350px;
-    }
-    
-    .gradientBackground {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    
-    .innerBox {
-        position: relative;
-        z-index: 2;
-        height: 100%;
-        padding: 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
+
     .stepCard {
-        position: relative;
-        height: 100%;
-        background: rgba(31, 31, 31, 0.8);
-        border-radius: 32px;
-        padding: 32px;
-        padding-top: 92px; /* Add padding to accommodate the icon */
-        transition: all 0.3s ease;
-        backdrop-filter: blur(50px);
-        box-shadow: 0 5px 1.5px -4px rgba(5, 5, 5, 0.25), 0 6px 4px -4px rgba(5, 5, 5, 0.1);
-        text-align: left;   
-    
-        &:before{
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 32px;
-            border: 1.5px solid transparent;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1)) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: destination-out;
-            mask-composite: exclude;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        width: 100%;
+        min-width: 0;
+        min-height: 300px;
+        max-width: 410px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 2.5rem 1.5rem;
+        text-align: left;
+        transition: box-shadow 0.2s;
+        border: 1px solid #ececec;
+        margin: 0 auto;
+        
+        &:hover {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
         }
         
-        &:hover{
-            transform: translateY(-2px);
+        .stepIcon {
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+            margin-bottom: 1.2rem;
+            margin-left: 0;
         }
-        
-        h3{
+        .stepTitle {
             font-size: 24px;
-            margin: 24px 0 16px;
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+            color: #202020;
             text-align: left;
+            line-height: 1.2;
+            word-break: break-word;
         }
-        
-        p{
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
+        .stepDescription {
+            font-size: 16px;
+            color: #222;
+            text-align: left;
+            border-radius: 8px;
+            padding: 0.9rem 1.2rem;
+            margin: 0;
+            margin-top: 0.2rem;
+            font-weight: 500;
+            width: 100%;
+            word-break: break-word;
         }
-    }
-          
-    .iconContainer {
-        position: absolute; 
-        width: 72px;
-        height: 72px;
-        background: rgba(248, 248, 248, 0.02);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: inset 0 4px 8px rgba(255, 255, 255, 0.1);
-        top: 32px; /* Position from top edge */
-        left: 32px; /* Position from left edge */
-        
-        &:before{
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 12px;
-            border: 1.5px solid transparent;
-            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1)) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: destination-out;
-            mask-composite: exclude;
+        .stepDescBg1 {
+            background: #C0C6B8;
+        }
+        .stepDescBg2 {
+            background: #C6AEA3;
+        }
+        .stepDescBg3 {
+            background: #A9A9A9;
         }
     }
-        
+
+    // Remove old styles
+    .stepCardWrapper,
+    .gradientWrapper,
+    .gradientBackground,
+    .innerBox,
+    .iconContainer,
     .iconCircle {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        background: rgba(248, 248, 248, 0.05);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-        
-        &:hover{
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.05);
-        }
-    }
-    .stepCardWrapper{
-        padding: 16px;
-        border-radius: 48px;
-        background: url('/images/features-bg.png') no-repeat center center / cover;
-        filter: grayscale(1);
-        transition: filter 0.3s ease;
-        &:hover{
-            filter: grayscale(0);
-        }
+        display: none !important;
     }
 }
 
@@ -1049,15 +950,12 @@ html, body {
     }
 
     .faqItem {
-        background: rgba(20, 20, 20, 0.95);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: #A9A9A9;
+        border: 1px solid #888;
         border-radius: 12px;
         overflow: hidden;
         transition: all 0.3s ease;
-
-        &:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-        }
+        color: #000;
     }
 
     .faqQuestion {
@@ -1068,22 +966,23 @@ html, body {
         align-items: center;
         background: none;
         border: none;
-        color: #fff;
-        font-size: 1.1rem;
+        color: #000;
+        font-size: 24px;
         font-weight: 500;
         text-align: left;
         cursor: pointer;
         transition: all 0.3s ease;
 
         &:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0,0,0,0.05);
         }
 
         .faqIcon {
             font-size: 1.5rem;
             transition: transform 0.3s ease;
-            color: #00D9F5;
+            color: #000;
             margin-left: 1rem;
+            font-weight: bold;
         }
     }
 
@@ -1092,15 +991,19 @@ html, body {
         overflow: hidden;
         transition: all 0.3s ease-out;
         padding: 0 1.5rem;
-        color: #959595;
-        font-size: 1rem;
+        color: #000;
+        font-size: 18px;
         line-height: 1.6;
         opacity: 0;
+        text-align: left;
 
         p {
             padding: 0;
             margin: 0;
             padding-bottom: 1.5rem;
+            color: #000;
+            font-size: 18px;
+            text-align: left;
         }
     }
 
@@ -1111,36 +1014,12 @@ html, body {
     }
 
     .faqItem:has(.active) {
-        background: rgba(20, 20, 20, 0.98);
+        background: #A9A9A9;
 
         .faqIcon {
             transform: rotate(45deg);
-            color: #9747FF;
+            color: #000;
         }
-    }
-}
-
-.starfieldWrapperlog {
-    position: absolute;
-    top: -5%;
-    left: 0;
-    right: 0;
-    height: 50%;
-    width: 100%;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.ellipselog {
-    position: absolute;
-    top: -30%;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    img{
-     width: 100%;
-    height: 100%;
-    object-fit: contain;
     }
 }
 
@@ -1155,4 +1034,68 @@ html, body {
 
 .fustatFont {
   font-family: Fustat, sans-serif;
+}
+
+.footerHeader {
+    font-size: 32px;
+    font-weight: 800;
+    font-family: Fustat, sans-serif;
+    color: #fff;
+    text-align: left;
+    margin: 0;
+}
+
+.mainHeading64 {
+    font-size: 64px;
+    font-weight: 600;
+    color: #000000;
+    text-align: left;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
+
+.mainHeading48 {
+    font-size: 48px;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    line-height: 1.1;
+}
+
+.mainHeading48Center {
+    font-size: 48px;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 2rem;
+    line-height: 1.1;
+}
+
+.mainSubheading24 {
+    font-size: 24px;
+    font-weight: 400;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    line-height: 1.5;
+}
+
+.mainSubheading24Center {
+    font-size: 24px;
+    font-weight: 400;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    line-height: 1.5;
+}
+
+.sectionHeaderGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.mainHeading48Center + .mainSubheading24Center {
+    align-items: center;
 }
