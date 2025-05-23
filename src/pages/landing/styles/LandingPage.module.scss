@@ -312,7 +312,7 @@ html, body {
 // Testimonials Section
 .testimonials {
     padding: 4rem 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+  
 }
 
 // Pricing Section Styles
@@ -418,6 +418,20 @@ html, body {
     }
 }
 
+.pricingCard.popular {
+    background: #1E342F !important;
+}
+.pricingCard.popular h3,
+.pricingCard.popular .price,
+.pricingCard.popular .planDescription,
+.pricingCard.popular .features li {
+    color: #fff !important;
+}
+
+.pricingCard.popular .price {
+    color: #F8F8F8AD !important;
+}
+
 .popularBadge {
     position: absolute;
     top: -5%;
@@ -502,22 +516,20 @@ html, body {
     letter-spacing: normal;
     transition: background 0.2s;
     cursor: pointer;
-    &:hover {
-        background: #111;
-    }
+  
 }
 
 .freeButton{
-    background: linear-gradient(45deg, #4A6572, #334752);
+    // background: linear-gradient(45deg, #4A6572, #334752);
     border: 2px solid rgba(255, 255, 255, 0.2);
     color: white;
     background-size: 150% 150%;
     animation: gradientBG 8s ease infinite;
     
-    &:hover{
-        background: linear-gradient(45deg, #5A7582, #435762);
-        border-color: rgba(255, 255, 255, 0.4);
-    }
+    // &:hover{
+    //     background: linear-gradient(45deg, #5A7582, #435762);
+    //     border-color: rgba(255, 255, 255, 0.4);
+    // }
 }
 
 // Product Hunt Section

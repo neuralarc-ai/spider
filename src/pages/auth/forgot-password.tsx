@@ -4,7 +4,6 @@ import { ArrowRight, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import uploadStyles from "../../styles/upload.module.scss";
 import { toast } from "sonner";
-import { StarField } from "@/components/StarField";
 import landingStyles from "../landing/styles/LandingPage.module.scss";
 import { getSupabaseClient } from '@/lib/supabase';
 import Footer from "@/components/Footer";
@@ -64,14 +63,6 @@ const ForgotPassword = () => {
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       <div className={landingStyles.backgroundElements} style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1 }}>
-        <motion.div
-          className={landingStyles.starfieldWrapperlog}
-          variants={starfieldVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <StarField />
-        </motion.div>
         <div className={landingStyles.ellipselog}>
           <img
             src="/images/white-radial.svg"

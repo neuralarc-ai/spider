@@ -448,9 +448,9 @@ const LandingPage = () => {
                 )}
                 <h3>{plan.title}</h3>
                 <div className={styles.price}>
-                  {plan.price && <span className={styles.period}>{plan.price}</span>}
-                  {plan.period && <span className={styles.period}>{plan.period}</span>}
-                  {plan.billing && <span className={styles.period}>{plan.billing}</span>}
+                  {plan.price && <span className={styles.period} >{plan.price}</span>}
+                  {plan.period && <span className={styles.period} >{plan.period}</span>}
+                  {plan.billing && <span className={styles.period} >{plan.billing}</span>}
                 </div>
                 <p className={styles.planDescription}>{plan.description}</p>
                 <ul className={styles.features}>
@@ -460,8 +460,8 @@ const LandingPage = () => {
                 </ul>
                 <Button
                   title={plan.buttonText}
-                  className={`${styles.pricingButton} ${plan.isPopular ? styles.primary : styles.secondary}`}
                   onClick={() => handlePricingButtonClick(plan.title)}
+                  popular={plan.isPopular}
                 />
               </motion.div>
             ))}

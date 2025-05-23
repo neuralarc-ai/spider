@@ -9,7 +9,6 @@ import { toast } from "@/components/ui/sonner";
 import { ArrowRight } from "lucide-react";
 import AnalysisReport from "@/components/AnalysisReport";
 import LoadingScreen from "@/components/LoadingScreen";
-import { StarField } from "@/components/StarField";
 import Footer from "@/components/Footer";
 import styles from "@/styles/upload.module.scss";
 import spidergo from "../../public/la_spider.svg"
@@ -120,47 +119,15 @@ const Index = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen overflow-hidden">
+    <div className="flex flex-col min-h-screen overflow-hidden grain-texture">
       <Navbar />
-
-      <div
-        className={styles.backgroundElements}
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: -1,
-        }}
-      >
-        <motion.div
-          className={styles.starfieldWrapper}
-          initial="hidden"
-          animate="visible"
-        >
-          <StarField />
-        </motion.div>
-        <motion.div
-          className={styles.ellipse}
-          initial="hidden"
-          animate="visible"
-        >
-          <img
-            src="/images/white-radial.svg"
-            alt="Radial gradient"
-            width={1000}
-            height={1000}
-          />
-        </motion.div>
-      </div>
 
       <div className="flex-grow bg-[#FBFBF8]">
         <h1
           className="text-center text-5xl font-bold mb-8"
           style={{
             color: "#1E1E1E",
-           
+
             WebkitBackgroundClip: "text",
             // WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -173,18 +140,14 @@ const Index = () => {
           {isLoading
             ? "Analyzing"
             : insights && !isLoading
-            ? "Analysis Report"
-            : "AI-Powered Pitch Deck & Investment Analysis"}
+              ? "Analysis Report"
+              : "AI-Powered Pitch Deck & Investment Analysis"}
         </h1>
 
         <div className={styles.uploadContainer}>
           {!insights && !isLoading && (
             <div className={styles.gradientWrapper}>
-              {/* <img
-                src="/images/backgroundgradiant.png"
-                alt="Gradient Background"
-                className={styles.gradientBackground}
-              /> */}
+
               <div className={styles.innerBox}>
                 <h2 className="font-fustat text-[#232323] font-semibold text-[20px] leading-[24px] tracking-[-0.01em] text-center mb-2 ">
                   Upload Your Pitch Deck
@@ -226,18 +189,19 @@ const Index = () => {
                   </div>
                 </div>
                 <div>
-                 
-                    <button
-                      onClick={handleAnalyze}
-                      className={styles.analyzeButton}
-                      disabled={!file || isLoading || !isDisclaimerAccepted}
-                    >
+
+                  <button
+                    onClick={handleAnalyze}
+                    className={styles.analyzeButton}
+                    disabled={!file || isLoading || !isDisclaimerAccepted}
+                    
+                  >
                     <img src={spidergo} alt="spidergo" />
-                      Go Spider - Analysis Now 
-                      <ArrowRight className="w-5 h-5" />
-                    </button>
+                    Go Spider - Analysis Now
+                    
+                  </button>
                 </div>
-               
+
               </div>
             </div>
           )}

@@ -79,7 +79,7 @@ const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(({ onFileSelect
 
   return (
     <div
-      className={`relative rounded-lg p-8 transition-colors
+      className={`relative rounded-lg p-8 transition-colors 
         ${isDragging ? 'bg-primary/5' : ''}
         ${error ? 'border-red-500/50' : ''}
       `}

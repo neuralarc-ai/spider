@@ -4,18 +4,17 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { clsx } from "clsx";
 import styles from "./TestimonialCarousel.module.scss";
-import StarField from "./StarField";
 
 const testimonials = [
   {
     id: 1,
-    text: "The AI analysis gave me a detailed overview of a startup pitch in minutes. It’s like having a dedicated analyst on my team.",
+    text: "The AI analysis gave me a detailed overview of a startup pitch in minutes. It's like having a dedicated analyst on my team.",
     author: "Jason Lee",
     position: "Early-Stage Investor",
   },
   {
     id: 2,
-    text: "I was amazed at how accurately the tool identified the startup’s strengths, weaknesses, and competitive landscape. A huge time-saver!",
+    text: "I was amazed at how accurately the tool identified the startup's strengths, weaknesses, and competitive landscape. A huge time-saver!",
     author: "Priya Mehta",
     position: "VC Analyst, Horizon Ventures",
   },
@@ -39,7 +38,7 @@ const testimonials = [
   },
   {
     id: 6,
-    text: "It identified red flags I hadn’t spotted myself. Super helpful for risk assessment before follow-up meetings.",
+    text: "It identified red flags I hadn't spotted myself. Super helpful for risk assessment before follow-up meetings.",
     author: "Aisha Khan",
     position: "Private Equity Consultant",
   },
@@ -63,7 +62,7 @@ const testimonials = [
   },
   {
     id: 10,
-    text: "This is by far one of the smartest tools I’ve used in the investment space. Clean UI, deep analysis.",
+    text: "This is by far one of the smartest tools I've used in the investment space. Clean UI, deep analysis.",
     author: "Olivia Brooks",
     position: "VC Partner",
   },
@@ -75,7 +74,7 @@ const testimonials = [
   },
   {
     id: 12,
-    text: "Perfect for quick decision-making. I’ve already recommended it to colleagues at two funds.",
+    text: "Perfect for quick decision-making. I've already recommended it to colleagues at two funds.",
     author: "Sophie Zhang",
     position: "Startup Scout",
   },
@@ -147,9 +146,6 @@ const TestimonialCarousel = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.starfieldWrapper}>
-        <StarField />
-      </div>
       <h3 className={styles.title}>Trusted by Leading Investors</h3>
       <p className={styles.subtitle}>
         Join thousands of investors making data-driven decisions with Spider.

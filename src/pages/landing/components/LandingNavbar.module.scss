@@ -132,8 +132,14 @@ $tablet-width: 1023px;
 
     &.loginButton {
         background: transparent;
-        color: #2B2521;
+        color: #606060;
         border: 1px solid #232323;
+        transition: background 0.2s, color 0.2s;
+    }
+
+    &.loginButton:hover {
+        background: #606060;
+        color: #fff;
     }
 
     &:hover {

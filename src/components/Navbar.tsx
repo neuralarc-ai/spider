@@ -13,6 +13,8 @@ import profile from "../../public/userprofile.svg"
 import logout from "../../public/LogoutOutline.svg"
 import historyIcon from "../../public/SortAscending.svg"
 import upgrade from "../../public/upgrade.svg"
+import backIcon from "../../public/back.svg"
+
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
@@ -82,19 +84,12 @@ const Navbar = () => {
                         onClick={handleBack}
                         aria-label="Back"
                     >
-                        <div className={styles.menuSquare}>
-                            <div className={styles.menuCircle}>
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M19 12H5m7 7l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </div>
-                        </div>
+                        <img src={backIcon} alt="Back" width={72} height={72} />
                     </button>
                 ) : (
-                    <div className={styles.placeholder} > 
-                      Spider
-                     </div>
-                    
+                    <div className={styles.placeholder}>
+                      <img src="/images/navlogo.svg" alt="Spider Logo" style={{height: 38, width: 128}} />
+                    </div>
                 )}
                 <div className={styles.logoLink} onClick={() => navigate('/spider')}>
                     
