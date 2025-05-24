@@ -381,7 +381,7 @@ const LoginPage = () => {
                             onClick={handleGoogleSignIn}
                           >
                             <img
-                              src="/google-white-icon.svg"
+                              src="/images/Gblack.svg"
                               alt="Google"
                               className="w-5 h-5"
                             />
@@ -615,7 +615,7 @@ const LoginPage = () => {
                           onClick={handleGoogleSignIn}
                         >
                           <img
-                            src="/google-white-icon.svg"
+                            src="/images/Gblack.svg"
                             alt="Google"
                             className="w-5 h-5"
                           />

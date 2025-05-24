@@ -9,20 +9,20 @@ const Footer = () => {
         <div className={styles.content}>
           <div className={styles.links}>
             <Link to="/terms-of-use">
-              <p className='font-[Fustat] font-light text-[12px] [leading-trim:cap-height] leading-[14px] tracking-normal text-center underline decoration-solid decoration-[0%] underline-offset-[0%] text-[#798682]'> Terms of use</p> 
+              <p className='font-[Fustat] font-light text-[12px] [leading-trim:cap-height] leading-[14px] tracking-normal text-center underline decoration-solid decoration-[0%] underline-offset-[0%] text-[#798682]'> Terms of use</p>
             </Link>
             <span>•</span>
             <Link to="/privacy-policy" >
-            <p className='font-[Fustat] font-light text-[12px] [leading-trim:cap-height] leading-[14px] tracking-normal text-center underline decoration-solid decoration-[0%] underline-offset-[0%] text-[#798682]' > Privacy Policy</p>
-             
-            </Link>
-            
-            <span>•</span>
-            <Link to="/responsible-ai">
-            <p className='font-[Fustat] font-light text-[12px] [leading-trim:cap-height] leading-[14px] tracking-normal text-center underline decoration-solid decoration-[0%] underline-offset-[0%] text-[#798682] '> Responsible AI</p>
+              <p className='font-[Fustat] font-light text-[12px] [leading-trim:cap-height] leading-[14px] tracking-normal text-center underline decoration-solid decoration-[0%] underline-offset-[0%] text-[#798682]' > Privacy Policy</p>
+
             </Link>
 
-          
+            <span>•</span>
+            <Link to="/responsible-ai">
+              <p className='font-[Fustat] font-light text-[12px] [leading-trim:cap-height] leading-[14px] tracking-normal text-center underline decoration-solid decoration-[0%] underline-offset-[0%] text-[#798682] '> Responsible & Ethical AI</p>
+            </Link>
+
+
 
           </div>
           <div className={styles.copyright}>
@@ -32,9 +32,9 @@ const Footer = () => {
             </p>
           </div>
           <span className='text-[#798682]'>•</span>
-         <p className={styles.spiderText}>
-           <img src="/images/flogo.svg" alt="Spider Logo" style={{height: 72, width: 72}} />
-         </p>
+          <p className={styles.spiderText}>
+            <img src="/images/flogo.svg" alt="Spider Logo" style={{ height: 72, width: 72 }} />
+          </p>
         </div>
       </div>
     </footer>

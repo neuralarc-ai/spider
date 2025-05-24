@@ -435,14 +435,16 @@ const LandingPage = () => {
               <motion.div
                 key={plan.title}
                 className={`${styles.pricingCard} ${plan.isPopular ? styles.popular : ''} relative`}
+                style={{ borderRadius: '8px', background: '#FFFFFF', boxShadow: 'none' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 {plan.isPopular && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-[#212228] rounded-full px-4 py-1 text-sm font-medium text-white border border-[#ffffff1a]">
-                      MOST POPULAR
+                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 rounded-[8px]">
+                    <div className="bg-[#A7B891] rounded-[8px] flex items-center justify-center border border-[#ffffff1a]"
+                      style={{ width: '190px', height: '48px', fontSize: '1.5rem', fontWeight: 600, borderRadius: '8px' }}>
+                      <span className="text-[#212228] w-full text-center py-2">MOST POPULAR</span>
                     </div>
                   </div>
                 )}
@@ -588,7 +590,7 @@ const LandingPage = () => {
                 <span>•</span>
                 <Link to="/privacy-policy">Privacy Policy</Link>
                 <span>•</span>
-                <Link to="/responsible-ai">Responsible AI</Link>
+                <Link to="/responsible-ai">Responsible & Ethical AI</Link>
               </div>
 
               <div className={styles.footerBottom}>

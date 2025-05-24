@@ -254,26 +254,26 @@ const RadarChart: React.FC<RadarChartProps> = ({ data }) => {
             fx="50%"
             fy="50%"
           >
-            <stop offset="28%" stopColor="#29272C" stopOpacity="0.6" />
-            <stop offset="65%" stopColor="#B0B0B0" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.5" />
+            <stop offset="0%" stopColor="#262626" stopOpacity="0.6" />
+            <stop offset="28%" stopColor="#3987BE" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#D48EA3" stopOpacity="0.5" />
           </radialGradient>
         </defs>
         <PolarGrid 
           strokeDasharray="3 3"
-          stroke="#ffffff1a"
+          stroke="#8B8B8B"
         />
         <PolarAngleAxis
           dataKey="subject"
           tick={<CustomTick />}
-          stroke="#ffffff1a"
-          tickLine={{ stroke: '#ffffff1a' }}
+          stroke="#8B8B8B"
+          tickLine={{ stroke: '#8B8B8B' }}
         />
         <PolarRadiusAxis 
           angle={30} 
           domain={[0, 10]}
           tick={false}
-          stroke="#ffffff1a"
+          stroke="#8B8B8B"
           tickCount={6}
         />
         <Radar

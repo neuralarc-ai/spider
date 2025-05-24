@@ -383,10 +383,17 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
             </p>
           </div>
          <div className="w-16 h-16 rounded-full bg-black bg-opacity-5 flex justify-center items-center">
-          <img
-            src={downloadlogo}
-            className="w-[72px] h-[72px] object-contain"
-          />
+          <PDFDownloadLink
+            document={<PitchDeckPDF data={data} />}
+            fileName={`${data.company_overview.company_name}-analysis.pdf`}
+            className="w-16 h-16 rounded-full bg-black bg-opacity-5 flex justify-center items-center cursor-pointer"
+          >
+            <img
+              src={downloadlogo}
+              className="w-[72px] h-[72px] object-contain"
+              alt="Download Analysis"
+            />
+          </PDFDownloadLink>
          </div>
            
         </div>
@@ -714,19 +721,19 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                           key={index}
                           className={index === data.competitor_analysis.competitors.length - 1 ? '' : 'border-b border-[#ffffff1a]'}
                         >
-                          <td className="py-4 border-r border-[#ffffff1a] font-[Fustat] font-normal text-[20px] leading-[24px] tracking-[-0.01em] text-[#4F4F4F]">
+                          <td className="py-4 font-[Fustat] font-normal text-[20px] leading-[24px] tracking-[-0.01em] text-[#4F4F4F]">
                             {competitor.name}
                           </td>
-                          <td className=" py-4 border-r border-[#ffffff1a] font-[Fustat] font-normal text-[20px] leading-[24px] tracking-[-0.01em] text-[#4F4F4F]">
+                          <td className="py-4 px-4 border-l" style={{ borderColor: '#0000001A' }}>
                             {competitor.key_investors}
                           </td>
-                          <td className=" py-4 border-r border-[#ffffff1a] font-[Fustat] font-normal text-[20px] leading-[24px] tracking-[-0.01em] text-[#4F4F4F]">
+                          <td className="py-4 px-4 border-l" style={{ borderColor: '#0000001A' }}>
                             {competitor.amount_raised}
                           </td>
-                          <td className=" py-4 border-r border-[#ffffff1a] font-[Fustat] font-normal text-[20px] leading-[24px] tracking-[-0.01em] text-[#4F4F4F]">
+                          <td className="py-4 px-4 border-l" style={{ borderColor: '#0000001A' }}>
                             {competitor.market_position}
                           </td>
-                          <td className="py-4 border-r border-[#ffffff1a] font-[Fustat] font-normal text-[20px] leading-[24px] tracking-[-0.01em] text-[#4F4F4F]">
+                          <td className="py-4 px-4 border-l" style={{ borderColor: '#0000001A' }}>
                             {competitor.strengths}
                           </td>
                         </tr>
@@ -1539,21 +1546,11 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
           </div>
         </div>
         {/* Download and Regenerate Buttons */}
-        <div className="flex justify-center gap-4 mt-8">
-          <PDFDownloadLink
-            document={<PitchDeckPDF data={data} />}
-            fileName={`${data.company_overview.company_name}-analysis.pdf`}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#36EEFC] to-[#693597] text-white rounded-lg hover:shadow-[0_0_15px_rgba(99,102,241,0.5)] transition-all duration-300"
-          >
-            
-            Download Analysis
-            <Download className="w-5 h-5" />
-          </PDFDownloadLink>
+        <div className="flex justify-center mt-8">
           <button
             onClick={() => window.location.reload()}
-            className="flex items-center gap-2 px-6 py-3 bg-[#343434] text-white rounded-lg hover:shadow-[white] transition-all duration-300"
+            className="flex items-center gap-2 px-6 py-3 bg-[#343434] text-white rounded-lg hover:shadow-[white] transition-all duration-300 mx-auto"
           >
-            
             Generate New Report
             <ArrowRight className="w-5 h-5" />
           </button>
