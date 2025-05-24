@@ -4,8 +4,7 @@ import Navbar from "@/components/Navbar";
 import { getAnalysisReport } from "@/services/storageService";
 import { MistralResponse } from "@/services/pdfService";
 import { toast } from "@/components/ui/sonner";
-import { Loader2, TrendingUp, Building, Users, DollarSign, Target, Shield, Lightbulb, BarChart2, AlertTriangle, ChevronLeft } from "lucide-react";
-import styles from "@/styles/Navbar.module.scss";
+import { Loader2 } from "lucide-react";
 
 const Insight = () => {
   const { id } = useParams<{ id: string }>();
@@ -57,300 +56,144 @@ const Insight = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col grain-texture">
       <Navbar />
-      
-      <main className="flex-1 container py-8 px-4">
-        <section className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Analysis Report</h1>
+      <main className="flex-1 container py-8 px-4 max-w-3xl mx-auto">
+        <section className="mb-12 text-center">
+          <h1 className="text-3xl font-bold mb-2 ">Analysis Report</h1>
           <p className="text-muted-foreground">
             Comprehensive analysis of the pitch deck
           </p>
         </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Company Overview */}
-          <div className="bg-card p-6 rounded-lg shadow">
-            <div className="flex items-center gap-2 mb-4">
-              <Building className="h-5 w-5 text-purple" />
-              <h2 className="text-xl font-semibold">Company Overview</h2>
+        {/* Company Overview */}
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-2">Company Overview</h2>
+          <div className="mb-2"><strong>Company Name:</strong> {insight.company_overview.company_name}</div>
+          <div className="mb-2"><strong>Industry:</strong> {insight.company_overview.industry}</div>
+          <div className="mb-2"><strong>Business Model:</strong> {insight.company_overview.business_model}</div>
+          <div className="mb-2"><strong>Key Offerings:</strong> {insight.company_overview.key_offerings}</div>
+          <div className="mb-2"><strong>Founded On:</strong> {insight.company_overview.founded_on || insight.company_overview.founded_year || 'Not available'}</div>
+        </section>
+        <hr className="my-8 border-t border-gray-300" />
+        {/* Market Analysis */}
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-2">Market Analysis</h2>
+          <div className="mb-2"><strong>Market Size:</strong> {insight.market_analysis.market_size}</div>
+          <div className="mb-2"><strong>Growth Rate:</strong> {insight.market_analysis.growth_rate}</div>
+        </section>
+        <hr className="my-8 border-t border-gray-300" />
+        {/* Strengths & Weaknesses */}
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">Strengths & Weaknesses</h2>
+          <div className="flex flex-col md:flex-row gap-8">
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold mb-2">Strengths</h3>
+              <ul className="list-disc list-inside ml-6">
+                {insight.strengths.map((strength, index) => (
+                  <li key={index}>{strength}</li>
+                ))}
+              </ul>
             </div>
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-medium">Company Name</h3>
-                <p className="text-muted-foreground">{insight.company_overview.company_name}</p>
-              </div>
-              <div>
-                <h3 className="font-medium">Industry</h3>
-                <p className="text-muted-foreground">{insight.company_overview.industry}</p>
-              </div>
-              <div>
-                <h3 className="font-medium">Business Model</h3>
-                <p className="text-muted-foreground">{insight.company_overview.business_model}</p>
-              </div>
-              <div>
-                <h3 className="font-medium">Key Offerings</h3>
-                <p className="text-muted-foreground">{insight.company_overview.key_offerings}</p>
-              </div>
-              <div>
-                <h3 className="font-medium">Founded On</h3>
-                <p className="text-muted-foreground">
-                  {insight.company_overview.founded_on && insight.company_overview.founded_on !== "N/A" ? (
-                    insight.company_overview.founded_on
-                  ) : insight.company_overview.founded_year ? (
-                    `Founded in ${insight.company_overview.founded_year} (year from web search)`
-                  ) : (
-                    <span className="text-muted-foreground/70">Not available in pitch deck or web search</span>
-                  )}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Market Analysis */}
-          <div className="bg-card p-6 rounded-lg shadow">
-            <div className="flex items-center gap-2 mb-4">
-              <BarChart2 className="h-5 w-5 text-purple" />
-              <h2 className="text-xl font-semibold">Market Analysis</h2>
-            </div>
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-medium">Market Size</h3>
-                <p className="text-muted-foreground">{insight.market_analysis.market_size}</p>
-              </div>
-              <div>
-                <h3 className="font-medium">Growth Rate</h3>
-                <p className="text-muted-foreground">{insight.market_analysis.growth_rate}</p>
-              </div>
-              
-              
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold mb-2">Weaknesses</h3>
+              <ul className="list-disc list-inside ml-6">
+                {insight.weaknesses.map((weakness, index) => (
+                  <li key={index}>{weakness}</li>
+                ))}
+              </ul>
             </div>
           </div>
-
-          {/* Strengths & Weaknesses */}
-          <div className="bg-card p-6 rounded-lg shadow">
-            <div className="flex items-center gap-2 mb-4">
-              <Target className="h-5 w-5 text-purple" />
-              <h2 className="text-xl font-semibold">Strengths</h2>
-            </div>
-            <ul className="list-disc list-inside text-muted-foreground space-y-2">
-              {insight.strengths.map((strength, index) => (
-                <li key={index}>{strength}</li>
+        </section>
+        <hr className="my-8 border-t border-gray-300" />
+        {/* Funding History */}
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-2">Funding History</h2>
+          {insight.funding_history?.rounds && insight.funding_history.rounds.length > 0 ? (
+            <ul className="list-disc list-inside ml-6">
+              {insight.funding_history.rounds.map((round, index) => (
+                <li key={index} className="mb-1">
+                  <strong>{round.type}:</strong> Amount: {round.amount}, Key Investors: {round.key_investors.join(", ")}
+                </li>
               ))}
             </ul>
-          </div>
-
-          <div className="bg-card p-6 rounded-lg shadow">
-            <div className="flex items-center gap-2 mb-4">
-              <AlertTriangle className="h-5 w-5 text-purple" />
-              <h2 className="text-xl font-semibold">Weaknesses</h2>
-            </div>
-            <ul className="list-disc list-inside text-muted-foreground space-y-2">
-              {insight.weaknesses.map((weakness, index) => (
-                <li key={index}>{weakness}</li>
+          ) : (
+            <div>No funding history specified in the pitch deck.</div>
+          )}
+        </section>
+        <hr className="my-8 border-t border-gray-300" />
+        {/* Expert Opinions */}
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-2">Expert Opinions</h2>
+          {insight.expert_opinions && insight.expert_opinions.length > 0 ? (
+            <ul className="list-disc list-inside ml-6">
+              {insight.expert_opinions.map((opinion, idx) => (
+                <li key={idx} className="mb-4">
+                  <div className="mb-1"><strong>Name:</strong> {opinion.name}</div>
+                  <div className="mb-1"><strong>Affiliation:</strong> {opinion.affiliation}</div>
+                  <div className="mb-1"><strong>Summary:</strong> {opinion.summary}</div>
+                  <div className="mb-1"><strong>Reference:</strong> {opinion.reference}</div>
+                  <div className="mb-1"><strong>Date:</strong> {opinion.date}</div>
+                </li>
               ))}
             </ul>
-          </div>
-
-          {/* Funding History */}
-          <div className="bg-card p-6 rounded-lg shadow">
-            <div className="flex items-center gap-2 mb-4">
-              <DollarSign className="h-5 w-5 text-purple" />
-              <h2 className="text-xl font-semibold">Funding History</h2>
-            </div>
-            <div className="space-y-4">
-              {insight.funding_history?.rounds && insight.funding_history.rounds.length > 0 ? (
-                insight.funding_history.rounds.map((round, index) => (
-                  <div key={index} className="border-b border-border pb-4 last:border-b-0 last:pb-0">
-                    <h3 className="font-medium">{round.type}</h3>
-                    <p className="text-muted-foreground">Amount: {round.amount}</p>
-                    <div>
-                      <span className="text-muted-foreground">Key Investors:</span>
-                      <ul className="list-disc list-inside text-muted-foreground">
-                        {round.key_investors.map((investor, i) => (
-                          <li key={i}>{investor}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className="text-center py-6">
-                  <div className="flex flex-col items-center gap-2">
-                    <DollarSign className="h-8 w-8 text-muted-foreground" />
-                    <p className="text-muted-foreground">No funding history specified in the pitch deck</p>
-                    <p className="text-sm text-muted-foreground/70">This could indicate either:</p>
-                    <ul className="text-sm text-muted-foreground/70 list-disc list-inside">
-                      <li>Pre-seed stage startup</li>
-                      <li>Self-funded/bootstrapped company</li>
-                      <li>Funding details not disclosed in the deck</li>
-                    </ul>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Competitor Analysis */}
-          <div className="bg-card p-6 rounded-lg shadow">
-            <div className="flex items-center gap-2 mb-4">
-              <Users className="h-5 w-5 text-purple" />
-              <h2 className="text-xl font-semibold">Competitor Analysis</h2>
-            </div>
-            <div className="space-y-6">
+          ) : (
+            <div>No expert opinions available.</div>
+          )}
+        </section>
+        <hr className="my-8 border-t border-gray-300" />
+        {/* Competitor Analysis */}
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-2">Competitor Analysis</h2>
+          {insight.competitor_analysis.competitors.length > 0 ? (
+            <ul className="list-disc list-inside ml-6">
               {insight.competitor_analysis.competitors.map((competitor, index) => (
-                <div key={index} className="border-b border-border pb-4 last:border-b-0 last:pb-0">
-                  <h3 className="font-medium text-lg mb-2">{competitor.name}</h3>
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <span className="text-muted-foreground">Key Investors:</span>
-                      <p className="mt-1">{competitor.key_investors}</p>
-                    </div>
-                    <div>
-                      <span className="text-muted-foreground">Amount Raised:</span>
-                      <p className="mt-1">{competitor.amount_raised}</p>
-                    </div>
-                    <div>
-                      <span className="text-muted-foreground">Market Position:</span>
-                      <p className="mt-1">{competitor.market_position}</p>
-                    </div>
-                    <div>
-                      <span className="text-muted-foreground">Strengths:</span>
-                      <p className="mt-1">{competitor.strengths}</p>
-                    </div>
-                  </div>
-                </div>
+                <li key={index} className="mb-1">
+                  <strong>{competitor.name}</strong> - Market Position: {competitor.market_position}, Key Investors: {competitor.key_investors}, Amount Raised: {competitor.amount_raised}, Strengths: {competitor.strengths}
+                </li>
               ))}
-            </div>
-          </div>
-
-          {/* Market Comparison */}
-          <div className="bg-card p-6 rounded-lg shadow">
-            <div className="flex items-center gap-2 mb-4">
-              <TrendingUp className="h-5 w-5 text-purple" />
-              <h2 className="text-xl font-semibold">Market Comparison</h2>
-            </div>
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-medium mb-3">Startup Metrics</h3>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <span className="text-muted-foreground">Growth Rate:</span>
-                    <p className="mt-1">{insight.market_comparison.metrics.startup.growth_rate}</p>
-                  </div>
-                  <div>
-                    <span className="text-muted-foreground">Market Share:</span>
-                    <p className="mt-1">{insight.market_comparison.metrics.startup.market_share}</p>
-                  </div>
-                  <div>
-                    <span className="text-muted-foreground">Revenue Model:</span>
-                    <p className="mt-1">{insight.market_comparison.metrics.startup.revenue_model}</p>
-                  </div>
-                  <div>
-                    <span className="text-muted-foreground">Differentiator:</span>
-                    <p className="mt-1">{insight.market_comparison.metrics.startup.differentiator}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Final Verdict */}
-          <div className="bg-card p-6 rounded-lg shadow">
-            <div className="flex items-center gap-2 mb-4">
-              <Shield className="h-5 w-5 text-purple" />
-              <h2 className="text-xl font-semibold">Final Verdict</h2>
-            </div>
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <span className="text-muted-foreground">Product Viability:</span>
-                  <div className="flex items-center gap-2 mt-1">
-                    <div className="w-full bg-muted rounded-full h-2">
-                      <div 
-                        className="bg-purple h-2 rounded-full" 
-                        style={{ width: `${insight.final_verdict.product_viability * 10}%` }}
-                      />
-                    </div>
-                    <span className="text-sm">{insight.final_verdict.product_viability}/10</span>
-                  </div>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Market Potential:</span>
-                  <div className="flex items-center gap-2 mt-1">
-                    <div className="w-full bg-muted rounded-full h-2">
-                      <div 
-                        className="bg-purple h-2 rounded-full" 
-                        style={{ width: `${insight.final_verdict.market_potential * 10}%` }}
-                      />
-                    </div>
-                    <span className="text-sm">{insight.final_verdict.market_potential}/10</span>
-                  </div>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Sustainability:</span>
-                  <div className="flex items-center gap-2 mt-1">
-                    <div className="w-full bg-muted rounded-full h-2">
-                      <div 
-                        className="bg-purple h-2 rounded-full" 
-                        style={{ width: `${insight.final_verdict.sustainability * 10}%` }}
-                      />
-                    </div>
-                    <span className="text-sm">{insight.final_verdict.sustainability}/10</span>
-                  </div>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Innovation:</span>
-                  <div className="flex items-center gap-2 mt-1">
-                    <div className="w-full bg-muted rounded-full h-2">
-                      <div 
-                        className="bg-purple h-2 rounded-full" 
-                        style={{ width: `${insight.final_verdict.innovation * 10}%` }}
-                      />
-                    </div>
-                    <span className="text-sm">{insight.final_verdict.innovation}/10</span>
-                  </div>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Exit Potential:</span>
-                  <div className="flex items-center gap-2 mt-1">
-                    <div className="w-full bg-muted rounded-full h-2">
-                      <div 
-                        className="bg-purple h-2 rounded-full" 
-                        style={{ width: `${insight.final_verdict.exit_potential * 10}%` }}
-                      />
-                    </div>
-                    <span className="text-sm">{insight.final_verdict.exit_potential}/10</span>
-                  </div>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Risk Factor:</span>
-                  <div className="flex items-center gap-2 mt-1">
-                    <div className="w-full bg-muted rounded-full h-2">
-                      <div 
-                        className="bg-purple h-2 rounded-full" 
-                        style={{ width: `${insight.final_verdict.risk_factor * 10}%` }}
-                      />
-                    </div>
-                    <span className="text-sm">{insight.final_verdict.risk_factor}/10</span>
-                  </div>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Competitive Edge:</span>
-                  <div className="flex items-center gap-2 mt-1">
-                    <div className="w-full bg-muted rounded-full h-2">
-                      <div 
-                        className="bg-purple h-2 rounded-full" 
-                        style={{ width: `${insight.final_verdict.competitive_edge * 10}%` }}
-                      />
-                    </div>
-                    <span className="text-sm">{insight.final_verdict.competitive_edge}/10</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+            </ul>
+          ) : (
+            <div>No competitor data available.</div>
+          )}
+        </section>
+        <hr className="my-8 border-t border-gray-300" />
+        {/* Market Comparison */}
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-2">Market Comparison</h2>
+          <div className="mb-2"><strong>Growth Rate:</strong> {insight.market_comparison.metrics.startup.growth_rate}</div>
+          <div className="mb-2"><strong>Market Share:</strong> {insight.market_comparison.metrics.startup.market_share}</div>
+          <div className="mb-2"><strong>Revenue Model:</strong> {insight.market_comparison.metrics.startup.revenue_model}</div>
+          <div className="mb-2"><strong>Differentiator:</strong> {insight.market_comparison.metrics.startup.differentiator}</div>
+        </section>
+        <hr className="my-8 border-t border-gray-300" />
+        {/* Final Verdict */}
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-2">Final Verdict</h2>
+          <div className="mb-2"><strong>Product Viability:</strong> {insight.final_verdict.product_viability}/10</div>
+          <div className="mb-2"><strong>Market Potential:</strong> {insight.final_verdict.market_potential}/10</div>
+          <div className="mb-2"><strong>Sustainability:</strong> {insight.final_verdict.sustainability}/10</div>
+          <div className="mb-2"><strong>Innovation:</strong> {insight.final_verdict.innovation}/10</div>
+          <div className="mb-2"><strong>Exit Potential:</strong> {insight.final_verdict.exit_potential}/10</div>
+          <div className="mb-2"><strong>Risk Factor:</strong> {insight.final_verdict.risk_factor}/10</div>
+          <div className="mb-2"><strong>Competitive Edge:</strong> {insight.final_verdict.competitive_edge}/10</div>
+          <p className="text-white text-base leading-relaxed mb-8 text-left" style={{ background: '#2B2521', borderRadius: 8, padding: '20px' }}>
+            {(() => {
+              const score = insight.investment_score ?? insight.final_verdict?.product_viability;
+              const companyName = insight.company_overview.company_name;
+              const industry = insight.industry_type || insight.company_overview.industry || "the industry";
+              if (score >= 8) {
+                return `${companyName} presents an excellent investment opportunity with a strong position in the ${industry.toLowerCase()} sector. The company demonstrates exceptional market potential, innovative solutions, and a clear competitive advantage, making it a highly attractive investment prospect.`;
+              } else if (score >= 5 && score <= 7) {
+                return `${companyName} shows promising investment potential in the ${industry.toLowerCase()} sector. While there are some areas for improvement, the company's market position and growth trajectory indicate good potential for returns.`;
+              } else if (score >= 1 && score <= 4) {
+                return `${companyName} presents a moderate investment opportunity in the ${industry.toLowerCase()} sector. The company shows some potential but faces significant challenges that need to be addressed for better investment prospects.`;
+              } else {
+                return `${companyName} currently presents a high-risk investment opportunity in the ${industry.toLowerCase()} sector. The company faces substantial challenges and requires significant improvements before being considered a viable investment option.`;
+              }
+            })()}
+          </p>
+        </section>
       </main>
     </div>
   );

@@ -598,8 +598,8 @@ const LandingPage = () => {
                   <img
                     src="/images/footer-logo.png"
                     alt="NeuralArc"
-                    width={32}
-                    height={32}
+                    width={100}
+                    height={100}
                     style={{
                       display: "inline-block",
                       verticalAlign: "middle",

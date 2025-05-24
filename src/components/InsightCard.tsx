@@ -1,27 +1,26 @@
-
 import { ReactNode } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface InsightCardProps {
   title: string;
-  content: string;
+  content: string | string[];
   icon: ReactNode;
-  type: "innovation" | "industry" | "problem" | "solution" | "funding" | "market";
+  type: string;
 }
 
-const InsightCard = ({ title, content, icon, type }: InsightCardProps) => {
+const InsightCard = ({ title, content }: InsightCardProps) => {
   return (
-    <Card className="overflow-hidden border-t-4 h-full" style={{ borderTopColor: `var(--insight-${type})` }}>
-      <CardHeader className="flex flex-row items-center gap-2 pb-2 px-4 md:px-6 pt-3 md:pt-4">
-        <div className={`p-1 rounded-md bg-insight-${type}/10`}>
-          {icon}
-        </div>
-        <CardTitle className="text-base md:text-lg">{title}</CardTitle>
-      </CardHeader>
-      <CardContent className="px-4 md:px-6 pb-4">
-        <p className="text-xs md:text-sm text-muted-foreground whitespace-pre-line">{content}</p>
-      </CardContent>
-    </Card>
+    <div className="mb-6">
+      <h2 className="text-xl font-bold mb-1">{title}</h2>
+      {Array.isArray(content) ? (
+        <ul className="list-disc list-inside ml-6">
+          {content.map((point, idx) => (
+            <li key={idx} className="mb-1">{point}</li>
+          ))}
+        </ul>
+      ) : (
+        <p className="text-base text-muted-foreground mb-2">{content}</p>
+      )}
+    </div>
   );
 };
 

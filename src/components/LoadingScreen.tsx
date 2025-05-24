@@ -1,6 +1,6 @@
 // components/LoadingScreen.tsx
 import React, { useEffect, useState } from 'react';
-import styles from '@/styles/upload.module.scss';
+import { Card } from '@/components/ui/card';
 
 const steps = [
   {
@@ -30,11 +30,11 @@ interface LoadingScreenProps {
   text?: string;
 }
 
-const LoadingScreen = ({ progress = 0, text = 'Generating' }: LoadingScreenProps) => {
+const LoadingScreen = ({ progress = 0 }: LoadingScreenProps) => {
   const [animatedProgress, setAnimatedProgress] = useState(0);
 
   useEffect(() => {
-    const animationDuration = 500; // Shorter duration for more immediate updates
+    const animationDuration = 500;
     const startTime = Date.now();
     const startProgress = animatedProgress;
     const targetProgress = progress;
@@ -42,74 +42,79 @@ const LoadingScreen = ({ progress = 0, text = 'Generating' }: LoadingScreenProps
     const animate = () => {
       const currentTime = Date.now();
       const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / animationDuration, 1);
-
-      // Linear interpolation for more accurate progress representation
-      const currentProgress = startProgress + (targetProgress - startProgress) * progress;
-
+      const prog = Math.min(elapsed / animationDuration, 1);
+      const currentProgress = startProgress + (targetProgress - startProgress) * prog;
       setAnimatedProgress(currentProgress);
-
-      if (progress < 1) {
+      if (prog < 1) {
         requestAnimationFrame(animate);
       }
     };
-
     requestAnimationFrame(animate);
   }, [progress]);
 
-  // Calculate current step based on actual progress
   const currentStep = Math.min(Math.floor(progress / 20), steps.length - 1);
 
   return (
-    <div className={styles.gradientWrapper}>
-      {/* <img src="/images/backgroundgradiant.png" alt="Gradient Background" className={styles.gradientBackground} /> */}
-
-      <div className={styles.innerBox}>
-        <h2 className="text-[20px] font-medium text-white mb-1 font-fustat">
-          <span className="animate-pulse">Processing...</span>
-        </h2>
-
-        <div className={styles.simpleProgress}>
-          <div className={styles.progressBar}>
-            <div
-              className={styles.progressFill}
-              style={{
-                width: `${animatedProgress}%`,
-                transition: 'width 0.2s ease-out'
-              }}
-            />
-          </div>
-          <div className={styles.progressText}>{Math.round(animatedProgress)}%</div>
-
-          <div className="grid grid-cols-3 gap-4 place-items-center">
-            {steps.map((step, index) => (
+    <div className="flex-grow flex flex-row items-center justify-center gap-12">
+      {/* Left blank card */}
+      <Card className="w-[35vw] h-[80vh] rounded-[16px] border-none flex flex-col" style={{ background: 'linear-gradient(180deg, #765E54 0%, #312119 100%)' }}>
+        <div className="pt-8 pl-8 text-white text-[32px] font-normal" style={{ fontFamily: 'Fustat, sans-serif' }}>
+          Spider
+        </div>
+        <div className="flex-1 flex items-center justify-center">
+          <img src="/images/loginspark.svg" alt="Login Spark" className="w-[90%] max-w-[600px] h-auto" />
+        </div>
+      </Card>
+      <div className="text-2xl font-semibold flex flex-col items-center justify-center">
+        Processing....
+        {/* Progress Bar */}
+        <div className="w-72 h-1 rounded-full mt-4 mb-6" style={{ background: '#E0E0E0', overflow: 'hidden' }}>
+          <div
+            style={{
+              width: `${animatedProgress}%`,
+              height: '100%',
+              borderRadius: 8,
+              background: 'linear-gradient(90deg, #262626 0%, #3987BE 52%, #D48EA3 100%)',
+              transition: 'width 0.2s ease-out'
+            }}
+          />
+        </div>
+        {/* Steps */}
+        <div className="flex flex-col gap-6 w-full max-w-xs items-start mb-6">
+          {steps.map((step, idx) => {
+            const isActive = idx === currentStep;
+            const isCompleted = idx < currentStep;
+            return (
               <div
-                key={index}
-                className={`${styles.stepBlock} ${
-                  index <= currentStep ? styles.completed : ''
-                } p-4 rounded-lg bg-[#1a1a1a] border border-[#333333] w-full max-w-xs transition-all duration-200`}
+                key={idx}
+                className={`flex items-start gap-4 w-full transition-all duration-300 ${isActive ? 'opacity-100 translate-x-[2px]' : isCompleted ? 'opacity-100' : 'opacity-60'}`}
               >
-                <div className="flex flex-col items-start w-full">
-                  <div className="flex items-center gap-2 w-full">
-                    <div 
-                      className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-200 ${
-                        index <= currentStep ? 'bg-purple' : 'bg-gray-600 opacity-40'
-                      }`}
-                    >
-                      <span className={`text-xs transition-all duration-200 ${
-                        index <= currentStep ? 'text-white' : 'text-gray-400'
-                      }`}>✓</span>
-                    </div>
-                    <h3 className={`font-medium font-fustat transition-all duration-200 ${
-                      index <= currentStep ? 'text-white' : 'text-gray-400'
-                    }`}>{step.title}</h3>
-                  </div>
-                  <div className="pl-7">
-                    <p className="text-sm text-gray-400 text-left w-full break-words">{step.description}</p>
-                  </div>
+                {/* Circle */}
+                <div
+                  className={`flex items-center justify-center mt-[2px] transition-all duration-300`}
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: '50%',
+                    background: isCompleted ? '#4C4740' : isActive ? '#4C474073' : '#DADADA',
+                    border: isCompleted || isActive ? '12px solid #29241E' : '12px solid #DADADA',
+                    boxShadow: isActive ? '0 0 0 2px #e0e0e0' : undefined,
+                  }}
+                />
+                {/* Texts */}
+                <div className="flex-1 pt-[6px]">
+                  <div className="font-medium mb-[2px] text-[15px] leading-[1.5] tracking-tight pl-[2px]" style={{ color: isActive ? '#232323' : '#BDBDBD' }}>{step.title}</div>
+                  <div className="text-sm" style={{ color: isActive ? '#232323' : '#BDBDBD' }}>{step.description}</div>
                 </div>
               </div>
-            ))}
+            );
+          })}
+        </div>
+        {/* Important Notice */}
+        <div className="w-full max-w-xs p-4 rounded-[8px] border text-sm" style={{ border: '1.5px solid #BB525273', color: '#BB5252' }}>
+          <strong className="block mb-2">Important Notice</strong>
+          <div>
+            Please stay on screen. Do not refresh or change while analysis is in progress. This process will take few minutes to complete. Thank you for patience!
           </div>
         </div>
       </div>

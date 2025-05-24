@@ -207,24 +207,9 @@ const Index = () => {
           )}
 
           {isLoading && (
-            <div>
-              <LoadingScreen
-                progress={progress}
-              />
-              <div className={styles.disclaimerContainer}>
-                <div className={styles.disclaimerText}>
-                  <h2 className="text-[18px] font-bold mb-2 text-red-500 font-fustat">Important Notice</h2>
-                  <div className="bg-red-500/10 border border-red-500 rounded-lg p-4">
-                    <p className="text-white text-justify leading-relaxed text-lg font-fustat">
-                      Please stay on the screen. Do not refresh or change screen while analysis is in progress. This process will take a few minutes to complete.
-                    </p>
-                    <p className="text-white text-lg mt-2 font-fustat">
-                      Thank you for patience!
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <LoadingScreen
+              progress={progress}
+            />
           )}
 
           {insights && !isLoading && (

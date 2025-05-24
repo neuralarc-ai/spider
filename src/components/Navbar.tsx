@@ -88,7 +88,7 @@ const Navbar = () => {
                     </button>
                 ) : (
                     <div className={styles.placeholder}>
-                      <img src="/images/navlogo.svg" alt="Spider Logo" style={{height: 38, width: 128}} />
+                      <img src="/images/navlogo.svg" alt="Spider Logo" style={{height: 80, width: 140    }} />
                     </div>
                 )}
                 <div className={styles.logoLink} onClick={() => navigate('/spider')}>
