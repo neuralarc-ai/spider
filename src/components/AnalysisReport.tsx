@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { MistralResponse } from "../services/pdfService";
 import { format } from "date-fns";
-import styles from "@/styles/upload.module.scss";
-import sharelogo from "../../public/Avatar.svg"
+// import styles from "@/styles/upload.module.scss";
+import downloadlogo from "../../public/List item (4).svg"
 import {
   FileText,
   Globe,
@@ -28,6 +28,9 @@ import {
 } from "recharts";
 import { Star } from "lucide-react";
 import RadarChart from "./RadarChart";
+import search from "../../public/pitch search.svg"
+import potential from "../../public/potential.svg"
+import saved from "../../public/saved.svg"
 
 interface AnalysisReportProps {
   data?: MistralResponse & {
@@ -346,84 +349,87 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
   }
 
   // Handle loading state
-  if (!data) {
-    return (
-      <div className={`${styles.gradientWrapper} font-fustat`}>
-        <img
-          src="/images/backgroundgradiant.png"
-          alt="Gradient Background"
-          className={styles.gradientBackground}
-        />
-        <div className={styles.innerBox}>
-          <div className="flex flex-col items-center justify-center min-h-[400px]">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
-            <p className="text-gray-400">Loading analysis report...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // if (!data) {
+  //   return (
+  //     <div className={`${styles.gradientWrapper} font-fustat`}>
+  //       <img
+  //         src="/images/backgroundgradiant.png"
+  //         alt="Gradient Background"
+  //         className={styles.gradientBackground}
+  //       />
+  //       <div className={styles.innerBox}>
+  //         <div className="flex flex-col items-center justify-center min-h-[400px]">
+  //           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
+  //           <p className="text-gray-400">Loading analysis report...</p>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
-    <div className={`${styles.gradientWrapper} font-fustat`}>
+    <div className= "font-fustat">
       
-      <div className={styles.innerBox}>
-        <div className="flex  items-start justify-between">
+      <div  >
+        <div className="flex justify-between items-center ">
           <div className="flex flex-col items-start justify-center">
-            <h4 className="font-[Fustat] font-bold text-[32px] leading-[28px] tracking-[-0.02em] text-black">
-
-            Analysis For - {data.company_overview.company_name}
+          <h4 className="font-[Fustat] text-[32px] leading-[28px] tracking-[-0.02em] text-black">
+              <span className="font-semibold">Analysis for - </span>
+              <span className="font-bold">{data.company_overview.company_name}</span>
             </h4>
-            <p className="text-gray-400 text-sm mt-3">
+            <p className=" font-fustat font-normal text-[16px] leading-[28px] tracking-[-0.004em] text-[#696969] mt-2">
             Industry: {data.industry_type} | Date:{" "}
             {format(data.analyzedAt, "MMMM dd yyyy")}
             </p>
           </div>
          <div className="w-16 h-16 rounded-full bg-black bg-opacity-5 flex justify-center items-center">
           <img
-            src={sharelogo}
-            className="w-8 h-8 object-contain"
+            src={downloadlogo}
+            className="w-[72px] h-[72px] object-contain"
           />
          </div>
            
         </div>
         
-        <div className="bg-[#FFFFFF] bg-opacity-50 backdrop-blur-md rounded-xl p-6">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="rounded-xl p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {/* Pitch Analysis Card */}
-            <div className="bg-[#DED5C9] border border-[#ffffff1a] rounded-lg p-2  gap-6">
-              <div className="flex items-center mb-4 border border-[#ffffff1a] rounded-[48px] p-2 pl-6">
-                <img src="/panalysis.svg" alt="Pitch Analysis" className="w-5 h-5 mr-3" />
-                <h3 className="text-lg font-medium text-black">
+            <div className="  rounded-[12px] p-[6px] gap-[24px] border border-[rgba(255,255,255,0.04)] bg-[#FFFFFF]">
+              <div className="flex items-center justify-between p-[20px] mb-4 rounded-md border-[1.5px] border-solid border-[#0000000D] ">
+              
+                <h3 className="text-lg text-black font-[Fustat] font-medium text-[21px] leading-[20px] tracking-[0]">
                   Pitch Analysis
                 </h3>
+                <img src={search} alt="Pitch Analysis" className="w-5 h-5 mr-3" />
               </div>
               <div className="space-y-4">
-                <div className="flex items-center justify-between pl-2 pr-2 gap-20 text-left">
+                <div className="flex items-center justify-between pl-6 pr-6 gap-20 ">
                   <div>
-                    <p className="text-black text-sm mb-1">Clarity Score:</p>
-                    <p className="text-black text-2xl font-bold">
+                    <p className="font-[Fustat] font-normal text-[16px] leading-[40px] tracking-[-0.004em] align-middle text-black">Clarity Score:</p>
+                    <span className="font-[Fustat] font-semibold text-[24px] leading-[40px] tracking-[-0.004em] align-middle">
                       {data.pitch_clarity}/10
-                    </p>
+                    </span>
                   </div>
                   <div>
-                    <p className="text-black text-sm mb-1">Sentiment:</p>
+                    <p className="text-black font-[Fustat] font-normal text-[16px] leading-[40px] tracking-[-0.004em] align-middle  ">Sentiment:</p>
                     <p
-                      className={`text-${data.reputation_analysis?.overall?.sentiment?.toLowerCase() ===
-                        "positive"
-                        ? "green"
-                        : data.reputation_analysis?.overall?.sentiment?.toLowerCase() ===
-                          "negative"
-                          ? "red"
-                          : "yellow"
-                        }-500 font-medium`}
-                    >
-                      {data.reputation_analysis?.overall?.sentiment || "Neutral"}
-                    </p>
+                  className={`font-[Fustat] font-semibold text-[24px] leading-[40px] tracking-[-0.004em] align-middle text-${
+                    data.reputation_analysis?.overall?.sentiment?.toLowerCase() === "positive"
+                      ? "green"
+                      : data.reputation_analysis?.overall?.sentiment?.toLowerCase() === "negative"
+                      ? "red"
+                      : "yellow"
+                  }-500`}
+                >
+                  {data.reputation_analysis?.overall?.sentiment || "Neutral"}
+                </p>
+
                   </div>
                 </div>
-                <div className="pt-4 border-t border-[#ffffff1a] ">
-                  <p className="text-sm text-black text-left">
+                
+                <div className="pt-4 bg-[#B7BEAE] items-center rounded-[8px] p-[24px_26px] gap-[16px] justify-center">
+                  <div>
+                  <p className="font-[Fustat] font-normal text-[16px] leading-[40px] tracking-[-0.004em] align-middle text-black">
                     AI detected{" "}
                     <span className="font-medium">
                       {data.strengths?.length || 0} strengths
@@ -433,36 +439,39 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                       {data.weaknesses?.length || 0} potential issues
                     </span>
                   </p>
+                  </div>
+                 
                 </div>
               </div>
             </div>
 
             {/* Investment Potential Card */}
-            <div className=" bg-[#DED5C9] border border-[#ffffff1a] rounded-lg p-2">
-              <div className="flex items-center mb-4 border border-[#ffffff1a] rounded-[48px] p-2 pl-6">
-                <img src="/ipotential.svg" alt="Investment Potential" className="w-5 h-5 mr-3" />
-                <h3 className="text-black text-lg font-medium">
+            <div className=" rounded-[12px] p-[6px] gap-[24px] border border-[rgba(255,255,255,0.04)] bg-[#FFFFFF]">
+              <div className="flex items-center justify-between p-[20px] mb-4 rounded-md border-[1.5px] border-solid border-[#0000000D]">
+
+                 <h3 className="text-lg text-black font-[Fustat] font-medium text-[21px] leading-[20px] tracking-[0]">
                   Investment Potential
                 </h3>
+                <img src={potential} alt="Investment Potential" className="w-5 h-5 mr-3" />
               </div>
               <div className="space-y-4">
-                <div className="flex items-center justify-between pl-2 pr-2 gap-20 text-left">
+                <div className=" flex items-center justify-between pl-6 pr-6 gap-20 ">
                   <div>
-                    <p className="text-black text-sm mb-1">Score:</p>
-                    <p className="text-black text-2xl font-bold">
-                      {data.investment_score}/10
-                    </p>
+                    <p className="font-[Fustat] font-normal text-[16px] leading-[40px] tracking-[-0.004em] align-middle text-black"> Score:</p>
+                      <span className="font-[Fustat] font-semibold text-[24px] leading-[40px] tracking-[-0.004em] align-middle">
+                        {data.pitch_clarity}/10
+                      </span>
                   </div>
                   <div>
-                    <p className="text-black text-sm mb-1">Exit Potential:</p>
-                    <p className="text-black font-medium">
+                    <p className="text-black font-[Fustat] font-normal text-[16px] leading-[40px] tracking-[-0.004em] align-middle ">Exit Potential:</p>
+                    <p className="font-[Fustat] font-semibold text-[24px] leading-[40px] tracking-[-0.004em] align-middle text">
                       {data.proposed_deal_structure?.valuation_cap ||
                         "Not specified"}
                     </p>
                   </div>
                 </div>
-                <div className="pt-4 border-t border-[#ffffff1a]">
-                  <p className="text-sm text-black text-left">
+                <div className="pt-4 bg-[#C6AEA3] items-center rounded-[8px] p-[24px_26px] gap-[16px] ">
+                  <p className="font-[Fustat] font-normal text-[16px] tracking-[-0.004em] ">
                     {data.market_analysis?.growth_rate ? (
                       <>
                         Growth rate:{" "}
@@ -488,30 +497,32 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
             </div>
 
             {/* Market Position Card */}
-            <div className=" bg-[#DED5C9] border border-[#ffffff1a] rounded-lg p-2">
-              <div className="flex items-center mb-4 border border-[#ffffff1a] rounded-[48px] p-2 pl-6">
-                <img src="/mposition.svg" alt="Market Position" className="w-5 h-5 mr-3" />
-                <h3 className="text-black text-lg font-medium">
+            <div className=" rounded-[12px] p-[6px] gap-[24px] border border-[rgba(255,255,255,0.04)] bg-[#FFFFFF]">
+              <div className="flex items-center justify-between p-[20px] mb-4 rounded-md border-[1.5px] border-solid border-[#0000000D]">
+              
+                <h3 className="text-lg text-black font-[Fustat] font-medium text-[21px] leading-[20px] tracking-[0]">
                   Market Position
                 </h3>
+                <img src= {saved} alt="Market Position" className="w-5 h-5 mr-3" />
               </div>
               <div className="space-y-4">
-                <div className="flex items-center justify-between pl-2 pr-2 gap-20 text-left">
+                <div className=" flex items-center justify-between pl-6 pr-6 gap-20 ">
                   <div>
-                    <p className="text-black text-sm mb-1">Classification:</p>
-                    <p className="text-black text-2xl font-bold">
-                      {data.market_position}
-                    </p>
+                  <p className="font-[Fustat] font-normal text-[16px] leading-[40px] tracking-[-0.004em] align-middle text-black">Classification:</p>
+                      <span className="font-[Fustat] font-semibold text-[24px] leading-[40px] tracking-[-0.004em] align-middle">
+                        {data.pitch_clarity}/10
+                      </span>
                   </div>
                   <div>
-                    <p className="text-black text-sm mb-1">Industry:</p>
-                    <p className="text-black font-medium">
+                    <p className="text-black font-[Fustat] font-normal text-[16px] leading-[40px] tracking-[-0.004em] align-middle">Industry:</p>
+                    <p className="font-[Fustat] font-semibold text-[24px] leading-[40px] tracking-[-0.004em] align-middle text-black">
                       {data.industry_type}
                     </p>
                   </div>
                 </div>
-                <div className="pt-4 border-t border-[#ffffff1a]">
-                  <p className="text-sm text-black text-left">
+
+                <div className= "pt-4 bg-[#A9A9A9] items-center rounded-[8px] p-[24px_26px] gap-[16px] ">
+                  <p className="font-[Fustat] font-normal text-[16px] leading-[40px] tracking-[-0.004em] align-middle text-black">
                     {data.competitor_analysis?.competitors ? (
                       <>
                         Competing with{" "}
@@ -529,10 +540,12 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
             </div>
           </div>
           <div>
-            <div className="">
-              <h2 className="text-2xl font-medium text-black mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+
+            <div className=" bg-[#FFFFFF] mt-3 p-[40px_32px] rounded-[12px] gap-[24px]" >
+              <h2 className="font-medium text-black mb-1 border-b border-[#ffffff1a] pb-4 text-left font-[Fustat] text-[32px] leading-[24px] tracking-[-0.02em] align-middle">
                 Company Overview
               </h2>
+               <div className="border-t border-[rgba(0,0,0,0.1)] pb-4 mb-3"> </div>
               <div className="grid grid-cols-2 gap-6">
                 {[
                   ["Company Name:", data.company_overview.company_name],
@@ -542,9 +555,9 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                   ["Business Model:", data.company_overview.business_model],
                   ["Key Offerings:", data.company_overview.key_offerings],
                 ].map(([label, value], i) => (
-                  <div key={i} className="border-b border-[#202020] pb-4 grid grid-cols-[150px_1fr]">
-                    <p className="text-gray-400 text-sm text-left">{label}</p>
-                    <p className="text-black text-base text-left">{value}</p>
+                  <div key={i} className={`border-b border-[rgba(0,0,0,0.1)] pb-4 grid grid-cols-[150px_1fr] ${i === 5  ? 'border-b-0' : ''}`}>
+                    <p className="font-[Fustat] font-semibold text-[16px] leading-[24px] tracking-[-0.02em]">{label}</p>
+                    <p className="text-[#4F4F4F] font-[Fustat] font-normal text-[16px] leading-[24px] tracking-[-0.02em]">{value}</p>
                   </div>
                 ))}
               </div>
@@ -553,17 +566,21 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
           </div>
           <div>
             {/* Strengths & Weaknesses Section */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 mt-8">
-              <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6">
-                <h2 className="text-2xl font-medium text-black mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 mt-8 ">
+              <div className="bg-[#FFFFFF] border border-[#ffffff1a] rounded-xl p-6 flex flex-col gap-y-3">
+                <h2 className="font-[Fustat] font-medium text-[32px] leading-[24px] tracking-[-0.02em] align-middle">
                   Strengths & Weaknesses
                 </h2>
+                <div className="opacity-50 border border-[#202020] mt-3"> 
+                </div>
                 <div className="grid grid-cols-2 gap-8">
                   <div>
-                    <h3 className="text-green-500 text-lg pl-5 mb-4 text-left">
+                    <h3 className=" text-lg  mb-4 text-left mt-6 font-[Fustat] font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle    bg-gradient-to-r from-[#9AB973] to-[#588321] bg-clip-text text-transparent"
+                         
+                        >
                       Strengths (Pros)
                     </h3>
-                    <ul className="list-disc list-outside pl-5 text-left text-black text-sm space-y-3">
+                      <ul className="list-disc list-outside pl-5 text-left text-black text-sm space-y-3">
                       {data.strengths.map((strength, index) => (
                         <li key={index} className="leading-relaxed">
                           {strength}
@@ -572,7 +589,8 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                     </ul>
                   </div>
                   <div>
-                    <h3 className="text-red-500 pl-5 text-lg mb-4 text-left">
+                    <h3 className=" text-lg mb-4 text-left mt-6 font-[Fustat] font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle
+             bg-gradient-to-r from-[#C0907B] to-[#D95A56] bg-clip-text text-transparent">
                       Weaknesses (Cons)
                     </h3>
                     <ul className="list-disc list-outside pl-5 text-left text-black text-sm space-y-3">
@@ -587,26 +605,29 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
               </div>
 
               {/* Funding History Section */}
-              <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6">
-                <h2 className="text-2xl font-medium text-black mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+              <div className="bg-[#FFFFFF] border border-[#ffffff1a] rounded-xl p-6">
+                <h2 className="text-2xl font-medium mb-2 border-b border-[#ffffff1a] pb-4 text-left font-[Fustat] text-[32px] leading-[24px] tracking-[-0.02em] align-middle text-[#222222]">
                   Funding History
                 </h2>
+                <div className="opacity-50 border border-[#202020] ">
+
+                 </div>
                 {data.funding_history?.rounds?.length > 0 ? (
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead>
                         <tr className="border-b border-[#ffffff1a]">
-                          <th className="text-left py-3 px-4 text-black font-normal">
+                          <th className="text-left py-3 px-4 font-semibold font-[Fustat] text-[20px] leading-[24px] tracking-[-0.004em] text-[#222222] align-middle">
                             Round
                           </th>
-                          <th className="text-left py-3 px-4 text-black font-normal">
+                          <th className="text-left py-3 px-4 font-semibold font-[Fustat] text-[20px] leading-[24px] tracking-[-0.004em] text-[#222222] align-middle">
                             Amount
                           </th>
-                          <th className="text-left py-3 px-4 text-black font-normal">
+                          <th className="text-left py-3 px-4 font-semibold font-[Fustat] text-[20px] leading-[24px] tracking-[-0.004em] text-[#222222] align-middle">
                             Key Investors
                           </th>
-                          <th className="text-left py-3 px-4 text-black font-normal">
-                            Date
+                          <th >
+                            <h6 className="text-left py-3 px-4 font-semibold font-[Fustat] text-[20px] leading-[24px] tracking-[-0.004em] text-[#222222] align-middle "> Date </h6>
                           </th>
                         </tr>
                       </thead>
@@ -616,18 +637,18 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                             key={index}
                             className="border-b border-[#ffffff1a] hover:bg-[#ffffff05] transition-colors"
                           >
-                            <td className="py-3 px-4 text-black text-left">
+                            <td className="py-3 px-4 text-black text-left font-[Fustat]">
                               {round.type || "Unknown Round"}
                             </td>
-                            <td className="py-3 px-4 text-black text-left">
+                            <td className="py-3 px-4 text-black text-left font-[Fustat]">
                               {round.amount || "Not disclosed"}
                             </td>
-                            <td className="py-3 px-4 text-black text-left">
+                            <td className="py-3 px-4 text-black text-left font-[Fustat]">
                               {round.key_investors?.length > 0
                                 ? round.key_investors.join(", ")
                                 : "Not disclosed"}
                             </td>
-                            <td className="py-3 px-4 text-black text-left">
+                            <td className="py-3 px-4 text-black text-left   font-[fustat]">
                               {round.date || "Not specified"}
                             </td>
                           </tr>
@@ -640,7 +661,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                     <div className="w-16 h-16 mb-4 rounded-full bg-[#ffffff10] flex items-center justify-center">
                       <HistoryIcon className="w-8 h-8 text-gray-400" />
                     </div>
-                    <h3 className="text-xl font-medium text-white mb-2">
+                    <h3 className="text-xl font-medium text-white mb-2 ">
                       No Funding History Available
                     </h3>
                     <p className="text-gray-400 max-w-md">
@@ -655,27 +676,33 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
           </div>
           <div>
             {/* Competitor Comparison Section */}
-            <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6 mb-8">
-              <h2 className="text-2xl font-medium text-black mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+            <div className="bg-[#FFFFFF] border-[#ffffff1a] rounded-xl p-6 mb-8">
+              <h2 className="text-2xl text-black border-b border-[#ffffff1a] pb-4 text-left font-[Fustat] font-medium text-[32px] leading-[24px] tracking-[-0.02em] align-middle">
                 Competitor Comparison
               </h2>
+
+            <div className="opacity-50 border border-[#202020] mb-3">
+
+            </div>
+              
+             
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-[#ffffff1a]">
-                      <th className="text-left py-3 px-4 text-black font-normal border-r border-[#ffffff1a]">
+                      <th className="font-[Fustat] text-left font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle">
                         Competitor
                       </th>
-                      <th className="text-left py-3 px-4 text-black font-normal border-r border-[#ffffff1a]">
+                      <th className=" font-[Fustat] text-left font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle">
                         Key Investors
                       </th>
-                      <th className="text-left py-3 px-4 text-black font-normal border-r border-[#ffffff1a]">
+                      <th className="font-[Fustat] text-left font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle">
                         Amount Raised
                       </th>
-                      <th className="text-left py-3 px-4 text-black font-normal border-r border-[#ffffff1a]">
+                      <th className="font-[Fustat] text-left font-semibold text-[20px] leading-[24px] tracking-[-0.004em]  align-middle">
                         Market Position
                       </th>
-                      <th className="text-left py-3 px-4 text-black font-normal">
+                      <th className="font-[Fustat] text-left font-semibold text-[20px] leading-[24px] tracking-[-0.004em]  align-middle">
                         Strengths
                       </th>
                     </tr>
@@ -687,19 +714,19 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                           key={index}
                           className={index === data.competitor_analysis.competitors.length - 1 ? '' : 'border-b border-[#ffffff1a]'}
                         >
-                          <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
+                          <td className="py-4 border-r border-[#ffffff1a] font-[Fustat] font-normal text-[20px] leading-[24px] tracking-[-0.01em] text-[#4F4F4F]">
                             {competitor.name}
                           </td>
-                          <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
+                          <td className=" py-4 border-r border-[#ffffff1a] font-[Fustat] font-normal text-[20px] leading-[24px] tracking-[-0.01em] text-[#4F4F4F]">
                             {competitor.key_investors}
                           </td>
-                          <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
+                          <td className=" py-4 border-r border-[#ffffff1a] font-[Fustat] font-normal text-[20px] leading-[24px] tracking-[-0.01em] text-[#4F4F4F]">
                             {competitor.amount_raised}
                           </td>
-                          <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
+                          <td className=" py-4 border-r border-[#ffffff1a] font-[Fustat] font-normal text-[20px] leading-[24px] tracking-[-0.01em] text-[#4F4F4F]">
                             {competitor.market_position}
                           </td>
-                          <td className="py-4 px-4 text-[#4F4F4F] text-left">
+                          <td className="py-4 border-r border-[#ffffff1a] font-[Fustat] font-normal text-[20px] leading-[24px] tracking-[-0.01em] text-[#4F4F4F]">
                             {competitor.strengths}
                           </td>
                         </tr>
@@ -711,18 +738,18 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
             </div>
 
             {/* Market Comparison Section */}
-            <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6 mb-8">
-              <h2 className="text-2xl font-medium text-black mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+            <div className=" bg-[#FFFFFF] border-[#ffffff1a] rounded-xl p-6 mb-8">
+              <h2 className="pb-4 font-[Fustat] font-medium text-[32px] leading-[24px] tracking-[-0.02em] align-middle text-[#000000] ">
                 Market Comparison
               </h2>
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto mt-2">
                 <table className="w-full">
-                  <thead>
+                  <thead className="bg-[#A8B0B8] rounded-md pt-[16px] pr-[88px] pb-[16px] pl-[56px]">
                     <tr className="border-b border-[#ffffff1a]">
-                      <th className="text-left py-3 px-4 text-gray-400 font-normal border-r border-[#ffffff1a]">
+                      <th className="text-left py-3 px-4 font-[Fustat] font-medium text-[20px] leading-[24px] tracking-[-0.004em] align-middle">
                         Metric
                       </th>
-                      <th className="text-left py-3 px-4 text-gray-400 font-normal border-r border-[#ffffff1a]">
+                      <th className="text-left py-3 px-4 font-[Fustat] font-medium text-[20px] leading-[24px] tracking-[-0.004em] align-middle">
                         {data.company_overview.company_name}
                       </th>
                       {data.competitor_analysis.competitors
@@ -730,7 +757,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                         .map((competitor, index) => (
                           <th
                             key={index}
-                            className="text-left py-3 px-4 text-gray-400 font-normal border-r border-[#ffffff1a]"
+                            className="text-left py-3 px-4 font-[Fustat] font-medium text-[20px] leading-[24px] tracking-[-0.004em] align-middle"
                           >
                             {competitor.name}
                           </th>
@@ -739,10 +766,10 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                   </thead>
                   <tbody>
                     <tr className="border-b border-[#ffffff1a]">
-                      <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
+                      <td className="py-4 px-4 text-[#4F4F4F] font-[fustat] text-left border-r border-[#ffffff1a]">
                         Market Share
                       </td>
-                      <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
+                      <td className="py-4 px-4 text-[#4F4F4F]  font-[fustat]  text-left border-r border-[#ffffff1a]">
                         {data.market_position}
                       </td>
                       {data.competitor_analysis.competitors
@@ -750,17 +777,17 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                         .map((competitor, index) => (
                           <td
                             key={index}
-                            className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]"
+                            className="py-4 px-4 text-[#4F4F4F] font-[fustat]  text-left border-r border-[#ffffff1a]"
                           >
                             {competitor.market_position}
                           </td>
                         ))}
                     </tr>
                     <tr className="border-b border-[#ffffff1a]">
-                      <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
+                      <td className="py-4 px-4 text-[#4F4F4F]  font-[fustat] text-left border-r border-[#ffffff1a] ">
                         Growth Rate
                       </td>
-                      <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
+                      <td className="py-4 px-4 text-[#4F4F4F]  font-[fustat] text-left border-r border-[#ffffff1a]">
                         {data.market_analysis.growth_rate}
                       </td>
                       {data.competitor_analysis.competitors
@@ -768,17 +795,17 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                         .map((competitor, index) => (
                           <td
                             key={index}
-                            className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]"
+                            className="py-4 px-4 text-[#4F4F4F]  font-[fustat] text-left border-r border-[#ffffff1a]"
                           >
                             {competitor.growth_rate || "N/A"}
                           </td>
                         ))}
                     </tr>
                     <tr className="border-b border-[#ffffff1a]">
-                      <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
+                      <td className="py-4 px-4 text-[#4F4F4F] font-[fustat] text-left border-r border-[#ffffff1a]">
                         Revenue Model
                       </td>
-                      <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
+                      <td className="py-4 px-4 text-[#4F4F4F] font-[fustat] text-left border-r border-[#ffffff1a]">
                         {data.company_overview.business_model}
                       </td>
                       {data.competitor_analysis.competitors
@@ -786,17 +813,17 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                         .map((competitor, index) => (
                           <td
                             key={index}
-                            className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]"
+                            className="py-4 px-4 text-[#4F4F4F] font-[fustat]  text-left border-r border-[#ffffff1a]"
                           >
                             {competitor.business_model || "N/A"}
                           </td>
                         ))}
                     </tr>
                     <tr>
-                      <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
+                      <td className="py-4 px-4 text-[#4F4F4F] font-[fustat]  text-left border-r border-[#ffffff1a]">
                         Key Differentiator
                       </td>
-                      <td className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]">
+                      <td className="py-4 px-4 text-[#4F4F4F] font-[fustat]  text-left border-r border-[#ffffff1a]">
                         {data.strengths[0] || "N/A"}
                       </td>
                       {data.competitor_analysis.competitors
@@ -804,7 +831,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                         .map((competitor, index) => (
                           <td
                             key={index}
-                            className="py-4 px-4 text-[#4F4F4F] text-left border-r border-[#ffffff1a]"
+                            className="py-4 px-4 text-[#4F4F4F]  font-[fustat] text-left border-r border-[#ffffff1a]"
                           >
                             {competitor.key_differentiator || "N/A"}
                           </td>
@@ -816,60 +843,66 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
             </div>
 
             {/* Exit Potential Section */}
-            <div className=" border border-[#ffffff1a] rounded-xl p-6">
-              <h2 className="text-2xl font-medium text-black  mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+            <div className=" bg-[#FFFFFF] rounded-xl p-6">
+              <h2 className="  font-[Fustat] text-[32px] leading-[24px] tracking-[-0.02em] align-middle text-2xl font-medium text-black mb-3 border-b border-[#ffffff1a] pb-4 text-left">
                 Exit Potential
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-[#202020] rounded-xl p-6">
-                  <h3 className="text-gray-400 mb-4 text-left">Exit Likelihood</h3>
+                <div className="bg-[#1E342F] rounded-xl p-6">
+                  <h3 className="mb-4 font-[Fustat] font-normal text-[24px] leading-[20px] tracking-[0em] text-white items-center">Exit Likelihood</h3>
                   <div className="relative pt-2">
                     <div className="w-full bg-gray-700 rounded-full h-2 relative">
                       <div
-                        className="h-full rounded-full shadow-[0_0_20px_rgba(255,255,255,0.7)] transition-all duration-1000 ease-out"
+                        className="h-full  items-center rounded-full shadow-[0_0_20px_rgba(255,255,255,0.7)] transition-all duration-1000 ease-out"
                         style={{ 
                           width: `${(data.final_verdict.exit_potential / 10) * 100}%`,
-                          background: 'linear-gradient(90deg, #FFFF1E 0%, #45FAC2 75.98%, #FF287A 168.85%)'
+                          background: 'linear-gradient(90deg, #262626 -45.63%, #3987BE 23.66%, #D48EA3 86.59%)'
                         }}
                       ></div>
-                      <div className="absolute -top-12 right-0 bg-[#FFFF1E] text-[#202020]  px-5 py-2 rounded-[48px] text-sm">
+                      <div className="absolute -top-12 right-0  px-5 py-2 rounded-[48px] font-[Fustat] font-normal text-[32px] leading-[21.67px] tracking-[0em] text-white">
                         {data.final_verdict.exit_potential}/10
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className=" bg-[#202020] rounded-xl p-6">
-                  <h3 className="text-gray-400 mb-4 text-left">Potential Exit Value</h3>
-                  <p className="text-3xl font-semibold text-white text-left">
-                    {data.proposed_deal_structure?.valuation_cap ||
-                      "Not disclosed"}
-                  </p>
+                <div className=" bg-[#1E342F] flex justify-between items-center rounded-xl p-8">
+                  <div className="justify-center items-center"> 
+                    <h3 className=" font-[Fustat] font-normal text-[18px] leading-[20px] tracking-[0em] text-white">Potential Exit Value</h3>
+                  </div>
+                  <div className="justify-center items-center">
+                      <p className=" font-[Fustat] font-medium text-[32px] leading-[20px] tracking-[0em] text-white">
+                        {data.proposed_deal_structure?.valuation_cap ||
+                          "Not disclosed"}
+                      </p>
+                  </div>
+                
+                 
                 </div>
               </div>
             </div>
           </div>
 
           {/* Expert Insights Section */}
-          <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6 mt-8">
-            <h2 className="text-2xl font-medium text-black mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+          <div className="bg-[#FFFFFF] border-[#ffffff1a] rounded-xl p-6 mt-8">
+            <h2 className="text-2xl  mb-8 border-b border-[#ffffff1a] pb-4 text-left font-[Fustat] font-medium text-[32px] leading-[24px] tracking-[-0.02em] align-middle text-black">
               Expert Insights
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Expert Opinions Card */}
-              <div className="bg-[#202020] rounded-xl p-6">
-                <h3 className="text-xl text-white mb-4 text-left border-b border-[#ffffff1a] pb-4">Expert Opinion</h3>
+              <div className="bg-[#E3E2DF] rounded-xl p-6">
+                <h3 className="text-xl text-[#363636] mb-4 text-left border-b border-[#ffffff1a] pb-4">Expert Opinion</h3>
                 {data.expert_opinions && data.expert_opinions.length > 0 ? (
                   <div className="mb-6">
-                    <h4 className="text-white text-lg font-medium text-left">
+                    <h4 className="text-[#363636] text-lg text-left font-[Fustat] font-medium text-[20px] leading-[24px] tracking-[-0.004em] align-middle">
                       {data.expert_opinions[0].name}
                     </h4>
-                    <p className="text-gray-400 mb-2 text-left">
+                    <p className=" text-[#363636] mb-2 text-left font-[Fustat] font-semibold text-[20px] leading-[30px] tracking-[-0.004em] align-middle">
                       {data.expert_opinions[0].affiliation}
                     </p>
-                    <p className="text-gray-300 leading-relaxed mb-2 text-left">
+                    <p className="text-[#363636] mb-2 text-left font-[Fustat] font-semibold text-[20px] leading-[30px] tracking-[-0.004em] align-middle ">
                       {data.expert_opinions[0].summary}
                     </p>
-                    <p className="text-gray-500 text-sm text-left">
+                    <p className="text-[#363636] text-sm text-left">
                       Reference: {data.expert_opinions[0].reference} | Date:{" "}
                       {data.expert_opinions[0].date}
                     </p>
@@ -892,10 +925,10 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                         />
                       </svg>
                     </div>
-                    <h4 className="text-gray-400 text-lg font-medium mb-2">
+                    <h4 className="text-[#363636] text-lg font-medium mb-2">
                       No Expert Opinion Available
                     </h4>
-                    <p className="text-gray-500 text-sm">
+                    <p className="text-[#363636] text-sm">
                       No expert opinions were found for this analysis.
                     </p>
                   </div>
@@ -903,16 +936,16 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
               </div>
 
               {/* Reputation Analysis Card */}
-              <div className="bg-[#202020] rounded-xl p-6">
-                <h3 className="text-xl text-white mb-6 text-left border-b border-[#ffffff1a] pb-4">Reputation Analysis</h3>
+              <div className="bg-[#E3E2DF] rounded-xl p-6">
+                <h3 className="text-xl mb-6 text-left border-b border-[#ffffff1a] pb-4 font-[Fustat] font-medium text-[20px] leading-[24px] tracking-[-0.004em] align-middle text-[#363636]">Reputation Analysis</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <tbody>
                       <tr className="border-b border-[#ffffff1a]">
-                        <td className="py-3 font-semibold text-gray-400  text-left">
+                        <td className="py-3  text-left font-[Fustat] font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle text-[#363636]">
                           News/Media
                         </td>
-                        <td className="py-3 text-white text-left">
+                        <td className="py-3  text-left font-[Fustat] font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle text-[#363636]">
                           {data.expert_insights?.reputation_analysis
                             ?.news_media || (
                               <span className="text-xs text-gray-500 text-left">N/A</span>
@@ -933,7 +966,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-white-400 fill-white"
+                                        className="w-4 h-4 text-white-[#363636] fill-[#363636]"
                                       />
                                     );
                                   } else if (i === fullStars && halfStar) {
@@ -950,7 +983,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-gray-600"
+                                        className="w-4 h-4 text-[#363636]"
                                       />
                                     );
                                   }
@@ -961,13 +994,13 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                         </td>
                       </tr>
                       <tr className="border-b border-[#ffffff1a]">
-                        <td className="py-3 font-semibold text-gray-400 text-left">
+                        <td className=" py-3  text-left font-[Fustat] font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle text-[#363636]">
                           Social Media
                         </td>
-                        <td className="py-3 text-white text-left">
+                        <td className="py-3  text-left font-[Fustat] font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle text-[#363636]">
                           {data.expert_insights?.reputation_analysis
                             ?.social_media || (
-                              <span className="text-xs text-gray-500 text-left">N/A</span>
+                              <span className="text-xs text-gray- text-left">N/A</span>
                             )}
                           /10
                         </td>
@@ -985,7 +1018,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-white-400 fill-white"
+                                        className="w-4 h-4 text-[#363636] fill-[#363636]"
                                       />
                                     );
                                   } else if (i === fullStars && halfStar) {
@@ -1002,7 +1035,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-gray-600"
+                                        className="w-4 h-4 text-[#363636]"
                                       />
                                     );
                                   }
@@ -1013,10 +1046,10 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                         </td>
                       </tr>
                       <tr className="border-b border-[#ffffff1a]">
-                        <td className="py-3 font-semibold text-gray-400 text-left">
+                        <td className="py-3  text-left font-[Fustat] font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle text-[#363636]">
                           Investor Reviews
                         </td>
-                        <td className="py-3 text-white text-left">
+                        <td className="py-3  text-left font-[Fustat] font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle text-[#363636]">
                           {data.expert_insights?.reputation_analysis
                             ?.investor_reviews || (
                               <span className="text-xs text-gray-500 text-left">N/A</span>
@@ -1037,14 +1070,14 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-white-400 fill-white"
+                                        className="w-4 h-4 text-[#363636] fill-[#363636]"
                                       />
                                     );
                                   } else if (i === fullStars && halfStar) {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-white-400"
+                                        className="w-4 h-4 text-[#363636]"
                                         style={{
                                           fill: "url(#halfStarGradient)",
                                         }}
@@ -1054,7 +1087,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-gray-600"
+                                        className="w-4 h-4 text-[#363636]"
                                       />
                                     );
                                   }
@@ -1065,10 +1098,10 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                         </td>
                       </tr>
                       <tr className="border-b border-[#ffffff1a]">
-                        <td className="py-3 font-semibold text-gray-400 text-left">
+                        <td className="py-3  text-left font-[Fustat] font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle text-[#363636]">
                           Customer Feedback
                         </td>
-                        <td className="py-3 text-white text-left">
+                        <td className=" py-3  text-left font-[Fustat] font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle text-[#363636]">
                           {data.expert_insights?.reputation_analysis
                             ?.customer_feedback || (
                               <span className="text-xs text-gray-500 text-left">N/A</span>
@@ -1089,14 +1122,14 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-white-400 fill-white"
+                                        className="w-4 h-4 text-white-400 fill-[#363636]"
                                       />
                                     );
                                   } else if (i === fullStars && halfStar) {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-white-400"
+                                        className="w-4 h-4 text-[#363636]"
                                         style={{
                                           fill: "url(#halfStarGradient)",
                                         }}
@@ -1106,7 +1139,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-gray-600"
+                                        className="w-4 h-4 text-[#363636]"
                                       />
                                     );
                                   }
@@ -1117,10 +1150,10 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                         </td>
                       </tr>
                       <tr>
-                        <td className="py-3 font-bold text-gray-400 text-left">
+                        <td className="py-3  text-left font-[Fustat] font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle text-[#363636]">
                           Overall
                         </td>
-                        <td className="py-3 text-white font-semibold text-left">
+                        <td className="py-3  text-left font-[Fustat] font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle text-[#363636]">
                           {data.expert_insights?.reputation_analysis
                             ?.overall || (
                               <span className="text-xs text-gray-500 text-left">N/A</span>
@@ -1141,14 +1174,14 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-white-400 fill-white"
+                                        className="w-4 h-4 text-[#363636] fill-[#363636]"
                                       />
                                     );
                                   } else if (i === fullStars && halfStar) {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-white-400"
+                                        className="w-4 h-4 text-[#363636]"
                                         style={{
                                           fill: "url(#halfStarGradient)",
                                         }}
@@ -1158,7 +1191,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                                     return (
                                       <Star
                                         key={i}
-                                        className="w-4 h-4 text-gray-600"
+                                        className="w-4 h-4 text-[#363636]"
                                       />
                                     );
                                   }
@@ -1176,8 +1209,8 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
           </div>
 
           {/* Proposed Deal Structure */}
-          <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6 mt-8">
-            <h2 className="text-2xl font-medium text-black mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+          <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl pt-2 mt-8">
+            <h2 className=" font-medium mb-8 pb-2 text-left font-[Fustat] text-[32px] leading-[40px] tracking-[-0.02em] align-middle text-[#000000]">
               Proposed Deal Structure
             </h2>
             {(!data.proposed_deal_structure ||
@@ -1188,7 +1221,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                 !data.proposed_deal_structure.anti_dilution_protection &&
                 !data.proposed_deal_structure.board_seat &&
                 !data.proposed_deal_structure.vesting_schedule)) ? (
-              <div className="bg-[#1a1b1f] rounded-xl p-8 text-center">
+              <div className="bg-[#FFFFFF] rounded-xl p-8 text-center">
                 <div className="flex flex-col items-center justify-center py-8">
                   <svg className="w-12 h-12 text-gray-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -1198,181 +1231,199 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
                 {data.proposed_deal_structure.investment_amount && data.proposed_deal_structure.investment_amount !== "Not specified" ? (
-                  <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">
+                  <div className="bg-[#FFFFFF] rounded-xl p-6 ">
+                    <h3 className="text-base mb-2 text-left font-[Fustat] font-medium text-[18px] leading-[20px] tracking-[0em] text-[#646464]">
                       Investment Amount
                     </h3>
-                    <p className="text-[#202020] text-2xl text-left">
+                    <p className="font-[Fustat] font-medium text-[27px] leading-[28px] tracking-[0em] text-[#000000]">
                       {data.proposed_deal_structure.investment_amount}
                     </p>
                   </div>
                 ) : (
-                  <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-gray-400 text-base mb-2 text-left">
+                  <div className="bg-[#FFFFFF] rounded-xl p-6">
+                    <h3 className="text-base mb-2 text-left font-[Fustat] font-medium text-[18px] leading-[20px] tracking-[0em] text-[#646464]">
                       Investment Amount
                     </h3>
-                    <p className="text-gray-400 text-sm text-left">The company has not disclosed their investment ask in the pitch deck</p>
+                    <p className="font-[Fustat] font-medium text-[27px] leading-[28px] tracking-[0em] text-[#000000]">The company has not disclosed their investment ask in the pitch deck</p>
                   </div>
                 )}
 
                 {data.proposed_deal_structure.equity_stake && data.proposed_deal_structure.equity_stake !== "Not specified" ? (
-                  <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">Equity Stake</h3>
-                    <p className="text-[#202020] text-2xl text-left">
+                  <div className="bg-[#FFFFFF] rounded-xl p-6">
+                    <h3 className="text-base mb-2 text-left font-[Fustat] font-medium text-[18px] leading-[20px] tracking-[0em] text-[#646464]">Equity Stake</h3>
+                    <p className="font-[Fustat] font-medium text-[27px] leading-[28px] tracking-[0em] text-[#000000]">
                       {data.proposed_deal_structure.equity_stake}
                     </p>
                   </div>
                 ) : (
-                  <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className=" text-[#B3B3B3] text-base mb-2 text-left">Equity Stake</h3>
-                    <p className="text-gray-400 text-sm text-left">The company has not specified the equity stake they are offering</p>
+                  <div className="bg-[#FFFFFF] rounded-xl p-6">
+                    <h3 className="text-base mb-2 text-left font-[Fustat] font-medium text-[18px] leading-[20px] tracking-[0em] text-[#646464]">Equity Stake</h3>
+                    <p className="font-[Fustat] font-medium text-[27px] leading-[28px] tracking-[0em] text-[#000000]">The company has not specified the equity stake they are offering</p>
                   </div>
                 )}
 
                 {data.proposed_deal_structure.valuation_cap && data.proposed_deal_structure.valuation_cap !== "Not specified" ? (
-                  <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">Valuation Cap</h3>
-                    <p className="text-[#202020] text-2xl text-left">
+                  <div className="bg-[#FFFFFF] rounded-xl p-6">
+                    <h3 className="text-base mb-2 text-left font-[Fustat] font-medium text-[18px] leading-[20px] tracking-[0em] text-[#646464]">Valuation Cap</h3>
+                    <p className="font-[Fustat] font-medium text-[27px] leading-[28px] tracking-[0em] text-[#000000]">
                       {data.proposed_deal_structure.valuation_cap}
                     </p>
                   </div>
                 ) : (
-                  <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">Valuation Cap</h3>
-                    <p className="text-gray-400 text-sm text-left">The company has not provided their valuation expectations</p>
+                  <div className="bg-[#FFFFFF] rounded-xl p-6">
+                    <h3 className="text-base mb-2 text-left font-[Fustat] font-medium text-[18px] leading-[20px] tracking-[0em] text-[#646464]">Valuation Cap</h3>
+                    <p className="font-[Fustat] font-medium text-[27px] leading-[28px] tracking-[0em] text-[#000000]">The company has not provided their valuation expectations</p>
                   </div>
                 )}
 
                 {data.proposed_deal_structure.liquidation_preference && data.proposed_deal_structure.liquidation_preference !== "Not specified" ? (
-                  <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">
+                  <div className="bg-[#FFFFFF] rounded-xl p-6">
+                    <h3 className="text-base mb-2 text-left font-[Fustat] font-medium text-[18px] leading-[20px] tracking-[0em] text-[#646464]">
                       Liquidation Preference
                     </h3>
-                    <p className="text-[#202020] text-2xl text-left">
+                    <p className="font-[Fustat] font-medium text-[27px] leading-[28px] tracking-[0em] text-[#000000]">
                       {data.proposed_deal_structure.liquidation_preference}
                     </p>
                   </div>
                 ) : (
-                  <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">
+                  <div className="bg-[#FFFFFF] rounded-xl p-6">
+                    <h3 className="text-base mb-2 text-left font-[Fustat] font-medium text-[18px] leading-[20px] tracking-[0em] text-[#646464]">
                       Liquidation Preference
                     </h3>
-                    <p className="text-gray-400 text-sm text-left">Liquidation preference terms have not been specified in the deck</p>
+                    <p className="font-[Fustat] font-medium text-[27px] leading-[28px] tracking-[0em] text-[#000000]">Liquidation preference terms have not been specified in the deck</p>
                   </div>
                 )}
 
                 {data.proposed_deal_structure.anti_dilution_protection && data.proposed_deal_structure.anti_dilution_protection !== "Not specified" ? (
-                  <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">
+                  <div className="bg-[#FFFFFF] rounded-xl p-6">
+                    <h3 className="text-base mb-2 text-left font-[Fustat] font-medium text-[18px] leading-[20px] tracking-[0em] text-[#646464]">
                       Anti-Dilution Protection
                     </h3>
-                    <p className="text-[#202020] text-2xl text-left">
+                    <p className="font-[Fustat] font-medium text-[27px] leading-[28px] tracking-[0em] text-[#000000]">
                       {data.proposed_deal_structure.anti_dilution_protection}
                     </p>
                   </div>
                 ) : (
-                  <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">
+                  <div className="bg-[#FFFFFF] rounded-xl p-6">
+                    <h3 className="text-base mb-2 text-left font-[Fustat] font-medium text-[18px] leading-[20px] tracking-[0em] text-[#646464]">
                       Anti-Dilution Protection
                     </h3>
-                    <p className="text-gray-400 text-sm text-left">Anti-dilution protection terms have not been disclosed</p>
+                    <p className="font-[Fustat] font-medium text-[27px] leading-[28px] tracking-[0em] text-[#000000]">Anti-dilution protection terms have not been disclosed</p>
                   </div>
                 )}
 
                 {data.proposed_deal_structure.board_seat && data.proposed_deal_structure.board_seat !== "Not specified" ? (
-                  <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">Board Seat</h3>
-                    <p className="text-[#202020] text-2xl text-left">
+                  <div className="bg-[#FFFFFF] rounded-xl p-6">
+                    <h3 className="text-base mb-2 text-left font-[Fustat] font-medium text-[18px] leading-[20px] tracking-[0em] text-[#646464]">Board Seat</h3>
+                    <p className="font-[Fustat] font-medium text-[27px] leading-[28px] tracking-[0em] text-[#000000]">
                       {data.proposed_deal_structure.board_seat}
                     </p>
                   </div>
                 ) : (
-                  <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">Board Seat</h3>
-                    <p className="text-gray-400 text-sm text-left">Board seat arrangements have not been mentioned in the deck</p>
+                  <div className="bg-[#FFFFFF] rounded-xl p-6">
+                    <h3 className="text-base mb-2 text-left font-[Fustat] font-medium text-[18px] leading-[20px] tracking-[0em] text-[#646464]">Board Seat</h3>
+                    <p className="font-[Fustat] font-medium text-[27px] leading-[28px] tracking-[0em] text-[#000000]">Board seat arrangements have not been mentioned in the deck</p>
                   </div>
                 )}
 
                 {data.proposed_deal_structure.vesting_schedule && data.proposed_deal_structure.vesting_schedule !== "Not specified" ? (
-                  <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">
+                  <div className="bg-[#FFFFFF] rounded-xl p-6">
+                    <h3 className="text-base mb-2 text-left font-[Fustat] font-medium text-[18px] leading-[20px] tracking-[0em] text-[#646464]">
                       Vesting Schedule
                     </h3>
-                    <p className="text-[#202020] text-2xl text-left">
+                    <p className="font-[Fustat] font-medium text-[27px] leading-[28px] tracking-[0em] text-[#000000]">
                       {data.proposed_deal_structure.vesting_schedule}
                     </p>
                   </div>
                 ) : (
-                  <div className="bg-[#1a1b1f] rounded-xl p-6">
-                    <h3 className="text-[#B3B3B3] text-base mb-2 text-left">
+                  <div className="bg-[#FFFFFF] rounded-xl p-6">
+                    <h3 className="text-base mb-2 text-left font-[Fustat] font-medium text-[18px] leading-[20px] tracking-[0em] text-[#646464]">
                       Vesting Schedule
                     </h3>
-                    <p className="text-gray-400 text-sm text-left">The company has not outlined their vesting schedule in the pitch deck</p>
+                    <p className="font-[Fustat] font-medium text-[27px] leading-[28px] tracking-[0em] text-[#000000]">The company has not outlined their vesting schedule in the pitch deck</p>
                   </div>
                 )}
               </div>
             )}
           </div>
           {/* Key Questions Section */}
-          <div className="backdrop-blur-sm border border-[#ffffff1a] rounded-xl p-6 mt-8">
-          <h2 className="text-2xl font-medium text-black mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+          <div className="bg-[#FFFFFF] border border-[#ffffff1a] rounded-xl p-6 mt-8">
+          <h2 className="font-medium mb-3 pt-2 pb-4 text-left font-[Fustat] text-[32px] leading-[24px] tracking-[-0.02em] align-middle text-[#000000] rounded-xl">
               Key Questions for the Startup
             </h2>
-            <div className="grid grid-cols-3 gap-4 mt-8">
-              <div className="bg-[#F2F2F2] p-4 rounded-lg ">
-                <h3 className="text-sm font-medium text-[#8C8C8C] mb-2 text-left">
+            <div className="grid grid-cols-3 gap-4 mt-3 rounded-md">
+              <div className="bg-[#CFD2D4] p-8 rounded-[12px]">
+                <h3 className="mb-4 text-left text-[#202020] font-fustat font-semibold text-[24px] leading-[24px] tracking-[-2%]">
                   {data.key_questions?.market_strategy?.question ||
                     "What is the market strategy?"}
                 </h3>
-                <p className="text-sm text-black text-left">
+                <p className="text-left text-[#202020] font-fustat font-normal text-[20px] leading-[32px] tracking-[0%] ">
                   {data.key_questions?.market_strategy?.answer || "N/A"}
                 </p>
               </div>
-              <div className="bg-[#F2F2F2] p-4 rounded-lg ">
-                <h3 className="text-sm font-medium text-[#8C8C8C] mb-2 text-left">
+              <div className="bg-[#CFD2D4] p-8 rounded-[12px]">
+                <h3 className="mb-4 text-left text-[#202020] font-fustat font-semibold text-[24px] leading-[24px] tracking-[-2%]">
                   {data.key_questions?.user_retention?.question ||
                     "How is user retention handled?"}
                 </h3>
-                <p className="text-sm text-black text-left">
+                <p className="text-left text-[#202020] font-fustat font-normal text-[20px] leading-[32px] tracking-[0%] ">
                   {data.key_questions?.user_retention?.answer || "N/A"}
                 </p>
               </div>
-              <div className="bg-[#F2F2F2] p-4 rounded-lg ">
-                <h3 className="text-sm font-medium text-[#8C8C8C] mb-2 text-left">
+              <div className="bg-[#CFD2D4] p-8 rounded-[12px]">
+                <h3 className="mb-4 text-left text-[#202020] font-fustat font-semibold text-[24px] leading-[24px] tracking-[-2%]">
                   {data.key_questions?.regulatory_risks?.question ||
                     "What are the regulatory risks?"}
                 </h3>
-                <p className="text-sm text-black text-left">
+                <p className="text-left text-[#202020] font-fustat font-normal text-[20px] leading-[32px] tracking-[0%] ">
                   {data.key_questions?.regulatory_risks?.answer || "N/A"}
                 </p>
               </div>
             </div>
           </div>
           {/* Final Verdict Section */}
-          <div className=" bg-[#202020] border border-[#ffffff1a] rounded-xl p-6 mt-8">
-            <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-medium text-white mb-8 border-b border-[#ffffff1a] pb-4 text-left">
+          <div className=" bg-[#2B2521] border border-[#ffffff1a] rounded-xl p-6 mt-8">
+            <div className="flex justify-between items-center mb-3">
+                <h2 className="mb-8 pb-4 text-left font-[Fustat] font-medium text-2xl leading-9 tracking-[-0.02em] align-middle text-[white]">
                   Final Verdict
                 </h2>
-                <div className="relative flex items-center justify-center">
-                  <div className="absolute inset-0 rounded-[50px] bg-gradient-to-r from-[#FFFF1E]/30 to-[#45FAC2]/30 blur-xl"></div>
-                  <div className="w-[133px] rounded-[50px] border-none p-[20px] flex justify-center items-center relative" style={{
-                        background: 'linear-gradient(90deg, #FFFF1E 0%, #45FAC2 95.42%)',
-                        boxShadow: '0px 0px 20px rgba(69, 250, 194, 0.3)'
-                      }}>
-                      <p className="font-[Fustat] font-bold text-[32px] leading-[100%] text-center text-[#202020]"> 
-                      {data.investment_score * 10}%
-                      </p>
+                <div className="relative flex items-center justify-center mb-6" style={{ width: 150, height: 70 }}>
+                  {/* Gradient Border */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      borderRadius: '50px',
+                      padding: 8,
+                      background: 'linear-gradient(90deg, #CFD2D4 0%, #45FAC2 95.42%)',
+                      WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                      WebkitMaskComposite: 'xor',
+                      maskComposite: 'exclude',
+                    }}
+                  />
+                  {/* Main Content with background */}
+                  <div
+                    className="flex items-center justify-center"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: '50px',
+                      background: 'linear-gradient(90deg, #C6AEA3 0%, #8EE3F0 95.42%)',
+                      position: 'relative',
+                      zIndex: 1,
+                    }}
+                  >
+                    <span className="font-[Fustat] font-bold text-[32px] text-[#202020]">{data.investment_score * 10}%</span>
                   </div>
                 </div>
             </div>
            
 
             {/* Company Analysis Card */}
-            <div className="bg-[#1a1b1f] rounded-xl p-6 mb-6">
-              <h3 className="text-xl text-[#FFFFFF] mb-2 text-left">
+            <div className="bg-[#FFFFFF0D] bg-opacity-[0.05] rounded-xl p-6 mb-6">
+              <h3 className="text-[#FFFFFF] mb-2 text-left font-[Fustat] font-bold text-[32px] leading-[100%] ">
                 {data.company_overview.company_name}
               </h3>
               <p className="text-[#A9A9A9] text-base leading-relaxed mb-8 text-left">
@@ -1390,19 +1441,19 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                 })()}
               </p>
               {/* Investment Potential Bar */}
-              <div className="mb-8 border border-[#ffffff1a] rounded-xl p-6">
+              <div className="mb-8 rounded-xl mt-3">
                 <div className="flex justify-between items-center mb-2 ">
-                  <span className="text-gray-400">Investment Potential</span>
+                  <span className="text-gray-400 mb-5">Investment Potential</span>
                   <span className="text-white bg-[#ffffff1a] px-3 py-1 rounded-full text-sm">
                     {data.investment_score * 10}%
                   </span>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2 relative">
                   <div
-                    className="h-full rounded-full shadow-[0_0_20px_rgba(255,255,255,0.7)] transition-all duration-1000 ease-out"
+                    className="h-full rounded-full transition-all duration-1000 ease-out"
                     style={{ 
                       width: `${(data.investment_score / 10) * 100}%`,
-                      background: 'linear-gradient(90deg, #FFFF1E 0%, #45FAC2 75.98%, #FF287A 168.85%)'
+                        background: 'linear-gradient(90deg, #262626 -45.63%, #3987BE 23.66%, #D48EA3 86.59%)'
                     }}
                   ></div>
                 </div>
@@ -1438,43 +1489,45 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
 
                 {/* Metrics List */}
                 <div className="space-y-4 flex-1 min-w-[220px]">
-                  <div className="bg-[#ffffff0a] rounded-xl p-4 flex justify-between items-center">
+                  <div className="border border-white/25 rounded-xl p-4 flex justify-between items-center ">
                     <span className="text-gray-300">Product Viability</span>
+                    <div className="border-l-[0.5px] border-white/25 h-full"></div>
+
                     <span className="text-white text-lg">
                       {data.final_verdict.product_viability}
                     </span>
                   </div>
-                  <div className="bg-[#ffffff0a] rounded-xl p-4 flex justify-between items-center">
+                  <div className=" border border-white/25 rounded-xl p-4 flex justify-between items-center">
                     <span className="text-gray-300">Market Potential</span>
                     <span className="text-white text-lg">
                       {data.final_verdict.market_potential}
                     </span>
                   </div>
-                  <div className="bg-[#ffffff0a] rounded-xl p-4 flex justify-between items-center">
+                  <div className="border border-white/25 rounded-xl p-4 flex justify-between items-center">
                     <span className="text-gray-300">Sustainability</span>
                     <span className="text-white text-lg">
                       {data.final_verdict.sustainability}
                     </span>
                   </div>
-                  <div className="bg-[#ffffff0a] rounded-xl p-4 flex justify-between items-center">
+                  <div className="border border-white/25 rounded-xl p-4 flex justify-between items-center">
                     <span className="text-gray-300">Exit Potential</span>
                     <span className="text-white text-lg">
                       {data.final_verdict.exit_potential}
                     </span>
                   </div>
-                  <div className="bg-[#ffffff0a] rounded-xl p-4 flex justify-between items-center">
+                  <div className="border border-white/25 rounded-xl p-4 flex justify-between items-center">
                     <span className="text-gray-300">Risk Factors</span>
                     <span className="text-white text-lg">
                       {data.final_verdict.risk_factor}
                     </span>
                   </div>
-                  <div className="bg-[#ffffff0a] rounded-xl p-4 flex justify-between items-center">
+                  <div className="border border-white/25 rounded-xl p-4 flex justify-between items-center">
                     <span className="text-gray-300">Innovation</span>
                     <span className="text-white text-lg">
                       {data.final_verdict.innovation}
                     </span>
                   </div>
-                  <div className="bg-[#ffffff0a] rounded-xl p-4 flex justify-between items-center">
+                  <div className="border border-white/25 rounded-xl p-4 flex justify-between items-center">
                     <span className="text-gray-300">Competitive Edge</span>
                     <span className="text-white text-lg">
                       {data.final_verdict.competitive_edge}

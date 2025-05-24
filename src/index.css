@@ -12,8 +12,8 @@
   font-display: swap; /* Optional: helps with font loading */
 }
 
-@layer base {
-  :root {
+/* @layer base {
+  /* :root {
     --background: 220 10% 15%;
     --foreground: 0 0% 100%;
     --card: 220 10% 20%;
@@ -73,7 +73,7 @@
     --sidebar-border: 220 10% 35%;
     --sidebar-ring: 0 0% 100%;
   }
-}
+} */ 
 
 @layer base {
   * {

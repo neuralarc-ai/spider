@@ -13,6 +13,7 @@ import { StarField } from "@/components/StarField";
 import Footer from "@/components/Footer";
 import styles from "@/styles/upload.module.scss";
 import spidergo from "../../public/la_spider.svg"
+import backbtn from "../../public/backbtn.svg"
 
 const starfieldVariants = {
   initial: { opacity: 0 },
@@ -123,59 +124,28 @@ const Index = () => {
     <div className="flex flex-col min-h-screen overflow-hidden">
       <Navbar />
 
-      <div
-        className={styles.backgroundElements}
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: -1,
-        }}
-      >
-        <motion.div
-          className={styles.starfieldWrapper}
-          initial="hidden"
-          animate="visible"
-        >
-          <StarField />
-        </motion.div>
-        <motion.div
-          className={styles.ellipse}
-          initial="hidden"
-          animate="visible"
-        >
-          <img
-            src="/images/white-radial.svg"
-            alt="Radial gradient"
-            width={1000}
-            height={1000}
-          />
-        </motion.div>
-      </div>
+      <div className="flex-grow bg-[#F3F3F1] justify-between items-center">
+        <div className="flex items-center max-w-[1279px] p-[40px] justify-center "> 
+          <div> 
+            <img src={backbtn}/>
+          </div>
 
-      <div className="flex-grow bg-[#FBFBF8]">
-        <h1
-          className="text-center text-5xl font-bold mb-8"
-          style={{
-            color: "#1E1E1E",
-           
-            WebkitBackgroundClip: "text",
-            // WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-            fontWeight: 700,
-            fontFamily: "Fustat, sans-serif",
-            fontSize: "48px",
-            marginTop: "32px",
-          }}
-        >
-          {isLoading
-            ? "Analyzing"
-            : insights && !isLoading
-            ? "Analysis Report"
-            : "AI-Powered Pitch Deck & Investment Analysis"}
-        </h1>
+          <h1
+            className="font-[Fustat] font-semibold text-[24px] leading-[40px] tracking-[-0.4%] align-middle text-center"
+            style={{
+              color: "#1E1E1E",
+              marginTop: "32px",
+            }}
+          >
+            {isLoading
+              ? "Analyzing"
+              : insights && !isLoading
+              ? "AI-Powered Pitch Deck & Investment Analysis"
+              : "Analysis"}
+          </h1>
+
+        </div>
+      
 
         <div className={styles.uploadContainer}>
           {!insights && !isLoading && (
@@ -233,8 +203,9 @@ const Index = () => {
                       disabled={!file || isLoading || !isDisclaimerAccepted}
                     >
                     <img src={spidergo} alt="spidergo" />
-                      Go Spider - Analysis Now 
-                      <ArrowRight className="w-5 h-5" />
+                    <p className="font-fustat text-[16px] leading-[24px] tracking-[0em] font-medium text-[#FFFFFF] ">   Go Spider - Analysis Now  </p>
+                    
+                      {/* <ArrowRight className="w-5 h-5" /> */}
                     </button>
                 </div>
                

@@ -222,8 +222,8 @@ const RadarChart: React.FC<RadarChartProps> = ({ data }) => {
       return (
         <div className="bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-700">
           <p className="text-white font-bold">{payload[0].payload.subject}</p>
-          <p className="text-gray-300">Score: {value}/10</p>
-          <p className="text-gray-400 mt-2 text-sm">{payload[0].payload.analysis}</p>
+          <p className="text-white">Score: {value}/10</p>
+          <p className="text-white mt-2 text-sm">{payload[0].payload.analysis}</p>
           <div className="mt-2">
             <div className="h-2 w-full bg-gray-700 rounded-full">
               <div 

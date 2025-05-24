@@ -74,7 +74,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className={styles.navbar}>
+        <nav className={`${styles.navbar} bg-[#FBFBF8]`}>
             <div className={styles.container}>
                 {(isHistoryPage || isTermsPage || isPrivacyPage || isResponsibleAIPage || isInsightPage) ? (
                     <button

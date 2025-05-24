@@ -3,9 +3,9 @@
 .uploadContainer {
   position: relative;
   width: 100%;
-  max-width: 1325px;
+  max-width: 1350px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,7 +36,9 @@
 .innerBox {
   position: relative;
   z-index: 1;
-  background-color: rgba(234, 233, 229, 1);
+  width:1279px;
+ 
+  background: #EAE9E5;
   // background: rgba(30, 30, 30, 0.85);
   backdrop-filter: blur(32px);
   border-radius: 32px;
@@ -52,7 +54,7 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   text-align: center;  
 
-  width: 1093px;
+ 
   justify-content: center;
   align-items: center;
 
@@ -67,7 +69,7 @@
 .uploadArea {
   flex: 1;
   // border: 2px dashed rgba(255, 255, 255, 0.2);
-  width:1013px;
+  width:100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -106,8 +108,8 @@
   /* fully rounded pill button */
   font-size: 16px;
   font-weight: 500;
-  background: #232323;
-  opacity: 100%;
+  background: #2B2521;
+
   // background: radial-gradient(circle at center,
   //     #693597 15%,
   //     #5091C9 70%,
@@ -126,12 +128,7 @@
     // box-shadow: 0 0 16px rgba(130, 70, 255, 0.6), 0 6px 30px rgba(0, 0, 0, 0.5);
   }
 
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-  }
+  
 }
 
 .timelineWrapper {
@@ -290,38 +287,6 @@
 
 .divider::after {
   margin-left: 12px;
-}
-
-.backgroundElements {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.starfieldWrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.ellipse {
-  position: absolute;
-  top: -45%;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  img{
-   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  }
 }
 
 .horizontalProgress {
