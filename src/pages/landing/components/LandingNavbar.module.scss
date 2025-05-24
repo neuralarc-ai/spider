@@ -35,16 +35,22 @@ $tablet-width: 1023px;
 
 .container {
     margin: 0 auto;
-    padding: 40 32px;
+    padding: 0 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: transparent;
     position: relative;
+    gap: 32px;
 
     @include mobile {
         padding: 0 20px;
     }
+}
+
+.logoSection {
+    flex: 0 0 auto;
+    z-index: 60;
 }
 
 .logoText {
@@ -61,18 +67,20 @@ $tablet-width: 1023px;
     align-items: center;
     justify-content: space-between;
     flex: 1;
-    margin-left: 100px;
+    gap: 48px;
 
     @include mobile-and-tablet {
         display: none;
     }
 }
 
-.nav {
+.navLinks {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 48px;
-    margin: 0 auto;
+    flex: 1;
+    padding: 0 24px;
 
     @include tablet {
         gap: 24px;
@@ -88,22 +96,21 @@ $tablet-width: 1023px;
     display: block;
     background: none;
     border: none;
-    width: 100%;
-    text-align: left;
     cursor: pointer;
     transition: color 0.2s ease;
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    white-space: nowrap;
 
     &:hover {
         color: #606060;
     }
 }
 
-.buttons {
+.actionButtons {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-left: auto;
+    flex: 0 0 auto;
 
     @include mobile {
         flex-direction: column;
@@ -124,6 +131,7 @@ $tablet-width: 1023px;
     border: 1px solid #2B2521;
     background: #2B2521;
     color: white;
+    white-space: nowrap;
 
     @include mobile {
         width: 100%;
@@ -138,12 +146,16 @@ $tablet-width: 1023px;
     }
 
     &.loginButton:hover {
-        background: #606060;
+        background: #2B2521;
         color: #fff;
     }
 
     &:hover {
-        opacity: 0.9;
+        
+        border-width: 4px;
+        border-radius: 4px;
+        border-style: solid;
+        border-image: linear-gradient(90deg, #C6AEA3, #8EE3F0) 1;
     }
 }
 

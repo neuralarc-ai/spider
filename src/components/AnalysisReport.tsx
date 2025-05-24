@@ -388,11 +388,11 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
             fileName={`${data.company_overview.company_name}-analysis.pdf`}
             className="w-16 h-16 rounded-full bg-black bg-opacity-5 flex justify-center items-center cursor-pointer"
           >
-            <img
-              src={downloadlogo}
-              className="w-[72px] h-[72px] object-contain"
+          <img
+            src={downloadlogo}
+            className="w-[72px] h-[72px] object-contain"
               alt="Download Analysis"
-            />
+          />
           </PDFDownloadLink>
          </div>
            
@@ -683,62 +683,34 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
           </div>
           <div>
             {/* Competitor Comparison Section */}
-            <div className="bg-[#FFFFFF] border-[#ffffff1a] rounded-xl p-6 mb-8">
-              <h2 className="text-2xl text-black border-b border-[#ffffff1a] pb-4 text-left font-[Fustat] font-medium text-[32px] leading-[24px] tracking-[-0.02em] align-middle">
+            <div className="bg-[#FFFFFF] border-[#ffffff1a] rounded-xl p-6 mb-8 mt-8">
+              <h2 className="text-2xl text-black border-b border-[#ffffff1a] pb-4 text-left font-[Fustat] font-medium text-[32px] leading-[24px] tracking-[-0.02em] align-middle mb-6">
                 Competitor Comparison
               </h2>
 
-            <div className="opacity-50 border border-[#202020] mb-3">
+              <div className="opacity-50 border border-[#202020] mb-3"></div>
 
-            </div>
-              
-             
               <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="w-full border-separate" style={{ borderSpacing: '0 0' }}>
                   <thead>
-                    <tr className="border-b border-[#ffffff1a]">
-                      <th className="font-[Fustat] text-left font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle">
-                        Competitor
-                      </th>
-                      <th className=" font-[Fustat] text-left font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle">
-                        Key Investors
-                      </th>
-                      <th className="font-[Fustat] text-left font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle">
-                        Amount Raised
-                      </th>
-                      <th className="font-[Fustat] text-left font-semibold text-[20px] leading-[24px] tracking-[-0.004em]  align-middle">
-                        Market Position
-                      </th>
-                      <th className="font-[Fustat] text-left font-semibold text-[20px] leading-[24px] tracking-[-0.004em]  align-middle">
-                        Strengths
-                      </th>
+                    <tr className="border-b border-[#E0E0E0]">
+                      <th className="font-[Fustat] text-left font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle px-6 py-4">Competitor</th>
+                      <th className="font-[Fustat] text-left font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle px-6 py-4 border-l border-[#E0E0E0]">Key Investors</th>
+                      <th className="font-[Fustat] text-left font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle px-6 py-4 border-l border-[#E0E0E0]">Amount Raised</th>
+                      <th className="font-[Fustat] text-left font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle px-6 py-4 border-l border-[#E0E0E0]">Market Position</th>
+                      <th className="font-[Fustat] text-left font-semibold text-[20px] leading-[24px] tracking-[-0.004em] align-middle px-6 py-4 border-l border-[#E0E0E0]">Strengths</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {data.competitor_analysis.competitors.map(
-                      (competitor, index) => (
-                        <tr
-                          key={index}
-                          className={index === data.competitor_analysis.competitors.length - 1 ? '' : 'border-b border-[#ffffff1a]'}
-                        >
-                          <td className="py-4 font-[Fustat] font-normal text-[20px] leading-[24px] tracking-[-0.01em] text-[#4F4F4F]">
-                            {competitor.name}
-                          </td>
-                          <td className="py-4 px-4 border-l" style={{ borderColor: '#0000001A' }}>
-                            {competitor.key_investors}
-                          </td>
-                          <td className="py-4 px-4 border-l" style={{ borderColor: '#0000001A' }}>
-                            {competitor.amount_raised}
-                          </td>
-                          <td className="py-4 px-4 border-l" style={{ borderColor: '#0000001A' }}>
-                            {competitor.market_position}
-                          </td>
-                          <td className="py-4 px-4 border-l" style={{ borderColor: '#0000001A' }}>
-                            {competitor.strengths}
-                          </td>
-                        </tr>
-                      )
-                    )}
+                    {data.competitor_analysis.competitors.map((competitor, index) => (
+                      <tr key={index} className={index === data.competitor_analysis.competitors.length - 1 ? '' : 'border-b border-[#F0F0F0]'}>
+                        <td className="py-4 px-6 font-[Fustat] font-normal text-[20px] leading-[24px] tracking-[-0.01em] text-[#4F4F4F] text-left">{competitor.name}</td>
+                        <td className="py-4 px-6 border-l border-[#E0E0E0] text-left">{competitor.key_investors}</td>
+                        <td className="py-4 px-6 border-l border-[#E0E0E0] text-left">{competitor.amount_raised}</td>
+                        <td className="py-4 px-6 border-l border-[#E0E0E0] text-left">{competitor.market_position}</td>
+                        <td className="py-4 px-6 border-l border-[#E0E0E0] text-left">{competitor.strengths}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
@@ -750,21 +722,17 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                 Market Comparison
               </h2>
               <div className="overflow-x-auto mt-2">
-                <table className="w-full">
+                <table className="w-full border-separate" style={{ borderSpacing: '0 0' }}>
                   <thead className="bg-[#A8B0B8] rounded-md pt-[16px] pr-[88px] pb-[16px] pl-[56px]">
-                    <tr className="border-b border-[#ffffff1a]">
-                      <th className="text-left py-3 px-4 font-[Fustat] font-medium text-[20px] leading-[24px] tracking-[-0.004em] align-middle">
-                        Metric
-                      </th>
-                      <th className="text-left py-3 px-4 font-[Fustat] font-medium text-[20px] leading-[24px] tracking-[-0.004em] align-middle">
-                        {data.company_overview.company_name}
-                      </th>
+                    <tr className="border-b border-[#E0E0E0]">
+                      <th className="text-left py-3 px-6 font-[Fustat] font-medium text-[20px] leading-[24px] tracking-[-0.004em] align-middle">Metric</th>
+                      <th className="text-left py-3 px-6 font-[Fustat] font-medium text-[20px] leading-[24px] tracking-[-0.004em] align-middle border-l border-[#E0E0E0]">{data.company_overview.company_name}</th>
                       {data.competitor_analysis.competitors
                         .slice(0, 4)
                         .map((competitor, index) => (
                           <th
                             key={index}
-                            className="text-left py-3 px-4 font-[Fustat] font-medium text-[20px] leading-[24px] tracking-[-0.004em] align-middle"
+                            className="text-left py-3 px-6 font-[Fustat] font-medium text-[20px] leading-[24px] tracking-[-0.004em] align-middle border-l border-[#E0E0E0]"
                           >
                             {competitor.name}
                           </th>
@@ -772,73 +740,57 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="border-b border-[#ffffff1a]">
-                      <td className="py-4 px-4 text-[#4F4F4F] font-[fustat] text-left border-r border-[#ffffff1a]">
-                        Market Share
-                      </td>
-                      <td className="py-4 px-4 text-[#4F4F4F]  font-[fustat]  text-left border-r border-[#ffffff1a]">
-                        {data.market_position}
-                      </td>
+                    <tr className="border-b border-[#E0E0E0]">
+                      <td className="py-4 px-6 text-[#4F4F4F] font-[fustat] text-left">Market Share</td>
+                      <td className="py-4 px-6 text-[#4F4F4F] font-[fustat] text-left border-l border-[#E0E0E0]">{data.market_position}</td>
                       {data.competitor_analysis.competitors
                         .slice(0, 4)
                         .map((competitor, index) => (
                           <td
                             key={index}
-                            className="py-4 px-4 text-[#4F4F4F] font-[fustat]  text-left border-r border-[#ffffff1a]"
+                            className="py-4 px-6 text-[#4F4F4F] font-[fustat] text-left border-l border-[#E0E0E0]"
                           >
                             {competitor.market_position}
                           </td>
                         ))}
                     </tr>
-                    <tr className="border-b border-[#ffffff1a]">
-                      <td className="py-4 px-4 text-[#4F4F4F]  font-[fustat] text-left border-r border-[#ffffff1a] ">
-                        Growth Rate
-                      </td>
-                      <td className="py-4 px-4 text-[#4F4F4F]  font-[fustat] text-left border-r border-[#ffffff1a]">
-                        {data.market_analysis.growth_rate}
-                      </td>
+                    <tr className="border-b border-[#E0E0E0]">
+                      <td className="py-4 px-6 text-[#4F4F4F] font-[fustat] text-left">Growth Rate</td>
+                      <td className="py-4 px-6 text-[#4F4F4F] font-[fustat] text-left border-l border-[#E0E0E0]">{data.market_analysis.growth_rate}</td>
                       {data.competitor_analysis.competitors
                         .slice(0, 4)
                         .map((competitor, index) => (
                           <td
                             key={index}
-                            className="py-4 px-4 text-[#4F4F4F]  font-[fustat] text-left border-r border-[#ffffff1a]"
+                            className="py-4 px-6 text-[#4F4F4F] font-[fustat] text-left border-l border-[#E0E0E0]"
                           >
                             {competitor.growth_rate || "N/A"}
                           </td>
                         ))}
                     </tr>
-                    <tr className="border-b border-[#ffffff1a]">
-                      <td className="py-4 px-4 text-[#4F4F4F] font-[fustat] text-left border-r border-[#ffffff1a]">
-                        Revenue Model
-                      </td>
-                      <td className="py-4 px-4 text-[#4F4F4F] font-[fustat] text-left border-r border-[#ffffff1a]">
-                        {data.company_overview.business_model}
-                      </td>
+                    <tr className="border-b border-[#E0E0E0]">
+                      <td className="py-4 px-6 text-[#4F4F4F] font-[fustat] text-left">Revenue Model</td>
+                      <td className="py-4 px-6 text-[#4F4F4F] font-[fustat] text-left border-l border-[#E0E0E0]">{data.company_overview.business_model}</td>
                       {data.competitor_analysis.competitors
                         .slice(0, 4)
                         .map((competitor, index) => (
                           <td
                             key={index}
-                            className="py-4 px-4 text-[#4F4F4F] font-[fustat]  text-left border-r border-[#ffffff1a]"
+                            className="py-4 px-6 text-[#4F4F4F] font-[fustat] text-left border-l border-[#E0E0E0]"
                           >
                             {competitor.business_model || "N/A"}
                           </td>
                         ))}
                     </tr>
                     <tr>
-                      <td className="py-4 px-4 text-[#4F4F4F] font-[fustat]  text-left border-r border-[#ffffff1a]">
-                        Key Differentiator
-                      </td>
-                      <td className="py-4 px-4 text-[#4F4F4F] font-[fustat]  text-left border-r border-[#ffffff1a]">
-                        {data.strengths[0] || "N/A"}
-                      </td>
+                      <td className="py-4 px-6 text-[#4F4F4F] font-[fustat] text-left">Key Differentiator</td>
+                      <td className="py-4 px-6 text-[#4F4F4F] font-[fustat] text-left border-l border-[#E0E0E0]">{data.strengths[0] || "N/A"}</td>
                       {data.competitor_analysis.competitors
                         .slice(0, 4)
                         .map((competitor, index) => (
                           <td
                             key={index}
-                            className="py-4 px-4 text-[#4F4F4F]  font-[fustat] text-left border-r border-[#ffffff1a]"
+                            className="py-4 px-6 text-[#4F4F4F] font-[fustat] text-left border-l border-[#E0E0E0]"
                           >
                             {competitor.key_differentiator || "N/A"}
                           </td>
@@ -860,7 +812,7 @@ const AnalysisReport: React.FC<AnalysisReportProps> = ({ data }) => {
                   <div className="relative pt-2">
                     <div className="w-full bg-gray-700 rounded-full h-2 relative">
                       <div
-                        className="h-full  items-center rounded-full shadow-[0_0_20px_rgba(255,255,255,0.7)] transition-all duration-1000 ease-out"
+                        className="h-full  items-center rounded-full  transition-all duration-1000 ease-out"
                         style={{ 
                           width: `${(data.final_verdict.exit_potential / 10) * 100}%`,
                           background: 'linear-gradient(90deg, #262626 -45.63%, #3987BE 23.66%, #D48EA3 86.59%)'

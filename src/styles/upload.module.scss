@@ -129,7 +129,18 @@
     // box-shadow: 0 0 16px rgba(130, 70, 255, 0.6), 0 6px 30px rgba(0, 0, 0, 0.5);
   }
 
-  
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: #38312C;
+    border-color: #ccc;
+    
+    &:hover {
+      opacity: 0.5;
+      transform: none;
+    }
+  }
 }
 
 .timelineWrapper {

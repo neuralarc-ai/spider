@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { getSupabaseClient } from "@/lib/supabase";
 import Logo from "@/components/Logo";
 import styles from "./LandingNavbar.module.scss";
+import { ArrowRight } from "lucide-react";
 
 const LandingNavbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -51,7 +52,8 @@ const LandingNavbar = () => {
       }}
     >
       <div className={styles.container}>
-        <div className={styles.logoText}>
+        {/* Logo Section */}
+        <div className={styles.logoSection}>
           <img src="/images/navlogo.svg" alt="Spider Logo" style={{height: 80, width: 140}} />
         </div>
 
@@ -64,7 +66,8 @@ const LandingNavbar = () => {
 
         {/* Desktop Navigation */}
         <div className={styles.desktopNav}>
-          <div className={styles.nav}>
+          {/* Navigation Links */}
+          <div className={styles.navLinks}>
             <button
               onClick={() => scrollToSection("features")}
               className={styles.link}
@@ -91,11 +94,14 @@ const LandingNavbar = () => {
             </button>
           </div>
 
-          <div className={styles.buttons}>
+          {/* Action Buttons */}
+          <div className={styles.actionButtons}>
             {isLoggedIn ? (
               <>
                 <Link to="/spider" className={styles.button}>
-                  Analyze Document
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+                    Analyze Document <ArrowRight style={{ width: 22, height: 22 }} />
+                  </span>
                 </Link>
                 <button
                   onClick={handleLogout}
@@ -113,7 +119,9 @@ const LandingNavbar = () => {
                   Log In
                 </Link>
                 <Link to="/auth/signin" className={styles.button}>
-                  Try Now
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+                    Try Now <ArrowRight style={{ width: 22, height: 22 }} />
+                  </span>
                 </Link>
               </>
             )}

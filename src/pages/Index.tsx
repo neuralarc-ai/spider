@@ -123,27 +123,6 @@ const Index = () => {
       <Navbar />
 
       <div className="flex-grow bg-[#FBFBF8]">
-        <h1
-          className="text-center text-5xl font-bold mb-8"
-          style={{
-            color: "#1E1E1E",
-
-            WebkitBackgroundClip: "text",
-            // WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-            fontWeight: 700,
-            fontFamily: "Fustat, sans-serif",
-            fontSize: "48px",
-            marginTop: "32px",
-          }}
-        >
-          {isLoading
-            ? "Analyzing"
-            : insights && !isLoading
-              ? "Analysis Report"
-              : "AI-Powered Pitch Deck & Investment Analysis"}
-        </h1>
-
         <div className={styles.uploadContainer}>
           {!insights && !isLoading && (
             <div className={styles.gradientWrapper}>
@@ -189,16 +168,13 @@ const Index = () => {
                   </div>
                 </div>
                 <div>
-
                   <button
                     onClick={handleAnalyze}
-                    className={styles.analyzeButton}
-                    disabled={!file || isLoading || !isDisclaimerAccepted}
-                    
+                    className={`${styles.analyzeButton} ${(!file || !isDisclaimerAccepted) ? styles.disabled : ''}`}
+                    disabled={!file || !isDisclaimerAccepted}
                   >
                     <img src={spidergo} alt="spidergo" />
                     Go Spider - Analysis Now
-                    
                   </button>
                 </div>
 

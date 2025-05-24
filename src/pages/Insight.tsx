@@ -66,7 +66,7 @@ const Insight = () => {
           </p>
         </section>
 
-        {/* Company Overview */}
+          {/* Company Overview */}
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-2">Company Overview</h2>
           <div className="mb-2"><strong>Company Name:</strong> {insight.company_overview.company_name}</div>
@@ -76,47 +76,47 @@ const Insight = () => {
           <div className="mb-2"><strong>Founded On:</strong> {insight.company_overview.founded_on || insight.company_overview.founded_year || 'Not available'}</div>
         </section>
         <hr className="my-8 border-t border-gray-300" />
-        {/* Market Analysis */}
+          {/* Market Analysis */}
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-2">Market Analysis</h2>
           <div className="mb-2"><strong>Market Size:</strong> {insight.market_analysis.market_size}</div>
           <div className="mb-2"><strong>Growth Rate:</strong> {insight.market_analysis.growth_rate}</div>
         </section>
         <hr className="my-8 border-t border-gray-300" />
-        {/* Strengths & Weaknesses */}
+          {/* Strengths & Weaknesses */}
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">Strengths & Weaknesses</h2>
           <div className="flex flex-col md:flex-row gap-8">
             <div className="flex-1">
               <h3 className="text-lg font-semibold mb-2">Strengths</h3>
               <ul className="list-disc list-inside ml-6">
-                {insight.strengths.map((strength, index) => (
-                  <li key={index}>{strength}</li>
-                ))}
-              </ul>
-            </div>
+              {insight.strengths.map((strength, index) => (
+                <li key={index}>{strength}</li>
+              ))}
+            </ul>
+          </div>
             <div className="flex-1">
               <h3 className="text-lg font-semibold mb-2">Weaknesses</h3>
               <ul className="list-disc list-inside ml-6">
-                {insight.weaknesses.map((weakness, index) => (
-                  <li key={index}>{weakness}</li>
-                ))}
-              </ul>
-            </div>
+              {insight.weaknesses.map((weakness, index) => (
+                <li key={index}>{weakness}</li>
+              ))}
+            </ul>
+          </div>
           </div>
         </section>
         <hr className="my-8 border-t border-gray-300" />
-        {/* Funding History */}
+          {/* Funding History */}
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-2">Funding History</h2>
-          {insight.funding_history?.rounds && insight.funding_history.rounds.length > 0 ? (
+              {insight.funding_history?.rounds && insight.funding_history.rounds.length > 0 ? (
             <ul className="list-disc list-inside ml-6">
               {insight.funding_history.rounds.map((round, index) => (
                 <li key={index} className="mb-1">
                   <strong>{round.type}:</strong> Amount: {round.amount}, Key Investors: {round.key_investors.join(", ")}
                 </li>
-              ))}
-            </ul>
+                        ))}
+                      </ul>
           ) : (
             <div>No funding history specified in the pitch deck.</div>
           )}
@@ -136,13 +136,13 @@ const Insight = () => {
                   <div className="mb-1"><strong>Date:</strong> {opinion.date}</div>
                 </li>
               ))}
-            </ul>
+                    </ul>
           ) : (
             <div>No expert opinions available.</div>
-          )}
+              )}
         </section>
         <hr className="my-8 border-t border-gray-300" />
-        {/* Competitor Analysis */}
+          {/* Competitor Analysis */}
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-2">Competitor Analysis</h2>
           {insight.competitor_analysis.competitors.length > 0 ? (
@@ -158,7 +158,7 @@ const Insight = () => {
           )}
         </section>
         <hr className="my-8 border-t border-gray-300" />
-        {/* Market Comparison */}
+          {/* Market Comparison */}
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-2">Market Comparison</h2>
           <div className="mb-2"><strong>Growth Rate:</strong> {insight.market_comparison.metrics.startup.growth_rate}</div>
@@ -167,7 +167,7 @@ const Insight = () => {
           <div className="mb-2"><strong>Differentiator:</strong> {insight.market_comparison.metrics.startup.differentiator}</div>
         </section>
         <hr className="my-8 border-t border-gray-300" />
-        {/* Final Verdict */}
+          {/* Final Verdict */}
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-2">Final Verdict</h2>
           <div className="mb-2"><strong>Product Viability:</strong> {insight.final_verdict.product_viability}/10</div>
